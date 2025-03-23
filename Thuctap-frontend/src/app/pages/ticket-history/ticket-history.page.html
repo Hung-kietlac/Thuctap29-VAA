@@ -1,0 +1,132 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaulthref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Lịch sử đặt vé</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  
+  <div class="ticket-history-container">
+    <ion-segment value="all" class="status-segment">
+      <ion-segment-button value="all">
+        <ion-label>Tất cả</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="completed">
+        <ion-label>Đã thanh toán</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="pending">
+        <ion-label>Đang chờ thanh toán</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="cancelled">
+        <ion-label>Đã hủy</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <div class="tickets-list">
+      <!-- Trạng thái đang tải -->
+      <ion-card class="loading-card">
+        <ion-card-content>
+          <ion-spinner name="crescent"></ion-spinner>
+          <p>Đang tải dữ liệu...</p>
+        </ion-card-content>
+      </ion-card>
+
+      <!-- Thông báo không có vé -->
+      <ion-item-divider class="no-tickets-message">
+        <ion-label>Không có vé nào trong lịch sử</ion-label>
+      </ion-item-divider>
+
+      <ion-card class="ticket-card">
+        <ion-card-header>
+          <div class="ticket-header">
+            <div class="ticket-id">
+              Mã vé: 
+            </div>
+            <ion-badge color="success">
+              Đã hoàn thành
+            </ion-badge>
+          </div>
+          <ion-card-title class="destination">Rạp</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          <div class="ticket-details">
+            <div class="detail-row">
+              <ion-icon name="calendar-outline"></ion-icon>
+              <span>Ngày chiếu:</span>
+            </div>
+            
+            <div class="detail-row">
+              <ion-icon name="calendar-outline"></ion-icon>
+              <span>Giờ chiếu:</span>
+            </div>
+            
+            <div class="detail-row">
+              <ion-icon name="cash-outline"></ion-icon>
+              <span>Giá vé:</span>
+            </div>
+            
+            <div class="detail-row">
+              <ion-icon name="card-outline"></ion-icon>
+              <span>Phương thức thanh toán:</span>
+            </div>
+            
+            <div class="detail-row">
+              <ion-icon name="time-outline"></ion-icon>
+              <span>Ngày đặt:</span>
+            </div>
+          </div>
+          
+          <div class="ticket-actions">
+            <ion-button fill="clear" size="small" routerlink="/ticket-details/TK001">
+              <ion-icon slot="start" name="eye-outline"></ion-icon>
+              Chi tiết
+            </ion-button>
+            
+            <ion-button fill="clear" size="small" color="danger">
+              <ion-icon slot="start" name="close-circle-outline"></ion-icon>
+              Hủy vé
+            </ion-button>
+            
+            <ion-button fill="clear" size="small">
+              <ion-icon slot="start" name="download-outline"></ion-icon>
+              Tải vé
+            </ion-button>
+          </div>
+        </ion-card-content>
+      </ion-card>
+      
+      <!-- Mẫu card vé thứ hai - Trạng thái đang chờ -->
+      <ion-card class="ticket-card">
+        <ion-card-header>
+          <div class="ticket-header">
+            <div class="ticket-id">
+              Mã vé: 
+            </div>
+            <ion-badge color="warning">
+           Trạng thái
+            </ion-badge>
+          </div>
+          <ion-card-title class="destination">rạp</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          
+        </ion-card-content>
+      </ion-card>
+      
+    </div>
+  </div>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button routerlink="/book-ticket">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

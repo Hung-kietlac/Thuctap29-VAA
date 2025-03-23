@@ -1,0 +1,36 @@
+<ion-content>
+  <div class="container">
+    <div class="form">
+      <div class="item">
+        <h2>Đăng ký</h2>
+        <label for="hoten">Họ và tên
+          <ion-input type="text" [(ngModel)]="userData.hoten" placeholder="Nguyen Van A"></ion-input>
+        </label>
+        <label for="ngaysinh">Ngày sinh
+          <input type="date" [(ngModel)]="userData.ngaysinh" style="color: #333; background: none;">
+        </label>
+        <label for="sodienthoai">Số điện thoại
+          <ion-input type="text" [(ngModel)]="userData.sodienthoai" placeholder="0123456789"></ion-input>
+        </label>
+        <label for="username">Tên đăng nhập
+          <ion-input type="text" [(ngModel)]="userData.username" placeholder="abc"></ion-input>
+        </label>
+        <label for="password">Mật khẩu
+          <ion-input type="password" [(ngModel)]="userData.password" placeholder="abc123@"></ion-input>
+        </label>
+        <label for="confirmPassword">Nhập lại mật khẩu
+          <ion-input type="password" [(ngModel)]="confirmPassword" placeholder="abc123@"></ion-input>
+        </label>
+        <!-- <ion-button (click)="sendOTP()">Gửi OTP</ion-button>
+        <div *ngIf="isOtpSent" class="otp-container">
+          <label>Nhập OTP:</label>
+          <ion-input type="text" [(ngModel)]="userData.otp" />
+        </div> -->
+        <ion-button expand="block" (click)="onSubmit()">
+          Đăng Ký
+        </ion-button>
+        <a href="/dangnhap">Bạn đã có tài khoản?</a>
+      </div>
+    </div>
+  </div>
+</ion-content>

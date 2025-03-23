@@ -1,0 +1,85 @@
+.menu-btn {
+    position: fixed;
+    top: 55px; 
+    left: 15px; 
+    font-size: 13px; 
+    background: transparent; 
+    border: none; 
+    color: white; 
+    z-index: 1000; 
+  }
+  
+  .sidebar {
+    position: fixed;
+    width: 250px;
+    height: 100%;
+    background: #0f0f0f;
+    left: -280px;
+    top: 0;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    box-shadow: 3px 0 10px rgba(0, 0, 0, 0.3);
+    overflow-y: auto;
+  }
+  
+  .sidebar.active {
+    left: 0;
+  }
+  
+  .sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .sidebar-header h3 {
+    color: #E50914;
+    margin: 0;
+    font-weight: bold;
+    font-size: 20px;
+  }
+  
+  .close-btn {
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .sidebar-menu {
+    padding: 16px 0;
+  }
+  
+  .sidebar-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+  
+  .sidebar-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+  }
+  
+  .sidebar-item.active {
+    background: rgba(229, 9, 20, 0.2);
+    color: #000000;
+    border-left: 4px solid #E50914;
+  }
+  
+  .sidebar-item ion-icon {
+    font-size: 22px;
+    margin-right: 12px;
+  }
+  
+  @media (max-width: 768px) {
+    .sidebar {
+      width: 250px;
+      left: -250px;
+    }
+  }

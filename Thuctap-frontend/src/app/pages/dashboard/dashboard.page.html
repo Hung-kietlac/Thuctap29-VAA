@@ -1,0 +1,115 @@
+<ion-content color="netflix-darker">
+  <app-admin-header></app-admin-header>
+  <app-admin-sidebar></app-admin-sidebar>
+    <div class="dashboard-container">
+      <h1>Bảng Điều Khiển</h1>
+
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12" size-md="6" size-lg="3">
+            <ion-card color="primary">
+              <ion-card-content>
+                <div class="stat-card">
+                  <div class="stat-info">
+                    <div class="stat-title">Tổng Vé Bán</div>
+                    <div class="stat-value">.....</div>
+                  </div>
+                  <div class="stat-icon">
+                    <ion-icon name="ticket-outline"></ion-icon>
+                  </div>
+                </div>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+          <ion-col size="12" size-md="6" size-lg="3">
+            <ion-card color="secondary">
+              <ion-card-content>
+                <div class="stat-card">
+                  <div class="stat-info">
+                    <div class="stat-title">Doanh Thu</div>
+                    <div class="stat-value">..... VNĐ</div>
+                  </div>
+                  <div class="stat-icon">
+                    <ion-icon name="cash-outline"></ion-icon>
+                  </div>
+                </div>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+          <ion-col size="12" size-md="6" size-lg="3">
+            <ion-card color="tertiary">
+              <ion-card-content>
+                <div class="stat-card">
+                  <div class="stat-info">
+                    <div class="stat-title">Khách Hàng Mới</div>
+                    <div class="stat-value">.....</div>
+                  </div>
+                  <div class="stat-icon">
+                    <ion-icon name="person-add-outline"></ion-icon>
+                  </div>
+                </div>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+          <ion-col size="12" size-md="6" size-lg="3">
+            <ion-card color="success">
+              <ion-card-content>
+                <div class="stat-card">
+                  <div class="stat-info">
+                    <div class="stat-title">Suất Chiếu</div>
+                    <div class="stat-value">.....</div>
+                  </div>
+                  <div class="stat-icon">
+                    <ion-icon name="videocam-outline"></ion-icon>
+                  </div>
+                </div>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      
+      <!-- Biểu đồ doanh thu -->
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Doanh Thu Theo Tháng</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="chart-container">
+            <p>Biểu đồ doanh thu sẽ hiển thị ở đây.</p>
+          </div>
+        </ion-card-content>
+      </ion-card>
+      
+      <!-- Phân tích phim bán chạy và ghế trống -->
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12" size-lg="6">
+            <ion-card>
+              <ion-card-header>
+                <ion-card-title>Phim Bán Chạy</ion-card-title>
+              </ion-card-header>
+              <ion-card-content>
+                <div class="chart-container">
+                  <p>Danh sách phim bán chạy  .....</p>
+                </div>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+          <ion-col size="12" size-lg="6">
+            <ion-card>
+              <ion-card-header>
+                <ion-card-title>Tỷ Lệ Ghế Trống</ion-card-title>
+              </ion-card-header>
+              <ion-card-content>
+                <div class="chart-container">
+                  <p>Biểu đồ ghế trống .....</p>
+                </div>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+    <app-admin-footer></app-admin-footer>
+</ion-content>

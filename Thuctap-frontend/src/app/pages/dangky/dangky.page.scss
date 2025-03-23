@@ -1,0 +1,74 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 110vh;
+    background-color: rgb(196, 196, 196);
+    grid-area: form;
+}
+
+ion-input::placeholder {
+    padding-left: 10px;
+}
+
+.item {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    border: 1px solid grey;
+    background-color: #fff;
+    width: 100%;
+    max-width: 400px;
+    padding: 10px 30px 30px 30px;
+}
+    
+.item ion-input {
+    background-color: #fff;
+    border-radius: 5px;
+    border: 1px solid grey;
+    margin-top: 10px;
+}
+    
+h2, a {
+    text-align: center;
+    color: #333;
+}
+
+label {
+    color: #333;
+}
+
+a {
+    display: block;
+}
+
+.otp-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 15px;
+  
+    label {
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 5px;
+      color: #333;
+    }
+  
+    input {
+      width: 200px;
+      padding: 10px;
+      font-size: 16px;
+      border: 2px solid #007bff;
+      border-radius: 5px;
+      text-align: center;
+      outline: none;
+      transition: 0.3s;
+  
+      &:focus {
+        border-color: #0056b3;
+        box-shadow: 0 0 5px rgba(0, 91, 187, 0.5);
+      }
+    }
+  }

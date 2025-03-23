@@ -1,0 +1,290 @@
+:host {
+    // Màu chủ đạo - Đỏ Netflix
+    --ion-color-primary: #E50914;
+    --ion-color-primary-rgb: 229, 9, 20;
+    --ion-color-primary-contrast: #ffffff;
+    --ion-color-primary-contrast-rgb: 255, 255, 255;
+    --ion-color-primary-shade: #ca0812;
+    --ion-color-primary-tint: #e82d2c;
+    
+    // Nền và màu chữ chính - Tông đen
+    --ion-background-color: #0C0C0C;
+    --ion-background-color-rgb: 12, 12, 12;
+    --ion-text-color: #ffffff;
+    --ion-text-color-rgb: 255, 255, 255;
+    
+    // Màu phụ
+    --ion-color-secondary: #333333;
+    --ion-color-tertiary: #555555;
+  }
+  
+  // Nền trang
+  ion-content {
+    --background: #0C0C0C;
+    --color: #ffffff;
+  }
+  
+  // Header
+  ion-header ion-toolbar {
+    --background: #000000;
+    --color: #ffffff;
+    --border-style: none;
+  }
+  
+  // Card
+  ion-card {
+    background: #121212;
+    color: #ffffff;
+    border-radius: 4px;
+    margin: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: 1px solid #1f1f1f;
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.9);
+    }
+  }
+  
+  // Card header
+  ion-card-header {
+    padding-bottom: 8px;
+    border-bottom: 1px solid #1f1f1f;
+  }
+  
+  ion-card-title {
+    color: #ffffff;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+  }
+  
+  ion-card-subtitle {
+    color: #E50914;
+    font-weight: 500;
+  }
+  
+  // Phần giá và số lượng
+  .ticket-price-qty, .food-price-qty {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    
+    ion-text {
+      margin-bottom: 4px;
+      
+      p {
+        color: #E50914;
+        font-weight: bold;
+      }
+    }
+  }
+  
+  // Chip (nút +/-)
+  ion-chip {
+    margin: 0;
+    background-color: #1f1f1f;
+    color: #ffffff;
+    border: 1px solid #333333;
+    transition: all 0.2s ease;
+    
+    &:hover {
+      background-color: #2a2a2a;
+      border-color: #E50914;
+    }
+    
+    &[color="tertiary"] {
+      background-color: rgba(229, 9, 20, 0.1);
+      border-color: #E50914;
+      
+      &:hover {
+        background-color: rgba(229, 9, 20, 0.2);
+      }
+    }
+  }
+  
+  // Items trong list
+  ion-list {
+    background-color: transparent;
+    
+    ion-item {
+      --background: transparent;
+      --border-color: #1f1f1f;
+      --color: #FFFFFF;
+      --padding-start: 0;
+      --inner-padding-end: 0;
+      
+      ion-label {
+        h2, h3 {
+          color: #FFFFFF;
+          font-weight: 500;
+        }
+        
+        p {
+          color: #888888;
+        }
+      }
+      
+      ion-note {
+        color: #FFFFFF;
+        
+        &[color="success"] {
+          color: #28a745;
+        }
+        
+        &[color="primary"] {
+          color: #E50914;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+  
+  // Thumbnail
+  ion-thumbnail {
+    --border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    
+    img {
+      object-fit: cover;
+    }
+  }
+  
+  // Item sliding (swipe)
+  ion-item-sliding {
+    background: #121212;
+    
+    ion-item-options {
+      border-radius: 0 4px 4px 0;
+    }
+  }
+  
+  // Mã giảm giá
+  .promo-list {
+    margin-top: 16px;
+    
+    h5 {
+      margin: 8px 0;
+      color: #888888;
+    }
+    
+    .promo-item {
+      margin-top: 8px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 4px;
+    }
+    
+    ion-badge {
+      background: #28a745;
+      padding: 6px 8px;
+      font-weight: bold;
+    }
+  }
+  
+  // Input
+  ion-input {
+    --background: #1f1f1f;
+    --color: #ffffff;
+    --placeholder-color: #666666;
+    --padding-start: 12px;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+  
+  // Phương thức thanh toán
+  .payment-methods {
+    margin-top: 24px;
+    
+    h5 {
+      margin: 8px 0 16px;
+      color: #888888;
+    }
+    
+    .payment-icon {
+      width: 40px;
+      height: 40px;
+      --border-radius: 4px;
+      background: #1f1f1f;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #333333;
+    }
+    
+    ion-radio {
+      --color: #666666;
+      --color-checked: #E50914;
+    }
+  }
+  
+  // Radio button
+  ion-radio-group ion-item {
+    --ripple-color: rgba(229, 9, 20, 0.1);
+    
+    &:hover {
+      --background: rgba(255, 255, 255, 0.03);
+    }
+  }
+  
+  // Button
+  ion-button {
+    --background: #E50914;
+    --background-hover: #c80812;
+    --background-activated: #a40710;
+    --background-focused: #c80812;
+    --color: white;
+    font-weight: bold;
+    --border-radius: 4px;
+    --box-shadow: none;
+    letter-spacing: 0.5px;
+    
+    &[fill="outline"] {
+      --border-color: #E50914;
+      --border-width: 1px;
+      --background: transparent;
+      --color: #E50914;
+      
+      &:hover {
+        --background: rgba(229, 9, 20, 0.1);
+      }
+    }
+    
+    &[fill="clear"] {
+      --background: transparent;
+      --color: #888888;
+      font-weight: normal;
+      
+      &:hover {
+        --color: #ffffff;
+      }
+    }
+  }
+  
+  // Nút thanh toán
+  .checkout-button {
+    margin-top: 24px;
+    height: 48px;
+    font-size: 16px;
+    
+    ion-icon {
+      margin-left: 8px;
+    }
+  }
+  
+  // Animation
+  @keyframes pulse {
+    0% {
+      box-shadow: 0 0 0 0 rgba(229, 9, 20, 0.4);
+    }
+    70% {
+      box-shadow: 0 0 0 10px rgba(229, 9, 20, 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(229, 9, 20, 0);
+    }
+  }
+  
+  .checkout-button:hover {
+    animation: pulse 1.5s infinite;
+  }

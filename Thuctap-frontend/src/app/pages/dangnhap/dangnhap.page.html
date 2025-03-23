@@ -1,0 +1,26 @@
+<ion-content>
+  <div class="form">
+    <div class="container">
+      <div class="image">
+        <img src="" alt="">
+      </div>
+    </div>
+    <div class="item">
+      <h2>Đăng nhập</h2>
+      <label for="">Tên đăng nhập
+        <ion-input type="text" [(ngModel)]="loginData.username" placeholder="abc123"></ion-input>
+      </label>
+      <label for="">Mật khẩu
+        <ion-input type="password" [(ngModel)]="loginData.password" placeholder="abc123@"></ion-input>
+      </label>
+      <br>
+      <label class="checkbox-label">
+        <ion-checkbox [(ngModel)]="rememberMe"></ion-checkbox>
+        Nhớ mật khẩu
+      </label>
+      <ion-button expand="block" (click)="onLogin()">Đăng nhập</ion-button>
+      <a href="/quenmatkhau">Quên mật khẩu</a>
+      <a href="/dangky">Bạn chưa có tài khoản?</a>
+    </div>
+  </div>
+</ion-content>
