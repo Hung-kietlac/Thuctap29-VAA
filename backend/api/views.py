@@ -12,6 +12,11 @@ from .models import Phim
 from bson import ObjectId
 
 client = MongoClient("mongodb://localhost:27017/")
+db = client["Thuctap"]
+
+phim_collection = db["Phim"]
+rap_collection = db["rap"]
+showtime_collection = db["suatchieu"]
 OTP_STORAGE = {}
 
 @csrf_exempt
@@ -261,48 +266,43 @@ def ticket_history(request):
         db = client["Thuctap"]  
         collection = db["ve"]  
 
-        # Log thông tin request
-        print(f"Request status: {request.GET.get('status', 'all')}")
+        # Ánh xạ trạng thái
+        status_mapping = {
+            'completed': 'Đã thanh toán',
+            'pending': 'Chưa thanh toán',
+            'cancelled': 'Đã hủy'
+        }
 
-        if request.method == "GET":
-            status_mapping = {
-                'completed': 'Đã thanh toán',
-                'pending': 'Đang chờ thanh toán', 
-                'cancelled': 'Đã hủy'
-            }
+        # Lấy trạng thái từ request
+        frontend_status = request.GET.get('status', 'all')
+        print(f"Frontend Status: {frontend_status}")
 
-            frontend_status = request.GET.get('status', 'all')
-            
-            query = {}
-            if frontend_status != 'all':
-                db_status = status_mapping.get(frontend_status)
-                if db_status:
-                    query['trangthai'] = db_status
+        # Xây dựng truy vấn
+        query = {}
+        if frontend_status != 'all':
+            db_status = status_mapping.get(frontend_status, frontend_status)
+            query['trangthai'] = db_status
 
-            # Log query
-            print(f"MongoDB Query: {query}")
+        # Truy vấn và chuyển đổi dữ liệu
+        tickets = list(collection.find(query))
+        for ticket in tickets:
+            ticket['_id'] = str(ticket['_id'])
+            # Chuyển đổi các trường ngày về dạng string
+            for date_field in ['ngayxem', 'ngaydat', 'thoigianTT']:
+                if date_field in ticket and ticket[date_field]:
+                    ticket[date_field] = ticket[date_field].strftime('%Y-%m-%d %H:%M:%S') if hasattr(ticket[date_field], 'strftime') else str(ticket[date_field])
 
-            tickets = list(collection.find(query))
+        print(f"Tickets found: {len(tickets)}")
 
-            # Log số lượng vé
-            print(f"Total tickets found: {len(tickets)}")
-
-            for ticket in tickets:
-                ticket['_id'] = str(ticket['_id'])
-                print(f"Ticket: {ticket}")
-
-            return JsonResponse({
-                "tickets": tickets, 
-                "total": len(tickets)
-            }, safe=False, status=200)
-
-        return JsonResponse({"error": "Phương thức không được hỗ trợ"}, status=405)
+        return JsonResponse({
+            "tickets": tickets, 
+            "total": len(tickets)
+        }, safe=False, status=200)
 
     except Exception as e:
-        # Log lỗi chi tiết
         print(f"Error in ticket_history: {traceback.format_exc()}")
         return JsonResponse({"error": f"Lỗi truy xuất dữ liệu: {str(e)}"}, status=500)
-    
+        
 @csrf_exempt
 def ticket_detail(request, ticket_id):
     try:
@@ -348,3 +348,263 @@ def cancel_ticket(request, ticket_id):
 
     except Exception as e:
         return JsonResponse({"error": f"Lỗi hủy vé: {str(e)}"}, status=500)
+    
+
+def get_users(request):
+    try:
+        client = MongoClient("mongodb://localhost:27017/")
+        db = client["Thuctap"]
+        collection = db["User"]
+
+        if request.method == "GET":
+            # Lấy tất cả người dùng, loại trừ trường password
+            users = list(collection.find({}, {"password": 0}))
+            
+            # Chuyển ObjectId sang string
+            for user in users:
+                user["_id"] = str(user["_id"])
+
+            return JsonResponse({"users": users}, safe=False, status=200)
+
+        return JsonResponse({"error": "Phương thức không được hỗ trợ"}, status=405)
+
+    except Exception as e:
+        return JsonResponse({"error": f"Lỗi truy xuất người dùng: {str(e)}"}, status=500)
+
+@csrf_exempt
+def delete_user(request, user_id):
+    try:
+        client = MongoClient("mongodb://localhost:27017/")
+        db = client["Thuctap"]
+        collection = db["User"]
+
+        if request.method == "DELETE":
+            # Xóa người dùng theo ID
+            result = collection.delete_one({"_id": ObjectId(user_id)})
+            
+            if result.deleted_count > 0:
+                return JsonResponse({"message": "Xóa người dùng thành công"}, status=200)
+            else:
+                return JsonResponse({"error": "Không tìm thấy người dùng"}, status=404)
+
+        return JsonResponse({"error": "Phương thức không được hỗ trợ"}, status=405)
+
+    except Exception as e:
+        return JsonResponse({"error": f"Lỗi xóa người dùng: {str(e)}"}, status=500)
+
+@csrf_exempt
+def update_user(request, user_id):
+    try:
+        client = MongoClient("mongodb://localhost:27017/")
+        db = client["Thuctap"]
+        collection = db["User"]
+
+        if request.method == "PUT":
+            # Phân tích dữ liệu từ request
+            data = json.loads(request.body)
+            
+            # Chuẩn bị dữ liệu cập nhật
+            update_data = {}
+            for key in ["hoten", "ngaysinh", "sodienthoai", "username"]:
+                if key in data:
+                    update_data[key] = data[key]
+            
+            # Nếu có mật khẩu mới, mã hóa trước khi lưu
+            if "password" in data:
+                hashed_password = bcrypt.hashpw(data["password"].encode('utf-8'), bcrypt.gensalt())
+                update_data["password"] = hashed_password.decode('utf-8')
+            
+            # Thực hiện cập nhật
+            result = collection.update_one(
+                {"_id": ObjectId(user_id)}, 
+                {"$set": update_data}
+            )
+            
+            if result.modified_count > 0:
+                return JsonResponse({"message": "Cập nhật người dùng thành công"}, status=200)
+            else:
+                return JsonResponse({"error": "Không tìm thấy người dùng hoặc không có thay đổi"}, status=404)
+
+        return JsonResponse({"error": "Phương thức không được hỗ trợ"}, status=405)
+
+    except Exception as e:
+        return JsonResponse({"error": f"Lỗi cập nhật người dùng: {str(e)}"}, status=500)
+    
+
+
+@csrf_exempt
+def count_users(request):
+    try:
+
+        client = MongoClient("mongodb://localhost:27017/")
+        db = client["Thuctap"]
+        collection = db["User"]
+
+        total_users = collection.count_documents({})  
+
+        return JsonResponse({'total': total_users}, status=200)
+    except Exception as e:
+        return JsonResponse({'error': f'Lỗi lấy tổng số người dùng: {str(e)}'}, status=500)
+    
+    
+@csrf_exempt
+def get_movies(request):
+    """Lấy danh sách phim, có thể lọc theo rạp, ngày chiếu, tên phim"""
+    try:
+        client = MongoClient("mongodb://localhost:27017/")
+        db = client["Thuctap"]
+        phim_collection = db["Phim"]
+
+        query_params = {}
+        if request.method == "POST" and request.body:
+            data = json.loads(request.body)
+            if data.get("tenphim"):
+                query_params["tenphim"] = {"$regex": data["tenphim"], "$options": "i"}
+            if data.get("ngaychieu"):
+                query_params["ngaychieu"] = data["ngaychieu"]
+            if data.get("rap"):
+                query_params["rap"] = data["rap"]
+        
+        movies = list(phim_collection.find(query_params, {"_id": 1, "tenphim": 1, "theloai": 1, "ngaychieu": 1, "tendaodien": 1}))
+
+        for movie in movies:
+            movie["_id"] = str(movie["_id"])
+
+        return JsonResponse(movies, safe=False)
+    except Exception as e:
+        return JsonResponse({"error": str(e)}, status=500)
+
+
+@csrf_exempt
+def add_movie(request):
+    """Thêm phim mới vào danh sách"""
+    try:
+      
+        client = MongoClient("mongodb://localhost:27017/")
+        db = client["Thuctap"]
+        phim_collection = db["Phim"]
+
+        if request.method != "POST":
+            return JsonResponse({"error": "Phương thức không hợp lệ"}, status=405)
+
+        data = json.loads(request.body)
+        if not data.get("tenphim"):
+            return JsonResponse({"error": "Tên phim không được để trống"}, status=400)
+
+        phim_collection.insert_one(data)
+        return JsonResponse({"message": "Thêm phim thành công!"}, status=201)
+    except Exception as e:
+        return JsonResponse({"error": str(e)}, status=500)
+
+
+@csrf_exempt
+def update_movie(request, movie_id):
+    """Cập nhật thông tin phim"""
+    try:
+       
+        client = MongoClient("mongodb://localhost:27017/")
+        db = client["Thuctap"]
+        phim_collection = db["Phim"]
+
+        if request.method != "PUT":
+            return JsonResponse({"error": "Phương thức không hợp lệ"}, status=405)
+
+        data = json.loads(request.body)
+        phim_collection.update_one({"_id": ObjectId(movie_id)}, {"$set": data})
+        return JsonResponse({"message": "Cập nhật phim thành công!"}, status=200)
+    except Exception as e:
+        return JsonResponse({"error": str(e)}, status=500)
+
+
+@csrf_exempt
+def delete_movie(request, movie_id):
+    """Xóa phim khỏi danh sách"""
+    try:
+       
+        client = MongoClient("mongodb://localhost:27017/")
+        db = client["Thuctap"]
+        phim_collection = db["Phim"]
+
+        if request.method != "DELETE":
+            return JsonResponse({"error": "Phương thức không hợp lệ"}, status=405)
+
+        phim_collection.delete_one({"_id": ObjectId(movie_id)})
+        return JsonResponse({"message": "Xóa phim thành công!"}, status=200)
+    except Exception as e:
+        return JsonResponse({"error": str(e)}, status=500)
+
+
+@csrf_exempt
+def get_showtimes(request):
+    """Lấy danh sách lịch chiếu, có thể lọc theo phim, rạp, ngày"""
+    try:
+       
+        client = MongoClient("mongodb://localhost:27017/")
+        db = client["Thuctap"]
+        showtime_collection = db["suatchieu"]
+
+        query_params = {}
+        if request.method == "POST" and request.body:
+            data = json.loads(request.body)
+            if data.get("tenphim"):
+                query_params["tenphim"] = {"$regex": data["tenphim"], "$options": "i"}
+            if data.get("ngaychieu"):
+                query_params["ngaychieu"] = data["ngaychieu"]
+            if data.get("rap"):
+                query_params["rap"] = data["rap"]
+
+        showtimes = list(
+            showtime_collection.find(
+                query_params,
+                {"_id": 1, "tenphim": 1, "rap": 1, "phong": 1, "ngaychieu": 1, "giochieu": 1},
+            )
+        )
+
+        for showtime in showtimes:
+            showtime["_id"] = str(showtime["_id"])
+
+        return JsonResponse(showtimes, safe=False)
+    except Exception as e:
+        return JsonResponse({"error": str(e)}, status=500)
+
+
+@csrf_exempt
+def add_showtime(request):
+    """Thêm lịch chiếu mới"""
+    try:
+       
+        client = MongoClient("mongodb://localhost:27017/")
+        db = client["Thuctap"]
+        showtime_collection = db["suatchieu"]
+
+        if request.method != "POST":
+            return JsonResponse({"error": "Phương thức không hợp lệ"}, status=405)
+
+        data = json.loads(request.body)
+        required_fields = ["tenphim", "rap", "phong", "ngaychieu", "giochieu"]
+
+        if not all(field in data for field in required_fields):
+            return JsonResponse({"error": "Thiếu thông tin lịch chiếu"}, status=400)
+
+        showtime_collection.insert_one(data)
+        return JsonResponse({"message": "Thêm lịch chiếu thành công!"}, status=201)
+    except Exception as e:
+        return JsonResponse({"error": str(e)}, status=500)
+
+
+@csrf_exempt
+def delete_showtime(request, showtime_id):
+    """Xóa lịch chiếu"""
+    try:
+       
+        client = MongoClient("mongodb://localhost:27017/")
+        db = client["Thuctap"]
+        showtime_collection = db["suatchieu"]
+
+        if request.method != "DELETE":
+            return JsonResponse({"error": "Phương thức không hợp lệ"}, status=405)
+
+        showtime_collection.delete_one({"_id": ObjectId(showtime_id)})
+        return JsonResponse({"message": "Xóa lịch chiếu thành công!"}, status=200)
+    except Exception as e:
+        return JsonResponse({"error": str(e)}, status=500)
