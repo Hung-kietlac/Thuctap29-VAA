@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,6 +27,13 @@ SECRET_KEY = 'django-insecure-c+@g=2_w=+og$#_-&jwlvilh#5@=ktqh(qzze0)y%u%f#+9%q8
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
+# env = environ.Env()
+# environ.Env.read_env()
+
+# VNPAY_TMN_CODE = env("VNPAY_TMN_CODE")
+# VNPAY_HASH_SECRET = env("VNPAY_HASH_SECRET")
+# VNPAY_URL = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html"
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:8100",

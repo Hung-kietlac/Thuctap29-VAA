@@ -30,6 +30,7 @@ export class TrangchuPage implements OnInit {
   today: string = '';
   isLoggedIn = false;
   selectedDate: string = '';
+  showUpcoming: boolean = false;
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -102,8 +103,12 @@ export class TrangchuPage implements OnInit {
       .subscribe({
         next: (response) => {
           if (response && response.phim && Array.isArray(response.phim)) {
-            this.nowPlayingMovies = response.phim;
-            this.filterMoviesByDate();  // Lọc phim ngay sau khi lấy dữ liệu
+            const today = new Date();  // Lấy ngày hiện tại
+            this.nowPlayingMovies = response.phim.filter(phim => new Date(phim.ngaychieu) <= today);
+            this.upcomingMovies = response.phim.filter(phim => new Date(phim.ngaychieu) > today);
+
+            console.log("Phim đang chiếu:", this.nowPlayingMovies);
+            console.log("Phim sắp chiếu:", this.upcomingMovies);
           } else {
             console.error('Dữ liệu phim không hợp lệ:', response);
           }
@@ -201,9 +206,10 @@ export class TrangchuPage implements OnInit {
       this.router.navigate(['/dangnhap']);
       return;
     }
-    this.router.navigate(['/cart'], { queryParams: {tenphim: phim.tenphim, id: phim.id, poster: phim.poster, ngaychieu: phim.ngaychieu}});
+    this.router.navigate(['/book-ticket'], { queryParams: {tenphim: phim.tenphim, theloai: phim.theloai, trailer: phim.trailer_teaser, mota: phim.mota, 
+      tendaodien: phim.tendaodien, dienvien: phim.dienvien, poster: phim.poster, ngaychieu: phim.ngaychieu, danhgiaphim: phim.danhgiaphim, thoiluong: phim.thoiluong}});
   }
-  
+
   logout() {
     localStorage.removeItem('userToken');
     this.isLoggedIn = false;
@@ -226,6 +232,12 @@ export class TrangchuPage implements OnInit {
   toggleMovies() {
     this.showAll = !this.showAll;
     this.displayedMovies = this.showAll ? this.nowPlayingMovies : this.nowPlayingMovies.slice(0, 7);
+  }
+
+  displayedUpcomingMovies = this.upcomingMovies.slice(0, 7);
+  toggleUpcoming() {
+    this.showUpcoming = !this.showUpcoming;
+    this.displayedUpcomingMovies = this.showUpcoming ? this.upcomingMovies : this.upcomingMovies.slice(0, 7);
   }
 
   // Hàm lọc phim theo danh mục
@@ -260,7 +272,7 @@ export class TrangchuPage implements OnInit {
 
   loadPromotions() {
     this.promotions = [
-      { id: 1, title: 'Giảm 50% vé xem phim', image:'https://png.pngtree.com/png-clipart/20201028/ourlarge/pngtree-super-hot-50-discount-promotion-yellow-sticker-png-image_2376814.jpg' },
+      { id: 1, title: 'Giảm 50% vé xem phim', image: 'https://png.pngtree.com/png-clipart/20201028/ourlarge/pngtree-super-hot-50-discount-promotion-yellow-sticker-png-image_2376814.jpg' },
       { id: 2, title: 'Tặng bắp rang miễn phí', image: 'https://th.bing.com/th/id/OIP.ctOKZWCmnRImZFwiaJZq5AHaFq?w=230&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7' }
     ];
   }

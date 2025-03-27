@@ -102,7 +102,7 @@
     </div>
   
     <div class="movie-grid">
-      <div class="movie-card" *ngFor="let phim of displayedMovies">
+      <div class="movie-card" *ngFor="let phim of nowPlayingMovies">
         <div class="movie-poster-container">
           <img [src]="phim.poster" [alt]="phim.tenphim" class="movie-poster">
           <div class="movie-rating">
@@ -131,36 +131,36 @@
   <!-- Phim Sắp Ra Mắt -->
   <div class="movie-section">
     <div class="section-header">
-      <h2>SẮP RA MẮT</h2>
-      <ion-button fill="clear" routerlink="/phim-sap-chieu" class="view-all-btn">
-        XEM TẤT CẢ <ion-icon name="chevron-forward-outline"></ion-icon>
+      <h2>PHIM SẮP CHIẾU</h2>
+      <ion-button fill="clear" (click)="toggleUpcoming()" class="view-all-btn">
+        {{ showAll ? 'THU GỌN' : 'XEM TẤT CẢ' }} <ion-icon name="chevron-forward-outline"></ion-icon>
       </ion-button>
     </div>
 
-    <div class="upcoming-slider">
-      <ion-slides [options]="upcomingSlideOpts">
-        <ion-slide>
-          <div class="upcoming-card">
-            <div class="upcoming-poster-container">
-              <img [src]="phim.poster" [alt]="phim.tenphim" class="upcoming-poster">
-              <div class="release-date">
-                <ion-icon name="calendar-outline"></ion-icon>
-                {{ phim.ngaychieu }}
-              </div>
-            </div>
-            <div class="upcoming-info">
-              <h3 class="upcoming-title">{{ phim.tenphim }}</h3>
-              <div class="upcoming-genres">
-                <span class="genre-tag">{{ phim.theloai }}</span>
-              </div>
-              <ion-button expand="block" fill="outline" color="light" class="remind-me-btn">
-                <ion-icon name="notifications-outline"></ion-icon>
-                NHẮC TÔI
-              </ion-button>
-            </div>
+    <div class="movie-grid">
+      <div class="movie-card" *ngFor="let phim of upcomingMovies">
+        <div class="movie-poster-container">
+          <img [src]="phim.poster" [alt]="phim.tenphim" class="movie-poster">
+          <div class="movie-rating">
+            <ion-icon name="star"></ion-icon>
+            <span>{{ phim.danhgiaphim }}</span>
           </div>
-        </ion-slide>
-      </ion-slides>
+        </div>
+        <div class="movie-info">
+          <h3 class="movie-title">{{ phim.tenphim }}</h3>
+          <div class="movie-genres">
+            <span class="genre-tag">{{ phim.theloai }}</span>
+          </div>
+        </div>
+        <div class="movie-actions">
+          <div class="upcoming-actions">
+            <ion-button expand="block" fill="outline" color="light" class="remind-me-btn">
+              <ion-icon name="notifications-outline"></ion-icon>
+              NHẮC TÔI
+            </ion-button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 

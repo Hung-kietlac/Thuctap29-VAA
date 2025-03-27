@@ -161,41 +161,6 @@ def phim(request):
 
     except Exception as e:
         return JsonResponse({"error": f"Lỗi server: {str(e)}"}, status=500)
-    
-@csrf_exempt
-def phim_dang_chieu(request):
-    try:
-        client = MongoClient("mongodb://localhost:27017/")
-        db = client["Thuctap"]
-        collection = db["Phim"]
-
-        today = datetime.today().strftime('%Y-%m-%d')  # Lấy ngày hôm nay
-
-        if request.method == "GET":
-            phim_dang_chieu = list(collection.find({"ngaychieu": {"$lte": today}}, {"_id": 0}))
-            return JsonResponse({"phim": phim_dang_chieu}, safe=False, status=200)
-
-        return JsonResponse({"error": "Method not allowed"}, status=405)
-
-    except Exception as e:
-        return JsonResponse({"error": f"Lỗi server: {str(e)}"}, status=500)
-    
-@csrf_exempt
-def phim_sap_chieu(request):
-    try:
-        client = MongoClient("mongodb://localhost:27017/")
-        db = client["Thuctap"]
-        collection = db["Phim"]
-
-        phim_list = list(collection.find({"trangthai": "Sắp chiếu"}))  # Lọc phim có trạng thái "Sắp chiếu"
-        
-        for phim in phim_list:
-            phim["_id"] = str(phim["_id"])  # Chuyển ObjectId thành chuỗi
-
-        return JsonResponse({"phim_sap_chieu": phim_list}, safe=False, status=200)
-
-    except Exception as e:
-        return JsonResponse({"error": f"Lỗi server: {str(e)}"}, status=500)
 
 @csrf_exempt
 def rap(request):
@@ -211,3 +176,68 @@ def rap(request):
         return JsonResponse({"error": "Lỗi phương thức"}, status=405)
     except Exception as e:
         return JsonResponse({"error": f"Lỗi server: {str(e)}"}, status=500)
+
+@csrf_exempt
+def dichvu(request):
+    try:
+        client = MongoClient("mongodb://localhost:27017/")
+        db = client["Thuctap"]
+        collection = db["dichvu"]
+        
+        if request.method =="GET":
+            dichvu = list(collection.find({}, {"_id":0}))
+            return JsonResponse({"dichvu": dichvu}, safe=False, status=200)
+        
+        return JsonResponse({"error": "Lỗi phương thức"}, status=405)
+    except Exception as e:
+        return JsonResponse({"error": f"Lỗi server: {str(e)}"}, status=500)
+
+def generate_vnpay_qr(request):
+    vnp_TmnCode = settings.VNPAY_TMN_CODE
+    vnp_HashSecret = settings.VNPAY_HASH_SECRET
+    vnp_Url = settings.VNPAY_URL
+
+    vnp_TxnRef = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
+    vnp_Amount = int(request.GET.get("amount", 10000)) * 100  # Đơn vị VNĐ x 100
+    vnp_OrderInfo = "Thanh toan don hang " + vnp_TxnRef
+    vnp_ReturnUrl = "http://localhost:3000/payment-success"  # Trang React sau khi thanh toán
+
+    # Tạo dữ liệu gửi lên VNPay
+    data = {
+        "vnp_Version": "2.1.0",
+        "vnp_Command": "pay",
+        "vnp_TmnCode": vnp_TmnCode,
+        "vnp_Amount": vnp_Amount,
+        "vnp_CurrCode": "VND",
+        "vnp_TxnRef": vnp_TxnRef,
+        "vnp_OrderInfo": vnp_OrderInfo,
+        "vnp_OrderType": "other",
+        "vnp_Locale": "vn",
+        "vnp_ReturnUrl": vnp_ReturnUrl,
+        "vnp_IpAddr": "127.0.0.1",
+        "vnp_CreateDate": datetime.datetime.now().strftime("%Y%m%d%H%M%S"),
+    }
+
+    # Sắp xếp tham số theo thứ tự alphabet
+    sorted_data = sorted(data.items())
+    query_string = urlencode(sorted_data)
+
+    # Tạo chữ ký bảo mật (HMAC-SHA512)
+    hmac_signature = hmac.new(
+        bytes(vnp_HashSecret, "utf-8"), 
+        bytes(query_string, "utf-8"), 
+        hashlib.sha512
+    ).hexdigest()
+
+    # Thêm chữ ký vào URL
+    payment_url = f"{vnp_Url}?{query_string}&vnp_SecureHash={hmac_signature}"
+
+    # Tạo mã QR Code
+    qr = qrcode.make(payment_url)
+    qr.save("qrcode.png")
+
+    # Encode QR thành Base64 để trả về frontend
+    with open("qrcode.png", "rb") as qr_file:
+        qr_base64 = base64.b64encode(qr_file.read()).decode()
+
+    return JsonResponse({"qr_code": qr_base64, "payment_url": payment_url})

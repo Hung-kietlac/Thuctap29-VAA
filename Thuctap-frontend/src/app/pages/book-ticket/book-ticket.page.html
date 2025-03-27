@@ -14,22 +14,22 @@
     <ion-card>
       <ion-card-header>
         <ion-card-subtitle>Đang chiếu</ion-card-subtitle>
-        <ion-card-title id="movieTitle">Người Nhện: Không Còn Nhà</ion-card-title>
+        <ion-card-title id="movieTitle">{{ phim.tenphim }}</ion-card-title>
       </ion-card-header>
       <ion-card-content>
         <div class="movie-info">
           <div class="movie-poster">
-            <img src="assets/spiderman-poster.jpg" alt="Poster phim" id="moviePoster">
+            <img src="{{ phim.poster }}" alt="Poster phim" id="moviePoster">
           </div>
           <div class="movie-details">
-            <p><strong>Thể loại:</strong> <span id="movieGenre">Hành động, Phiêu lưu, Siêu anh hùng</span></p>
-            <p><strong>Thời lượng:</strong> <span id="movieDuration">148 phút</span></p>
-            <p><strong>Đánh giá:</strong> <span id="movieRating">9.2/10</span></p>
-            <p><strong>Khởi chiếu:</strong> <span id="movieReleaseDate">15/02/2025</span></p>
-            <p><strong>Đạo diễn:</strong> <span id="movieDirector">Jon Watts</span></p>
-            <p><strong>Diễn viên:</strong> <span id="movieCast">Tom Holland, Zendaya, Benedict Cumberbatch</span></p>
-            <p><strong>Mô tả:</strong> <span id="movieDescription">Peter Parker phải đối mặt với hậu quả khi danh tính của anh bị lộ. Anh tìm đến Doctor Strange để xin giúp đỡ, nhưng một phép thuật bị hỏng đã mở ra đa vũ trụ, giải phóng những kẻ thù mạnh mẽ từ những thực tại khác.</span></p>
-            <ion-button expand="block" color="secondary" id="watchTrailer">
+            <p><strong>Thể loại:</strong> <span id="movieGenre"> {{ phim.theloai }}</span></p>
+            <p><strong>Thời lượng:</strong> <span id="movieDuration"> {{ phim.thoiluong }} phút</span></p>
+            <p><strong>Đánh giá:</strong> <span id="movieRating"> {{ phim.danhgiaphim }}/10</span></p>
+            <p><strong>Khởi chiếu:</strong> <span id="movieReleaseDate"> {{ phim.ngaychieu }}</span></p>
+            <p><strong>Đạo diễn:</strong> <span id="movieDirector"> {{ phim.tendaodien }}</span></p>
+            <p><strong>Diễn viên:</strong> <span id="movieCast"> {{ phim.dienvien }}</span></p>
+            <p><strong>Mô tả:</strong> <span id="movieDescription"> {{ phim.mota }}</span></p>
+            <ion-button expand="block" color="secondary" id="watchTrailer" (click)="openTrailer()">
               Xem Trailer
             </ion-button>
           </div>
@@ -64,40 +64,42 @@
         <div class="cinema-selector">
           <ion-item>
             <ion-label>Chọn Rạp</ion-label>
-            <ion-select id="cinemaSelect" interface="popover">
-              <ion-select-option value="cgv-vincom">CGV Vincom Center</ion-select-option>
-              <ion-select-option value="lotte-nam-sai-gon">Lotte Cinema Nam Sài Gòn</ion-select-option>
-              <ion-select-option value="galaxy-nguyen-du">Galaxy Nguyễn Du</ion-select-option>
+            <ion-select id="cinemaSelect" interface="popover" (ionChange)="onCinemaChange($event)">
+              <ion-select-option value="CGV Vincom Đồng Khởi">CGV Vincom Đồng Khởi</ion-select-option>
+              <ion-select-option value="Lotte Cinema Nam Sài Gòn">Lotte Cinema Nam Sài Gòn</ion-select-option>
+              <ion-select-option value="BHD Star Cineplex Thảo Điền">BHD Star Cineplex Thảo Điền</ion-select-option>
+              <ion-select-option value="Galaxy Nguyễn Du">Galaxy Nguyễn Du</ion-select-option>
+              <ion-select-option value="Cinestar Quốc Thanh">Cinestar Quốc Thanh</ion-select-option>
             </ion-select>
           </ion-item>
         </div>
 
         <div class="showtimes-container">
-          <div class="showtime-item" data-id="showtime-1">
+          <div class="showtime-item" data-id="showtime-1" (click)="selectShowtime('10:30', 'Cinema 1 - 2D Phụ đề')">
             <ion-chip color="primary">
               <ion-label>10:30</ion-label>
             </ion-chip>
             <span class="venue">Cinema 1 - 2D Phụ đề</span>
           </div>
-          <div class="showtime-item" data-id="showtime-2">
+          <div class="showtime-item" data-id="showtime-2" (click)="selectShowtime('13:45', 'Cinema 2 - 3D Phụ đề')">
             <ion-chip color="primary">
               <ion-label>13:45</ion-label>
             </ion-chip>
             <span class="venue">Cinema 2 - 3D Phụ đề</span>
           </div>
-          <div class="showtime-item" data-id="showtime-3">
+          <div class="showtime-item" data-id="showtime-3" (click)="selectShowtime('16:15', 'Cinema 1 - 2D Lồng Tiếng')">
             <ion-chip color="primary">
               <ion-label>16:15</ion-label>
             </ion-chip>
             <span class="venue">Cinema 1 - 2D Lồng tiếng</span>
           </div>
-          <div class="showtime-item" data-id="showtime-4">
+          <div class="showtime-item" data-id="showtime-4" (click)="selectShowtime('19:30', 'Cinema 3 - IMAX')">
             <ion-chip color="primary">
               <ion-label>19:30</ion-label>
             </ion-chip>
             <span class="venue">Cinema 3 - IMAX</span>
           </div>
-          <div class="showtime-item" data-id="showtime-5">
+          <div class="showtime-item" data-id="showtime-5" (click)="selectShowtime('21:45', 'Cinema 2 - 3D Phụ đề')">
             <ion-chip color="primary">
               <ion-label>21:45</ion-label>
             </ion-chip>
@@ -111,7 +113,7 @@
     <ion-card>
       <ion-card-header>
         <ion-card-title>Chọn Ghế</ion-card-title>
-        <ion-card-subtitle id="roomInfo">Cinema 1 - Phòng chiếu Deluxe</ion-card-subtitle>
+        <ion-card-subtitle id="roomInfo">{{ selectedShowtime.venue }}</ion-card-subtitle>
       </ion-card-header>
       <ion-card-content>
         <div class="screen-container">
@@ -121,78 +123,21 @@
         </div>
 
         <div class="seats-container">
-          <!-- Hàng A -->
-          <div class="seat-row">
-            <div class="seat-label">A</div>
-            <div class="seats">
-              <div class="seat" data-seat="A1">A1</div>
-              <div class="seat" data-seat="A2">A2</div>
-              <div class="seat" data-seat="A3">A3</div>
-              <div class="seat" data-seat="A4">A4</div>
-              <div class="seat" data-seat="A5">A5</div>
-              <div class="seat" data-seat="A6">A6</div>
-              <div class="seat" data-seat="A7">A7</div>
-              <div class="seat" data-seat="A8">A8</div>
-            </div>
-          </div>
-          
-          <!-- Hàng B -->
-          <div class="seat-row">
-            <div class="seat-label">B</div>
-            <div class="seats">
-              <div class="seat" data-seat="B1">B1</div>
-              <div class="seat" data-seat="B2">B2</div>
-              <div class="seat" data-seat="B3">B3</div>
-              <div class="seat" data-seat="B4">B4</div>
-              <div class="seat" data-seat="B5">B5</div>
-              <div class="seat" data-seat="B6">B6</div>
-              <div class="seat" data-seat="B7">B7</div>
-              <div class="seat" data-seat="B8">B8</div>
-            </div>
-          </div>
-          
-          <!-- Hàng C -->
-          <div class="seat-row">
-            <div class="seat-label">C</div>
-            <div class="seats">
-              <div class="seat" data-seat="C1">C1</div>
-              <div class="seat" data-seat="C2">C2</div>
-              <div class="seat vip" data-seat="C3">C3</div>
-              <div class="seat vip" data-seat="C4">C4</div>
-              <div class="seat vip" data-seat="C5">C5</div>
-              <div class="seat vip" data-seat="C6">C6</div>
-              <div class="seat" data-seat="C7">C7</div>
-              <div class="seat" data-seat="C8">C8</div>
-            </div>
-          </div>
-          
-          <!-- Hàng D -->
-          <div class="seat-row">
-            <div class="seat-label">D</div>
-            <div class="seats">
-              <div class="seat" data-seat="D1">D1</div>
-              <div class="seat" data-seat="D2">D2</div>
-              <div class="seat vip" data-seat="D3">D3</div>
-              <div class="seat vip" data-seat="D4">D4</div>
-              <div class="seat vip" data-seat="D5">D5</div>
-              <div class="seat vip" data-seat="D6">D6</div>
-              <div class="seat" data-seat="D7">D7</div>
-              <div class="seat" data-seat="D8">D8</div>
-            </div>
-          </div>
-          
-          <!-- Hàng E -->
-          <div class="seat-row">
-            <div class="seat-label">E</div>
-            <div class="seats">
-              <div class="seat" data-seat="E1">E1</div>
-              <div class="seat" data-seat="E2">E2</div>
-              <div class="seat" data-seat="E3">E3</div>
-              <div class="seat" data-seat="E4">E4</div>
-              <div class="seat" data-seat="E5">E5</div>
-              <div class="seat" data-seat="E6">E6</div>
-              <div class="seat" data-seat="E7">E7</div>
-              <div class="seat" data-seat="E8">E8</div>
+          <div class="seats-container">
+            <div *ngFor="let row of ['A', 'B', 'C', 'D', 'E']" class="seat-row">
+              <div class="seat-label">{{ row }}</div>
+              <div class="seats">
+                <div class="seat"
+                     *ngFor="let seat of [row + '1', row + '2', row + '3', row + '4', row + '5', row + '6', row + '7', row + '8']"
+                     [ngClass]="{
+                       'vip': isVipSeat(seat),
+                       'selected': selectedSeats.includes(seat),
+                       'booked': isBooked(seat)
+                     }"
+                     (click)="toggleSeat(seat)">
+                  {{ seat }}
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -227,39 +172,37 @@
         <ion-list>
           <ion-item>
             <ion-label>Phim:</ion-label>
-            <ion-note slot="end" id="summaryMovieTitle">Người Nhện: Không Còn Nhà</ion-note>
+            <ion-note slot="end" id="summaryMovieTitle">{{ phim.tenphim }}</ion-note>
           </ion-item>
           <ion-item>
             <ion-label>Rạp chiếu:</ion-label>
-            <ion-note slot="end" id="summaryCinema">CGV Vincom Center</ion-note>
+            <ion-note slot="end" id="summaryCinema">{{ selectedCinema }}</ion-note>
           </ion-item>
           <ion-item>
             <ion-label>Phòng chiếu:</ion-label>
-            <ion-note slot="end" id="summaryRoom">Cinema 1 - Deluxe</ion-note>
-          </ion-item>
-          <ion-item>
-            <ion-label>Định dạng:</ion-label>
-            <ion-note slot="end" id="summaryFormat">2D Phụ đề</ion-note>
+            <ion-note slot="end" id="summaryRoom">{{ selectedShowtime.venue }}</ion-note>
           </ion-item>
           <ion-item>
             <ion-label>Ngày chiếu:</ion-label>
-            <ion-note slot="end" id="summaryDate">09/03/2025</ion-note>
+            <ion-note slot="end" id="summaryDate">{{ phim.ngaychieu }}</ion-note>
           </ion-item>
           <ion-item>
             <ion-label>Suất chiếu:</ion-label>
-            <ion-note slot="end" id="summaryShowtime">--:--</ion-note>
+            <ion-note slot="end" id="summaryShowtime">{{ selectedShowtime.time }}</ion-note>
           </ion-item>
           <ion-item>
             <ion-label>Ghế đã chọn:</ion-label>
-            <ion-note slot="end" id="summarySeats">--</ion-note>
+            <ion-note slot="end">
+              {{ selectedSeats.length > 0 ? getFormattedSeats() : '--' }}
+            </ion-note>
           </ion-item>
           <ion-item>
             <ion-label>Số lượng vé:</ion-label>
-            <ion-note slot="end" id="summaryTicketCount">0</ion-note>
+            <ion-note slot="end" id="summaryTicketCount">{{ selectedSeats.length }}</ion-note>
           </ion-item>
           <ion-item>
             <ion-label>Giá vé:</ion-label>
-            <ion-note slot="end" id="summaryPrice">0 VNĐ</ion-note>
+            <ion-note slot="end" id="summaryPrice"> {{ calculateTotalPrice() | number }} VNĐ</ion-note>
           </ion-item>
         </ion-list>
 
@@ -288,7 +231,7 @@
           </ion-select>
         </ion-item>
 
-        <ion-button expand="block" color="primary" id="confirmBooking">
+        <ion-button (click)="datve(phim)" expand="block" color="primary" id="confirmBooking">
           Xác nhận đặt vé
         </ion-button>
       </ion-card-content>
