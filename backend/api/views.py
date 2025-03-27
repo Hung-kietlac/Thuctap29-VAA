@@ -11,6 +11,7 @@ import traceback
 from .models import Phim
 from bson import ObjectId
 
+client = MongoClient("mongodb://localhost:27017/")
 OTP_STORAGE = {}
 
 @csrf_exempt
@@ -241,3 +242,109 @@ def generate_vnpay_qr(request):
         qr_base64 = base64.b64encode(qr_file.read()).decode()
 
     return JsonResponse({"qr_code": qr_base64, "payment_url": payment_url})
+
+
+@csrf_exempt
+def get_tickets(request):
+    if request.method == "GET":
+        try:
+            tickets = Ticket.objects.all().values()  # Lấy tất cả vé
+            return JsonResponse(list(tickets), safe=False)
+        except Exception as e:
+            return JsonResponse({"error": str(e)}, status=500)
+    return JsonResponse({"error": "Invalid request"}, status=400)
+
+@csrf_exempt
+def ticket_history(request):
+    try:
+        client = MongoClient("mongodb://localhost:27017/")
+        db = client["Thuctap"]  
+        collection = db["ve"]  
+
+        # Log thông tin request
+        print(f"Request status: {request.GET.get('status', 'all')}")
+
+        if request.method == "GET":
+            status_mapping = {
+                'completed': 'Đã thanh toán',
+                'pending': 'Đang chờ thanh toán', 
+                'cancelled': 'Đã hủy'
+            }
+
+            frontend_status = request.GET.get('status', 'all')
+            
+            query = {}
+            if frontend_status != 'all':
+                db_status = status_mapping.get(frontend_status)
+                if db_status:
+                    query['trangthai'] = db_status
+
+            # Log query
+            print(f"MongoDB Query: {query}")
+
+            tickets = list(collection.find(query))
+
+            # Log số lượng vé
+            print(f"Total tickets found: {len(tickets)}")
+
+            for ticket in tickets:
+                ticket['_id'] = str(ticket['_id'])
+                print(f"Ticket: {ticket}")
+
+            return JsonResponse({
+                "tickets": tickets, 
+                "total": len(tickets)
+            }, safe=False, status=200)
+
+        return JsonResponse({"error": "Phương thức không được hỗ trợ"}, status=405)
+
+    except Exception as e:
+        # Log lỗi chi tiết
+        print(f"Error in ticket_history: {traceback.format_exc()}")
+        return JsonResponse({"error": f"Lỗi truy xuất dữ liệu: {str(e)}"}, status=500)
+    
+@csrf_exempt
+def ticket_detail(request, ticket_id):
+    try:
+        client = MongoClient("mongodb://localhost:27017/")
+        db = client["Thuctap"]
+        collection = db["ve"]
+
+        if request.method == "GET":
+            # Chuyển ticket_id sang ObjectId
+            ticket = collection.find_one({"_id": ObjectId(ticket_id)})
+
+            if ticket:
+                ticket['_id'] = str(ticket['_id'])
+                return JsonResponse(ticket, safe=False, status=200)
+            else:
+                return JsonResponse({"error": "Không tìm thấy vé"}, status=404)
+
+        return JsonResponse({"error": "Phương thức không được hỗ trợ"}, status=405)
+
+    except Exception as e:
+        return JsonResponse({"error": f"Lỗi truy xuất chi tiết vé: {str(e)}"}, status=500)
+
+@csrf_exempt
+def cancel_ticket(request, ticket_id):
+    try:
+        client = MongoClient("mongodb://localhost:27017/")
+        db = client["Thuctap"]
+        collection = db["ve"]
+
+        if request.method == "POST":
+            # Cập nhật trạng thái vé thành "Đã hủy"
+            result = collection.update_one(
+                {"_id": ObjectId(ticket_id)}, 
+                {"$set": {"trangthai": "Đã hủy"}}
+            )
+
+            if result.modified_count > 0:
+                return JsonResponse({"message": "Hủy vé thành công"}, status=200)
+            else:
+                return JsonResponse({"error": "Không tìm thấy vé hoặc không thể hủy"}, status=404)
+
+        return JsonResponse({"error": "Phương thức không được hỗ trợ"}, status=405)
+
+    except Exception as e:
+        return JsonResponse({"error": f"Lỗi hủy vé: {str(e)}"}, status=500)
