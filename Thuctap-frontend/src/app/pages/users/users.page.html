@@ -1,0 +1,118 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>User Management</ion-title>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon slot="icon-only" name="add-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <ion-toolbar color="dark">
+    <ion-searchbar placeholder="Search users" color="light">
+    </ion-searchbar>
+    <ion-buttons slot="end">
+      <ion-button>All</ion-button>
+      <ion-button>Active</ion-button>
+      <ion-button>Inactive</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="dark">
+  <div class="user-stats">
+    <div class="stat-box">
+      <span class="stat-number">Tổng</span>
+      <span class="stat-label">Total Users</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-number">Số người mới</span>
+      <span class="stat-label">New Users</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-number">VIP</span>
+      <span class="stat-label">Premium</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-number">Phim đã xem</span>
+      <span class="stat-label">Movies Viewed</span>
+    </div>
+  </div>
+
+  <!-- Admin Table -->
+  <ion-grid>
+    <ion-row class="header-row">
+      <ion-col size="0.5">#</ion-col>
+      <ion-col size="3">Admin</ion-col>
+      <ion-col size="2.5">Tên</ion-col>
+      <ion-col size="2">....</ion-col>
+      <ion-col size="2">....</ion-col>
+    </ion-row>
+
+    <ion-row class="user-row">
+      <ion-col size="0.5">1</ion-col>
+      <ion-col size="3">
+        <div class="user-info">
+          <ion-avatar>
+            <img src="https://ionicframework.com/docs/img/demos/avatar.svg">
+          </ion-avatar>
+          <div class="user-details">
+            <div class="user-name">.....</div>
+            <div class="user-email">example.com</div>
+          </div>
+        </div>
+      </ion-col>
+      <ion-col size="2.5">....K</ion-col>
+      <ion-col size="2">2 hours ago</ion-col>
+      <ion-col size="2">2023-04-15</ion-col>
+      <ion-col size="2">
+        <ion-button fill="clear" size="small">
+          <ion-icon name="ellipsis-vertical"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>  
+
+  <!-- Users Table -->
+  <ion-grid>
+    <ion-row class="header-row">
+      <ion-col size="0.5">#</ion-col>
+      <ion-col size="3">User</ion-col>
+      <ion-col size="2.5">Plan</ion-col>
+      <ion-col size="2">Last Active</ion-col>
+      <ion-col size="2">Joined</ion-col>
+    </ion-row>
+
+    <ion-row class="user-row">
+      <ion-col size="0.5">1</ion-col>
+      <ion-col size="3">
+        <div class="user-info">
+          <ion-avatar>
+            <img src="https://ionicframework.com/docs/img/demos/avatar.svg">
+          </ion-avatar>
+          <div class="user-details">
+            <div class="user-name">.....</div>
+            <div class="user-email">example.com</div>
+          </div>
+        </div>
+      </ion-col>
+      <ion-col size="2.5">Premium 4K</ion-col>
+      <ion-col size="2">2 hours ago</ion-col>
+      <ion-col size="2">2023-04-15</ion-col>
+      <ion-col size="2">
+        <ion-button fill="clear" size="small">
+          <ion-icon name="ellipsis-vertical"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>  
+  <!-- Infinite Scroll -->
+  <ion-infinite-scroll>
+    <ion-infinite-scroll-content loadingspinner="crescent" loadingtext="Loading more users...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+</ion-content>

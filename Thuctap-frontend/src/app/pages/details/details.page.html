@@ -1,0 +1,125 @@
+<app-header></app-header>
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button href="/trangchu"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Chi tiết phim</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-progress-bar *ngif="isLoading" type="indeterminate"></ion-progress-bar>
+
+  <ng-container *ngif="!isLoading &amp;&amp; movie">
+    <!-- Banner phim -->
+    <div class="movie-banner">
+      <img [src]="phim.posterUrl" alt="Movie poster">
+      <div class="movie-overlay">
+        <h1>{{ phim.tenphim }}</h1>
+        <div class="movie-meta">
+          <span>{{ phim.ngaychieu }}</span>
+          <span>{{ phim.duration }} phút</span>
+          <span>{{ phim.rating }}/10</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Thông tin phim -->
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Thông tin</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item lines="none">
+          <ion-label>
+            <h2>Đạo diễn</h2>
+            <p>{{ phim.tendaodien }}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label>
+            <h2>Diễn viên</h2>
+            <p>{{ phim.dienvien }}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label>
+            <h2>Thể loại</h2>
+            <p>{{ phim.theloai }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Nội dung phim -->
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Nội dung</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>{{ phim.mota }}</p>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Trailer - Bỏ qua pipe và thay đổi cách xử lý -->
+    <ion-card *ngIf="phim.trailer">
+      <ion-card-header>
+        <ion-card-title>Trailer</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        
+        <!-- Option 1: Sử dụng link trực tiếp đến YouTube -->
+        <div class="video-container">
+          <a [href]="phim.trailerUrl" target="_blank">
+            <ion-button expand="block">
+              <ion-icon name="videocam-outline" slot="start"></ion-icon>
+              Xem Trailer
+            </ion-button>
+          </a>
+        </div>
+        
+        <!-- Option 2: Hiển thị hình ảnh thumbnail thay vì iframe -->
+        <div class="trailer-thumbnail" *ngif="phim.trailerThumbnail">
+          <img [src]="phim.trailer" alt="Trailer thumbnail">
+          <ion-button (click)="openTrailer(phim.trailer)" expand="block">
+            <ion-icon name="play" slot="start"></ion-icon>
+            Xem Trailer
+          </ion-button>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Lịch chiếu -->
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Lịch chiếu</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-segment value="today">
+          <ion-segment-button value="today">
+            <ion-label>Hôm nay</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="tomorrow">
+            <ion-label>Ngày mai</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+
+        <div class="showtimes">
+          <ion-chip *ngFor="let time of phim.showtimes">
+            {{ time }}
+          </ion-chip>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
+
+  <!-- Nút đặt vé -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="bookTicket()">
+      <ion-icon name="ticket-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
+
+<app-footer>&gt;</app-footer>

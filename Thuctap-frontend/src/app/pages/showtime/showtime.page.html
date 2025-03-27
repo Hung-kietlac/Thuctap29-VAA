@@ -1,0 +1,284 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Quản Lý Rạp Chiếu Phim</ion-title>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon slot="icon-only" name="notifications-outline"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon slot="icon-only" name="person-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="admin-container">
+    <!-- Navigation Tabs -->
+    <ion-segment [(ngModel)]="selectedSegment" color="danger">
+      <ion-segment-button value="showtimes">
+        <ion-label>Lịch Chiếu</ion-label>
+        <ion-icon name="calendar"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="theaters">
+        <ion-label>Rạp Phim</ion-label>
+        <ion-icon name="business"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="movies">
+        <ion-label>Phim</ion-label>
+        <ion-icon name="film"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="tickets">
+        <ion-label>Vé</ion-label>
+        <ion-icon name="ticket"></ion-icon>
+      </ion-segment-button>
+    </ion-segment>
+
+    <!-- Showtimes Section -->
+    <div *ngIf="selectedSegment === 'showtimes'" class="section-container">
+      <div class="section-header">
+        <h2>Quản Lý Lịch Chiếu</h2>
+        <ion-button color="danger" size="small">
+          <ion-icon name="add" slot="start"></ion-icon>
+          Thêm Mới
+        </ion-button>
+      </div>
+
+      <!-- Filter & Search -->
+      <ion-card>
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col size="12" size-md="3">
+                <ion-item lines="none">
+                  <ion-label position="stacked">Rạp phim</ion-label>
+                  <ion-select placeholder="Chọn rạp phim">
+                    <ion-select-option value="cinema1">CGV Quận 1</ion-select-option>
+                    <ion-select-option value="cinema2">Lotte Cinema</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+              <ion-col size="12" size-md="3">
+                <ion-item lines="none">
+                  <ion-label position="stacked">Phim</ion-label>
+                  <ion-select placeholder="Chọn phim">
+                    <ion-select-option value="movie1">Avengers</ion-select-option>
+                    <ion-select-option value="movie2">Fast & Furious</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+              <ion-col size="12" size-md="3">
+                <ion-item lines="none">
+                  <ion-label position="stacked">Ngày chiếu</ion-label>
+                  <ion-datetime displayFormat="DD/MM/YYYY" placeholder="Chọn ngày"></ion-datetime>
+                </ion-item>
+              </ion-col>
+              <ion-col size="12" size-md="3" class="ion-align-self-end">
+                <ion-button expand="block" color="danger">
+                  <ion-icon name="search" slot="start"></ion-icon>
+                  Tìm kiếm
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+
+      <!-- Showtimes List -->
+      <ion-card>
+        <ion-card-content class="no-padding">
+          <div class="table-header">
+            <ion-grid>
+              <ion-row>
+                <ion-col size="0.5">#</ion-col>
+                <ion-col size="2">Phim</ion-col>
+                <ion-col size="2">Rạp</ion-col>
+                <ion-col size="1">Phòng</ion-col>
+                <ion-col size="2">Ngày chiếu</ion-col>
+                <ion-col size="1.5">Giờ chiếu</ion-col>
+                <ion-col size="1.5">Trạng thái</ion-col>
+                <ion-col size="0.5"></ion-col>
+              </ion-row>
+            </ion-grid>
+          </div>
+          <ion-list lines="full">
+            <ion-item>
+              <ion-col size="0.5">1</ion-col>
+              <ion-col size="2">Avengers</ion-col>
+              <ion-col size="2">CGV Quận 1</ion-col>
+              <ion-col size="1">P01</ion-col>
+              <ion-col size="2">12/03/2025</ion-col>
+              <ion-col size="1.5">19:30</ion-col>
+              <ion-col size="1.5">
+                <ion-badge color="success">Đang bán</ion-badge>
+              </ion-col>
+              <ion-col size="0.5">
+                <ion-buttons>
+                  <ion-button fill="clear" color="primary">
+                    <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+                  </ion-button>
+                  <ion-button fill="clear" color="danger">
+                    <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+                  </ion-button>
+                </ion-buttons>
+              </ion-col>
+            </ion-item>
+           
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
+
+      <!-- Pagination -->
+      <div class="pagination">
+        <ion-button color="medium" size="small">
+          <ion-icon name="chevron-back"></ion-icon>
+        </ion-button>
+        <ion-button color="danger" size="small">1</ion-button>
+        <ion-button color="medium" size="small">2</ion-button>
+        <ion-button color="medium" size="small">
+          <ion-icon name="chevron-forward"></ion-icon>
+        </ion-button>
+      </div>
+    </div>
+
+    <!-- Theaters Section -->
+    <div *ngIf="selectedSegment === 'theaters'" class="section-container">
+      <div class="section-header">
+        <h2>Quản Lý Rạp Phim</h2>
+        <ion-button color="danger" size="small">
+          <ion-icon name="add" slot="start"></ion-icon>
+          Thêm Mới
+        </ion-button>
+      </div>
+      <ion-card>
+        <ion-card-content class="no-padding">
+          <div class="table-header">
+            <ion-grid>
+              <ion-row>
+                <ion-col size="0.5">#</ion-col>
+                <ion-col size="3">Tên rạp</ion-col>
+                <ion-col size="2.5">Địa chỉ</ion-col>
+                <ion-col size="2">Số phòng</ion-col>
+                <ion-col size="2">Số ghế</ion-col>
+                <ion-col size="1.5">Trạng thái</ion-col>
+                <ion-col size="0.5"></ion-col>
+              </ion-row>
+            </ion-grid>
+          </div>
+          <ion-list lines="full">
+            <ion-item>
+              <ion-col size="0.5">1</ion-col>
+              <ion-col size="3">CGV Quận 1</ion-col>
+              <ion-col size="2.5">123 Lê Lợi, Q1</ion-col>
+              <ion-col size="2">5</ion-col>
+              <ion-col size="2">450</ion-col>
+              <ion-col size="1.5">
+                <ion-badge color="success">Hoạt động</ion-badge>
+              </ion-col>
+              <ion-col size="0.5">
+                <ion-buttons>
+                  <ion-button fill="clear" color="primary">
+                    <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+                  </ion-button>
+                  <ion-button fill="clear" color="danger">
+                    <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+                  </ion-button>
+                </ion-buttons>
+              </ion-col>
+            </ion-item>
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <!-- Movies Section -->
+    <div *ngIf="selectedSegment === 'movies'" class="section-container">
+      <div class="section-header">
+        <h2>Quản Lý Phim</h2>
+        <ion-button color="danger" size="small">
+          <ion-icon name="add" slot="start"></ion-icon>
+          Thêm Mới
+        </ion-button>
+      </div>
+      <ion-card>
+        <ion-card-content class="no-padding">
+          <div class="table-header">
+            <ion-grid>
+              <ion-row>
+                <ion-col size="0.5">#</ion-col>
+                <ion-col size="3">Tên phim</ion-col>
+                <ion-col size="2">Thể loại</ion-col>
+                <ion-col size="1.5">Thời lượng</ion-col>
+                <ion-col size="2">Ngày khởi chiếu</ion-col>
+                <ion-col size="1.5">Trạng thái</ion-col>
+                <ion-col size="1"></ion-col>
+              </ion-row>
+            </ion-grid>
+          </div>
+          <ion-list lines="full">
+            <ion-item>
+              <ion-col size="0.5">1</ion-col>
+              <ion-col size="3">Avengers</ion-col>
+              <ion-col size="2">Hành động</ion-col>
+              <ion-col size="1.5">150 phút</ion-col>
+              <ion-col size="2">10/03/2025</ion-col>
+              <ion-col size="1.5">
+                <ion-badge color="success">Đang chiếu</ion-badge>
+              </ion-col>
+              <ion-col size="1">
+                <ion-buttons>
+                  <ion-button fill="clear" color="primary">
+                    <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+                  </ion-button>
+                  <ion-button fill="clear" color="danger">
+                    <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+                  </ion-button>
+                </ion-buttons>
+              </ion-col>
+            </ion-item>
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <!-- Tickets Section -->
+    <div *ngIf="selectedSegment === 'tickets'" class="section-container">
+      <div class="section-header">
+        <h2>Quản Lý Vé</h2>
+      </div>
+      <ion-card>
+        <ion-card-content class="no-padding">
+          <div class="table-header">
+            <ion-grid>
+              <ion-row>
+                <ion-col size="0.5">#</ion-col>
+                <ion-col size="2">Mã vé</ion-col>
+                <ion-col size="2.5">Phim</ion-col>
+                <ion-col size="2">Rạp</ion-col>
+                <ion-col size="1.5">Phòng/Ghế</ion-col>
+                <ion-col size="2">Thời gian</ion-col>
+                <ion-col size="1.5">Trạng thái</ion-col>
+              </ion-row>
+            </ion-grid>
+          </div>
+          <ion-list lines="full">
+            <ion-item>
+              <ion-col size="0.5">1</ion-col>
+              <ion-col size="2">VE001</ion-col>
+              <ion-col size="2.5">Avengers</ion-col>
+              <ion-col size="2">CGV Quận 1</ion-col>
+              <ion-col size="1.5">P01/G15</ion-col>
+              <ion-col size="2">12/03 - 19:30</ion-col>
+              <ion-col size="1.5">
+                <ion-badge color="success">Đã bán</ion-badge>
+              </ion-col>
+            </ion-item>
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,106 @@
+// footer.component.scss
+
+.cinema-footer {
+    --ion-background-color: #141414;
+    
+    .footer-toolbar {
+      --background: #141414;
+      --padding-top: 20px;
+      --padding-bottom: 20px;
+      --min-height: auto;
+    }
+    
+    .footer-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 1200px;
+      height:110px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    .brand-section, .links-section, .social-section {
+      flex: 1;
+      min-width: 250px;
+      margin-bottom: 20px;
+    }
+    
+    .footer-title {
+      color: white;
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+    
+    .footer-text {
+      color: #a0a0a0;
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+    
+    .footer-links {
+      background: transparent;
+      
+      ion-item {
+        --background: transparent;
+        --color: #a0a0a0;
+        --min-height: 32px;
+        --padding-start: 0;
+        
+        &:hover {
+          --color: white;
+        }
+      }
+    }
+    
+    .social-buttons {
+      display: flex;
+      
+      .social-button {
+        --background: #2a2a2a;
+        --color: #a0a0a0;
+        --border-radius: 50%;
+        --padding-start: 0;
+        --padding-end: 0;
+        height: 40px;
+        width: 40px;
+        margin-right: 10px;
+        
+        ion-icon {
+          font-size: 18px;
+        }
+        
+        &:hover {
+          --background: var(--ion-color-primary);
+          --color: white;
+        }
+      }
+    }
+    
+    .copyright {
+      width: 100%;
+      text-align: center;
+      border-top: 1px solid #333;
+      padding-top: 20px;
+      margin-top: 10px;
+      
+      p {
+        color: #777;
+        font-size: 13px;
+      }
+    }
+  }
+  
+  // Media queries for responsive design
+  @media (max-width: 768px) {
+    .cinema-footer .footer-container {
+      flex-direction: column;
+      
+      .brand-section, .links-section, .social-section {
+        width: 100%;
+        margin-bottom: 25px;
+      }
+    }
+  }

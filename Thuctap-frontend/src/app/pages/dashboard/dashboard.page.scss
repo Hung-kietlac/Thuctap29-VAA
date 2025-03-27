@@ -1,0 +1,64 @@
+ion-content {
+    --background: #1A1A1A;
+    --color: white;
+  }
+  
+  .dashboard-container {
+    padding: 16px;
+  }
+  
+  h1 {
+    color: white;
+    margin-bottom: 24px;
+    font-weight: bold;
+  }
+  
+  ion-card {
+    background: #2A2A2A;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+  }
+  
+  ion-card-title {
+    color: white;
+    font-size: 18px;
+  }
+  
+  .stat-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+  }
+  
+  .stat-info {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .stat-title {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+  }
+  
+  .stat-value {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 8px;
+  }
+  
+  .stat-icon {
+    font-size: 36px;
+    color: rgba(255, 255, 255, 0.9);
+  }
+  
+  .chart-container {
+    height: 300px;
+    width: 100%;
+  }
+  
+  ion-card-content {
+    padding: 16px;
+  }

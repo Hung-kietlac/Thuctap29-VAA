@@ -1,0 +1,50 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: rgb(196, 196, 196);
+    grid-area: form;
+}
+
+ion-input::placeholder {
+    padding-left: 10px;
+}
+
+.item {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    border: 1px solid grey;
+    background-color: #fff;
+    width: 100%;
+    max-width: 400px;
+    padding: 10px 30px 30px 30px;
+}
+    
+.item ion-input {
+    background-color: #fff;
+    border-radius: 5px;
+    border: 1px solid grey;
+    margin-top: 10px;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+h2, a {
+    text-align: center;
+    color: #333;
+}
+
+label {
+    color: #333;
+}
+
+a {
+    display: block;
+}

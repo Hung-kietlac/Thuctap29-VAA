@@ -1,0 +1,293 @@
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar color="dark" class="header-toolbar">
+    <ion-buttons slot="start">
+      <ion-button class="logo-button">
+        <ion-icon name="film-outline"></ion-icon>
+        <ion-label class="brand-name">CINEMA</ion-label>
+      </ion-button>
+    </ion-buttons>
+    
+    <ion-buttons slot="end" class="nav-buttons">
+      <ion-button routerlink="/dang-chieu" class="nav-item active">
+        <ion-label>HỆ THỐNG RẠP PHIM</ion-label>
+      </ion-button>
+      <ion-button routerlink="/dang-chieu" class="nav-item active">
+        <ion-label>ĐANG CHIẾU</ion-label>
+      </ion-button>
+      <ion-button routerlink="/sap-chieu" class="nav-item">
+        <ion-label>SẮP CHIẾU</ion-label>
+      </ion-button>
+      <ion-button routerlink="/pho-bien" class="nav-item">
+        <ion-label>PHỔ BIẾN</ion-label>
+      </ion-button>
+      <ion-button routerlink="/khuyen-mai" class="nav-item">
+        <ion-label>KHUYẾN MÃI</ion-label>
+      </ion-button>
+      <ion-button *ngIf="!isLoggedIn" href="/dangnhap" class="nav-item login-btn">
+        <ion-label>ĐĂNG NHẬP</ion-label>
+      </ion-button>
+      <ion-button *ngIf="isLoggedIn" (click)="logout()" class="nav-item login-btn">
+        <ion-label>ĐĂNG XUẤT</ion-label>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <!-- Hero Banner Slider -->
+  <div class="hero-banner-container">
+    <swiper-container pager="true" [config]="heroBannerOpts" class="hero-banner-slider">
+      <swiper-slide *ngIf="nowPlayingMovies.length > 0">
+        <div class="hero-banner-slide" [ngStyle]="{'background-image': 'url(' + nowPlayingMovies[0].poster + ')'}" 
+        (click)="goToDetail(nowPlayingMovies[0].phimId)">
+          <div class="hero-banner-overlay">
+            <div class="hero-banner-content">
+              <h1 class="hero-title">{{ nowPlayingMovies[0].tenphim }}</h1>
+              <div class="hero-rating">
+                <ion-icon name="star"></ion-icon>
+                <span>{{ nowPlayingMovies[0].danhgiaphim }}/10</span>
+              </div>
+              <div class="hero-genres">
+                <span class="hero-genre-tag">{{ nowPlayingMovies[0].theloai }}</span>
+              </div>
+              <ion-button (click)="datve(nowPlayingMovies[0])" expand="block" color="danger" class="hero-cta-button">
+                ĐẶT VÉ NGAY
+              </ion-button>
+            </div>
+          </div>
+        </div>
+      </swiper-slide>
+    </swiper-container>
+  </div>
+
+  <!-- Category Tabs -->
+  <div class="category-tabs">
+    <div class="category-tab" [class.active]="selectedCategory === 'dang-chieu'" (click)="selectCategory('dang-chieu')">
+      <ion-icon name="film-outline"></ion-icon>
+      <span>Đang chiếu</span>
+    </div>
+    <div class="category-tab" [class.active]="selectedCategory === 'sap-chieu'" (click)="selectCategory('sap-chieu')">
+      <ion-icon name="calendar-outline"></ion-icon>
+      <span>Sắp chiếu</span>
+    </div>
+    <div class="category-tab" [class.active]="selectedCategory === 'pho-bien'" (click)="selectCategory('pho-bien')">
+      <ion-icon name="trending-up-outline"></ion-icon>
+      <span>Phổ biến</span>
+    </div>
+    <div class="category-tab" [class.active]="selectedCategory === 'khuyen-mai'" (click)="selectCategory('khuyen-mai')">
+      <ion-icon name="ticket-outline"></ion-icon>
+      <span>Khuyến mãi</span>
+    </div>
+  </div>
+
+  <!-- Genre Filter -->
+  <div class="genre-filter">
+    <div class="genre-scroll">
+      <div class="genre-chip" [class.active]="selectedGenre === 'all'" (click)="selectGenre('all')">
+        Tất cả
+      </div>
+      <div *ngfor="let genre of genres" class="genre-chip" [class.active]="selectedGenre === genre.id" (click)="selectGenre(genre.id)">
+        {{ genre.name }}
+      </div>
+    </div>
+  </div>
+
+  <!-- Phim Đang Chiếu -->
+  <div class="movie-section">
+    <div class="section-header">
+      <h2>PHIM ĐANG CHIẾU</h2>
+      <ion-button fill="clear" (click)="toggleMovies()" class="view-all-btn">
+        {{ showAll ? 'THU GỌN' : 'XEM TẤT CẢ' }} <ion-icon name="chevron-forward-outline"></ion-icon>
+      </ion-button>
+    </div>
+  
+    <div class="movie-grid">
+      <div class="movie-card" *ngFor="let phim of nowPlayingMovies">
+        <div class="movie-poster-container">
+          <img [src]="phim.poster" [alt]="phim.tenphim" class="movie-poster">
+          <div class="movie-rating">
+            <ion-icon name="star"></ion-icon>
+            <span>{{ phim.danhgiaphim }}</span>
+          </div>
+        </div>
+        <div class="movie-info">
+          <h3 class="movie-title">{{ phim.tenphim }}</h3>
+          <div class="movie-genres">
+            <span class="genre-tag">{{ phim.theloai }}</span>
+          </div>
+        </div>
+        <div class="movie-actions">
+          <ion-button (click)="datve(phim)" expand="block" color="danger" class="book-now-btn">
+            ĐẶT VÉ
+          </ion-button>
+          <ion-button (click)="goToDetail(phim.id)" expand="block" fill="clear" color="light" class="details-btn">
+            CHI TIẾT
+          </ion-button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Phim Sắp Ra Mắt -->
+  <div class="movie-section">
+    <div class="section-header">
+      <h2>PHIM SẮP CHIẾU</h2>
+      <ion-button fill="clear" (click)="toggleUpcoming()" class="view-all-btn">
+        {{ showAll ? 'THU GỌN' : 'XEM TẤT CẢ' }} <ion-icon name="chevron-forward-outline"></ion-icon>
+      </ion-button>
+    </div>
+
+    <div class="movie-grid">
+      <div class="movie-card" *ngFor="let phim of upcomingMovies">
+        <div class="movie-poster-container">
+          <img [src]="phim.poster" [alt]="phim.tenphim" class="movie-poster">
+          <div class="movie-rating">
+            <ion-icon name="star"></ion-icon>
+            <span>{{ phim.danhgiaphim }}</span>
+          </div>
+        </div>
+        <div class="movie-info">
+          <h3 class="movie-title">{{ phim.tenphim }}</h3>
+          <div class="movie-genres">
+            <span class="genre-tag">{{ phim.theloai }}</span>
+          </div>
+        </div>
+        <div class="movie-actions">
+          <div class="upcoming-actions">
+            <ion-button expand="block" fill="outline" color="light" class="remind-me-btn">
+              <ion-icon name="notifications-outline"></ion-icon>
+              NHẮC TÔI
+            </ion-button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Rạp Gần Đây -->
+  <div class="theaters-section">
+    <div class="section-header">
+      <h2>RẠP GẦN ĐÂY</h2>
+      <ion-button fill="clear" routerlink="/rap-chieu-phim" class="view-all-btn">
+        XEM TẤT CẢ <ion-icon name="chevron-forward-outline"></ion-icon>
+      </ion-button>
+    </div>
+
+    <div class="theaters-grid">
+      <div class="theater-card" *ngFor="let theater of nearbyTheaters">
+        <div class="theater-image-container">
+          <img [src]="theater.hinhanh" [alt]="theater.tenrap" class="theater-image">
+        </div>
+        <div class="theater-info">
+          <h3 class="theater-name">{{ theater.tenrap }}</h3>
+          <p class="theater-address">{{ theater.diachi }}</p>
+          <div class="theater-distance">
+            <ion-icon name="location-outline"></ion-icon>
+            <span>{{ theater.distance }} km</span>
+          </div>
+          <ion-button expand="block" fill="outline" class="theater-showtime-btn">
+            XEM LỊCH CHIẾU
+          </ion-button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Promotion Section -->
+  <div class="promo-section">
+    <div class="section-header">
+      <h2>KHUYẾN MÃI</h2>
+      <ion-button fill="clear" routerLink="/khuyen-mai" class="view-all-btn">
+        XEM TẤT CẢ <ion-icon name="chevron-forward-outline"></ion-icon>
+      </ion-button>
+    </div>
+    
+    <div class="promo-grid">
+      <div class="promo-card" *ngFor="let promo of promotions">
+        <img [src]="promo.image" [alt]="promo.title" class="promo-image">
+        <div class="promo-info">
+          <h3 class="promo-title">{{ promo.title }}</h3>
+          <p class="promo-expiry">
+            <ion-icon name="time-outline"></ion-icon>
+            Hết hạn: {{ promo.expiryDate || 'Không có hạn' }}
+          </p>
+          <ion-button expand="block" class="promo-details-btn">
+            CHI TIẾT
+          </ion-button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- App Download -->
+  <div class="app-download-section">
+    <div class="app-download-content">
+      <div class="app-info">
+        <h2>TẢI ỨNG DỤNG CINEMA</h2>
+        <p>Đặt vé dễ dàng, nhận thông báo ưu đãi và tích điểm đổi quà</p>
+        <div class="app-buttons">
+          <ion-button class="app-btn">
+            <ion-icon name="logo-google-playstore"></ion-icon>
+            Google Play
+          </ion-button>
+          <ion-button class="app-btn">
+            <ion-icon name="logo-apple"></ion-icon>
+            App Store
+          </ion-button>
+        </div>
+      </div>
+      <div class="app-image">
+        <img src="assets/images/app-mockup.png" alt="CINEMA App">
+      </div>
+    </div>
+  </div>
+
+<ion-footer class="cinema-footer">
+  <ion-toolbar color="dark" class="footer-toolbar">
+    <div class="footer-container">
+      <div class="brand-section">
+        <h3 class="footer-title">CINEMA</h3>
+        <p class="footer-text">Hệ thống rạp chiếu phim hàng đầu Việt Nam</p>
+        <p class="footer-text">Hotline: 1900 1234</p>
+        <p class="footer-text">Email: infoadcinema.com</p>
+      </div>
+      
+      <div class="links-section">
+        <h3 class="footer-title">LIÊN KẾT NHANH</h3>
+        <ion-list lines="none" class="footer-links">
+          <ion-item>
+            <ion-label>Về chúng tôi</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>Chính sách &amp; Điều khoản</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>Hỗ trợ</ion-label>
+          </ion-item>
+        </ion-list>
+      </div>
+      
+      <div class="social-section">
+        <h3 class="footer-title">KẾT NỐI VỚI CHÚNG TÔI</h3>
+        <div class="social-buttons">
+          <ion-button class="social-button">
+            <ion-icon name="logo-facebook"></ion-icon>
+          </ion-button>
+          <ion-button class="social-button">
+            <ion-icon name="logo-instagram"></ion-icon>
+          </ion-button>
+          <ion-button class="social-button">
+            <ion-icon name="logo-youtube"></ion-icon>
+          </ion-button>
+          <ion-button class="social-button">
+            <ion-icon name="logo-tiktok"></ion-icon>
+          </ion-button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="copyright">
+      <p>© 2025 CINEMA. Tất cả các quyền được bảo lưu.</p>
+    </div>
+  </ion-toolbar>
+</ion-footer>

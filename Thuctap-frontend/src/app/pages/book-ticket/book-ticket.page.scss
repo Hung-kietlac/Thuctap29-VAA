@@ -1,0 +1,305 @@
+:root {
+    --ion-color-primary: #E50914;
+    --ion-color-primary-rgb: 229, 9, 20;
+    --ion-color-primary-contrast: #ffffff;
+    --ion-color-primary-contrast-rgb: 255, 255, 255;
+    --ion-color-primary-shade: #ca0812;
+    --ion-color-primary-tint: #e82d2c;
+    
+    --ion-background-color: #141414;
+    --ion-background-color-rgb: 20, 20, 20;
+    --ion-text-color: #ffffff;
+    --ion-text-color-rgb: 255, 255, 255;
+  }
+  
+  ion-content {
+    --background: #141414;
+    --color: #ffffff;
+  }
+  
+  ion-header ion-toolbar {
+    --background: #000000;
+    --color: #ffffff;
+  }
+  
+  ion-card {
+    background: #181818;
+    color: #ffffff;
+    border-radius: 5px;
+    margin: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  }
+  
+  ion-card-header {
+    padding-bottom: 8px;
+  }
+  
+  ion-card-title {
+    color: #ffffff;
+    font-weight: bold;
+  }
+  
+  ion-card-subtitle {
+    color: #E50914;
+    font-weight: 500;
+  }
+  
+  .movie-info {
+    display: flex;
+    margin-bottom: 16px;
+  }
+  
+  .movie-poster {
+    width: 120px;
+    min-width: 120px;
+    margin-right: 16px;
+    
+    img {
+      width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    }
+  }
+  
+  .movie-details {
+    p {
+      margin: 8px 0;
+      font-size: 14px;
+      color: #B3B3B3;
+      
+      strong {
+        color: #ffffff;
+      }
+    }
+  }
+  
+  ion-segment {
+    --background: #181818;
+    margin-bottom: 10px;
+    
+    ion-segment-button {
+      --color: #B3B3B3;
+      --color-checked: #ffffff;
+      --background-checked: #E50914;
+      --indicator-color: #E50914;
+      --border-color: #333333;
+      font-size: 12px;
+    }
+  }
+  
+  .showtimes-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 16px;
+  }
+  
+  .showtime-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    ion-chip {
+      margin: 0;
+      cursor: pointer;
+      background-color: #333333;
+      color: #ffffff;
+      border: 1px solid #666666;
+      transition: all 0.2s ease;
+      
+      &:hover {
+        background-color: #E50914;
+      }
+    }
+    
+    .venue {
+      font-size: 12px;
+      margin-top: 4px;
+      color: #B3B3B3;
+    }
+  }
+  
+  /* Khu vực màn hình */
+  .screen-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 16px 0 32px;
+  }
+  
+  .screen {
+    width: 80%;
+    height: 30px;
+    background-color: #181818;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    transform: perspective(100px) rotateX(-5deg);
+    border: 1px solid #333333;
+    
+    span {
+      font-size: 12px;
+      color: #B3B3B3;
+    }
+  }
+  
+  /* Khu vực chọn ghế */
+  .seats-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .seat-row {
+    display: flex;
+    align-items: center;
+  }
+  
+  .seat-label {
+    width: 30px;
+    text-align: center;
+    font-weight: bold;
+    color: #FFFFFF;
+  }
+  
+  .seats {
+    display: flex;
+    gap: 8px;
+    flex-grow: 1;
+    justify-content: center;
+  }
+  
+  .seat {
+    width: 35px;
+    height: 35px;
+    border-radius: 5px;
+    background-color: #333333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid #666666;
+    color: #FFFFFF;
+    
+    &:hover {
+      background-color: #444444;
+    }
+    
+    &.selected {
+      background-color: #E50914;
+      border-color: #E50914;
+    }
+    
+    &.booked {
+      background-color: #666666;
+      cursor: not-allowed;
+    }
+    
+    &.vip {
+      border-color: #FFD700;
+    }
+    
+    &.vip.selected {
+      background-color: #E50914;
+      border-color: #E50914;
+    }
+  }
+  
+  /* Chú thích ghế */
+  .seat-legend {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 20px;
+  }
+  
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    color: #B3B3B3;
+    
+    .seat-sample {
+      width: 20px;
+      height: 20px;
+      border-radius: 3px;
+      background-color: #333333;
+      border: 1px solid #666666;
+      
+      &.selected {
+        background-color: #E50914;
+        border-color: #E50914;
+      }
+      
+      &.booked {
+        background-color: #666666;
+      }
+      
+      &.vip {
+        background-color: #4d4d4d;
+        border-color: #FFD700;
+      }
+    }
+  }
+  
+  /* Thông tin đặt vé */
+  ion-list {
+    background-color: transparent;
+    
+    ion-item {
+      --background: transparent;
+      --border-color: #333333;
+      --color: #FFFFFF;
+      
+      ion-label {
+        color: #B3B3B3;
+      }
+      
+      ion-note {
+        color: #FFFFFF;
+      }
+    }
+  }
+  
+  .customer-info {
+    margin: 20px 0;
+    
+    ion-item {
+      --background: transparent;
+      --border-color: #333333;
+      
+      ion-label {
+        color: #B3B3B3;
+      }
+      
+      ion-input {
+        --color: #FFFFFF;
+        --placeholder-color: #666666;
+      }
+    }
+  }
+  
+  ion-button {
+    --background: #E50914;
+    --background-hover: #ca0812;
+    --color: white;
+    font-weight: bold;
+    margin-top: 16px;
+    --border-radius: 4px;
+    --box-shadow: none;
+    
+    &:hover {
+      --background: #ca0812;
+    }
+  }
+  
+  ion-card:hover {
+    transform: scale(1.02);
+    transition: transform 0.3s ease;
+  }

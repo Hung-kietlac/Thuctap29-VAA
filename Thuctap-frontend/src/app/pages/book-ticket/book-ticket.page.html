@@ -1,0 +1,240 @@
+<app-header></app-header>
+
+<ion-app>
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-title>
+        Đặt Vé Xem Phim
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <!-- Thông tin phim -->
+    <ion-card>
+      <ion-card-header>
+        <ion-card-subtitle>Đang chiếu</ion-card-subtitle>
+        <ion-card-title id="movieTitle">{{ phim.tenphim }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="movie-info">
+          <div class="movie-poster">
+            <img src="{{ phim.poster }}" alt="Poster phim" id="moviePoster">
+          </div>
+          <div class="movie-details">
+            <p><strong>Thể loại:</strong> <span id="movieGenre"> {{ phim.theloai }}</span></p>
+            <p><strong>Thời lượng:</strong> <span id="movieDuration"> {{ phim.thoiluong }} phút</span></p>
+            <p><strong>Đánh giá:</strong> <span id="movieRating"> {{ phim.danhgiaphim }}/10</span></p>
+            <p><strong>Khởi chiếu:</strong> <span id="movieReleaseDate"> {{ phim.ngaychieu }}</span></p>
+            <p><strong>Đạo diễn:</strong> <span id="movieDirector"> {{ phim.tendaodien }}</span></p>
+            <p><strong>Diễn viên:</strong> <span id="movieCast"> {{ phim.dienvien }}</span></p>
+            <p><strong>Mô tả:</strong> <span id="movieDescription"> {{ phim.mota }}</span></p>
+            <ion-button expand="block" color="secondary" id="watchTrailer" (click)="openTrailer()">
+              Xem Trailer
+            </ion-button>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Chọn lịch chiếu -->
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Lịch Chiếu</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-segment value="2025-03-09" id="dateSelector">
+          <ion-segment-button value="2025-03-09">
+            <ion-label>09/03<br>CN</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2025-03-10">
+            <ion-label>10/03<br>T2</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2025-03-11">
+            <ion-label>11/03<br>T3</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2025-03-12">
+            <ion-label>12/03<br>T4</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2025-03-13">
+            <ion-label>13/03<br>T5</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+
+        <div class="cinema-selector">
+          <ion-item>
+            <ion-label>Chọn Rạp</ion-label>
+            <ion-select id="cinemaSelect" interface="popover" (ionChange)="onCinemaChange($event)">
+              <ion-select-option value="CGV Vincom Đồng Khởi">CGV Vincom Đồng Khởi</ion-select-option>
+              <ion-select-option value="Lotte Cinema Nam Sài Gòn">Lotte Cinema Nam Sài Gòn</ion-select-option>
+              <ion-select-option value="BHD Star Cineplex Thảo Điền">BHD Star Cineplex Thảo Điền</ion-select-option>
+              <ion-select-option value="Galaxy Nguyễn Du">Galaxy Nguyễn Du</ion-select-option>
+              <ion-select-option value="Cinestar Quốc Thanh">Cinestar Quốc Thanh</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </div>
+
+        <div class="showtimes-container">
+          <div class="showtime-item" data-id="showtime-1" (click)="selectShowtime('10:30', 'Cinema 1 - 2D Phụ đề')">
+            <ion-chip color="primary">
+              <ion-label>10:30</ion-label>
+            </ion-chip>
+            <span class="venue">Cinema 1 - 2D Phụ đề</span>
+          </div>
+          <div class="showtime-item" data-id="showtime-2" (click)="selectShowtime('13:45', 'Cinema 2 - 3D Phụ đề')">
+            <ion-chip color="primary">
+              <ion-label>13:45</ion-label>
+            </ion-chip>
+            <span class="venue">Cinema 2 - 3D Phụ đề</span>
+          </div>
+          <div class="showtime-item" data-id="showtime-3" (click)="selectShowtime('16:15', 'Cinema 1 - 2D Lồng Tiếng')">
+            <ion-chip color="primary">
+              <ion-label>16:15</ion-label>
+            </ion-chip>
+            <span class="venue">Cinema 1 - 2D Lồng tiếng</span>
+          </div>
+          <div class="showtime-item" data-id="showtime-4" (click)="selectShowtime('19:30', 'Cinema 3 - IMAX')">
+            <ion-chip color="primary">
+              <ion-label>19:30</ion-label>
+            </ion-chip>
+            <span class="venue">Cinema 3 - IMAX</span>
+          </div>
+          <div class="showtime-item" data-id="showtime-5" (click)="selectShowtime('21:45', 'Cinema 2 - 3D Phụ đề')">
+            <ion-chip color="primary">
+              <ion-label>21:45</ion-label>
+            </ion-chip>
+            <span class="venue">Cinema 2 - 3D Phụ đề</span>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Chọn ghế -->
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Chọn Ghế</ion-card-title>
+        <ion-card-subtitle id="roomInfo">{{ selectedShowtime.venue }}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="screen-container">
+          <div class="screen">
+            <span>Màn hình</span>
+          </div>
+        </div>
+
+        <div class="seats-container">
+          <div class="seats-container">
+            <div *ngFor="let row of ['A', 'B', 'C', 'D', 'E']" class="seat-row">
+              <div class="seat-label">{{ row }}</div>
+              <div class="seats">
+                <div class="seat"
+                     *ngFor="let seat of [row + '1', row + '2', row + '3', row + '4', row + '5', row + '6', row + '7', row + '8']"
+                     [ngClass]="{
+                       'vip': isVipSeat(seat),
+                       'selected': selectedSeats.includes(seat),
+                       'booked': isBooked(seat)
+                     }"
+                     (click)="toggleSeat(seat)">
+                  {{ seat }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="seat-legend">
+          <div class="legend-item">
+            <div class="seat-sample"></div>
+            <span>Ghế thường - 90.000đ</span>
+          </div>
+          <div class="legend-item">
+            <div class="seat-sample vip"></div>
+            <span>Ghế VIP - 120.000đ</span>
+          </div>
+          <div class="legend-item">
+            <div class="seat-sample selected"></div>
+            <span>Ghế đã chọn</span>
+          </div>
+          <div class="legend-item">
+            <div class="seat-sample booked"></div>
+            <span>Ghế đã đặt</span>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Thông tin đặt vé -->
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Thông Tin Đặt Vé</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list>
+          <ion-item>
+            <ion-label>Phim:</ion-label>
+            <ion-note slot="end" id="summaryMovieTitle">{{ phim.tenphim }}</ion-note>
+          </ion-item>
+          <ion-item>
+            <ion-label>Rạp chiếu:</ion-label>
+            <ion-note slot="end" id="summaryCinema">{{ selectedCinema }}</ion-note>
+          </ion-item>
+          <ion-item>
+            <ion-label>Phòng chiếu:</ion-label>
+            <ion-note slot="end" id="summaryRoom">{{ selectedShowtime.venue }}</ion-note>
+          </ion-item>
+          <ion-item>
+            <ion-label>Ngày chiếu:</ion-label>
+            <ion-note slot="end" id="summaryDate">{{ phim.ngaychieu }}</ion-note>
+          </ion-item>
+          <ion-item>
+            <ion-label>Suất chiếu:</ion-label>
+            <ion-note slot="end" id="summaryShowtime">{{ selectedShowtime.time }}</ion-note>
+          </ion-item>
+          <ion-item>
+            <ion-label>Ghế đã chọn:</ion-label>
+            <ion-note slot="end">
+              {{ selectedSeats.length > 0 ? getFormattedSeats() : '--' }}
+            </ion-note>
+          </ion-item>
+          <ion-item>
+            <ion-label>Số lượng vé:</ion-label>
+            <ion-note slot="end" id="summaryTicketCount">{{ selectedSeats.length }}</ion-note>
+          </ion-item>
+          <ion-item>
+            <ion-label>Giá vé:</ion-label>
+            <ion-note slot="end" id="summaryPrice"> {{ calculateTotalPrice() | number }} VNĐ</ion-note>
+          </ion-item>
+        </ion-list>
+
+        <div class="customer-info">
+          <ion-item>
+            <ion-label position="floating">Họ và tên</ion-label>
+            <ion-input type="text" id="customerName" required=""></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Số điện thoại</ion-label>
+            <ion-input type="tel" id="customerPhone" required=""></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Email</ion-label>
+            <ion-input type="email" id="customerEmail" required=""></ion-input>
+          </ion-item>
+        </div>
+
+        <ion-item>
+          <ion-label>Phương thức thanh toán</ion-label>
+          <ion-select id="paymentMethod" interface="popover">
+            <ion-select-option value="momo">Ví MoMo</ion-select-option>
+            <ion-select-option value="vnpay">VN Pay</ion-select-option>
+            <ion-select-option value="credit">Thẻ tín dụng</ion-select-option>
+            <ion-select-option value="banking">Chuyển khoản ngân hàng</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-button (click)="datve(phim)" expand="block" color="primary" id="confirmBooking">
+          Xác nhận đặt vé
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </ion-content>
+</ion-app>

@@ -1,0 +1,843 @@
+:host {
+    --primary-color: #ff3d00;
+    --primary-dark: #c30000;
+    --primary-light: #ff7539;
+    --text-color: #ffffff;
+    --background-dark: #121212;
+    --background-medium: #1e1e1e;
+    --background-light: #2c2c2c;
+    --gradient-overlay: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.1) 100%);
+  }
+  
+  /* Header styles */
+  .header-toolbar {
+    --background: rgba(18, 18, 18, 0.9);
+    --border-color: transparent;
+    padding: 0 16px;
+    height: 70px;
+    
+    ion-buttons {
+      height: 100%;
+    }
+    .logo-button {
+      display: flex;
+      align-items: center;
+      color: var(--text-color);
+      
+      ion-icon {
+        font-size: 24px;
+        margin-right: 8px;
+      }
+      
+      .brand-name {
+        font-size: 24px;
+        font-weight: 700;
+        letter-spacing: 2px;
+      }
+    }
+    
+    .nav-buttons {
+      .nav-item {
+        margin: 0 5px;
+        font-size: 14px;
+        font-weight: 500;
+        letter-spacing: 1px;
+        
+        &.active {
+          --color: var(--primary-color);
+          font-weight: 700;
+        }
+        
+        &.login-btn {
+          --background: var(--primary-color);
+          --color: var(--text-color);
+          height: 36px;
+          margin-left: 10px;
+          border-radius: 18px;
+        }
+      }
+    }
+  }
+  
+  /* Hero Banner */
+  .hero-banner-container {
+    height: 600px;
+    position: relative;
+    
+    .hero-banner-slider {
+      height: 100%;
+      
+      .hero-banner-slide {
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        
+        .hero-banner-overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          filter: none;
+          opacity: 1;
+          object-fit: contain;
+          object-position: center;
+          object-fit: contain;
+          bottom: 0;
+          background: var(--gradient-overlay);
+          display: flex;
+          align-items: flex-end;
+          padding-bottom: 80px;
+          
+          .hero-banner-content {
+            width: 90%;
+            max-width: 600px;
+            margin-left: 50px;
+            color: var(--text-color);
+            
+            .hero-title {
+              font-size: 48px;
+              font-weight: 700;
+              margin-bottom: 16px;
+              text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            }
+            
+            .hero-rating {
+              display: flex;
+              align-items: center;
+              margin-bottom: 16px;
+              
+              ion-icon {
+                color: var(--primary-color);
+                font-size: 24px;
+                margin-right: 8px;
+              }
+              
+              span {
+                font-size: 20px;
+                font-weight: 600;
+              }
+            }
+            
+            .hero-genres {
+              margin-bottom: 24px;
+              
+              .hero-genre-tag {
+                display: inline-block;
+                padding: 6px 12px;
+                margin-right: 8px;
+                margin-bottom: 8px;
+                background: rgba(255, 255, 255, 0.2);
+                border-radius: 16px;
+                font-size: 14px;
+              }
+            }
+            
+            .hero-cta-button {
+              max-width: 200px;
+              --background: var(--primary-color);
+              --background-activated: var(--primary-dark);
+              font-weight: 700;
+              font-size: 16px;
+              height: 48px;
+              --border-radius: 24px;
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  /* Category Tabs */
+  .category-tabs {
+    display: flex;
+    justify-content: space-around;
+    background-color: var(--background-medium);
+    padding: 16px 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    
+    .category-tab {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 8px 0;
+      width: 25%;
+      color: #9e9e9e;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      
+      ion-icon {
+        font-size: 24px;
+        margin-bottom: 8px;
+      }
+      
+      span {
+        font-size: 14px;
+        font-weight: 500;
+      }
+      
+      &.active {
+        color: var(--primary-color);
+        transform: scale(1.05);
+      }
+      
+      &:hover {
+        color: var(--primary-light);
+      }
+    }
+  }
+  
+  /* Genre Filter */
+  .genre-filter {
+    background-color: var(--background-light);
+    padding: 12px 16px;
+    overflow: hidden;
+    position: relative;
+    
+    .genre-scroll {
+      display: flex;
+      overflow-x: auto;
+      padding-bottom: 8px;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+      
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+    
+    .genre-chip {
+      flex: 0 0 auto;
+      padding: 8px 16px;
+      margin-right: 10px;
+      background-color: var(--background-medium);
+      border-radius: 20px;
+      color: #9e9e9e;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      
+      &.active {
+        background-color: var(--primary-color);
+        color: var(--text-color);
+      }
+    }
+  }
+  
+  /* Movie Sections */
+  .movie-section {
+    padding: 32px 16px;
+    background-color: var(--background-dark);
+    
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      
+      h2 {
+        color: var(--text-color);
+        font-size: 24px;
+        font-weight: 700;
+        margin: 0;
+      }
+      
+      .view-all-btn {
+        --color: var(--primary-color);
+        font-size: 14px;
+        font-weight: 600;
+        
+        ion-icon {
+          margin-left: 4px;
+        }
+      }
+    }
+  }
+  
+  /* Movie Grid */
+  .movie-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 20px;
+    
+    .movie-card {
+      background-color: var(--background-light);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform 0.3s ease;
+      
+      &:hover {
+        transform: translateY(-5px);
+        
+        .movie-actions {
+          opacity: 1;
+        }
+      }
+      
+      .movie-poster-container {
+        position: relative;
+        aspect-ratio: 2/3;
+        overflow: hidden;
+        
+        .movie-poster {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.5s ease;
+        }
+        
+        .movie-rating {
+          position: absolute;
+          top: 10px;
+          right: 10px;
+          background-color: rgba(0, 0, 0, 0.7);
+          border-radius: 12px;
+          padding: 4px 8px;
+          display: flex;
+          align-items: center;
+          
+          ion-icon {
+            color: var(--primary-color);
+            font-size: 16px;
+            margin-right: 4px;
+          }
+          
+          span {
+            color: var(--text-color);
+            font-size: 14px;
+            font-weight: 600;
+          }
+        }
+        
+        .movie-actions {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 100%);
+          padding: 30px 10px 10px;
+          opacity: 0;
+          transition: opacity 0.3s ease;
+          
+          .book-now-btn {
+            margin-bottom: 8px;
+            --background: var(--primary-color);
+            --border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            height: 32px;
+          }
+          
+          .details-btn {
+            --border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            height: 32px;
+            margin: 0;
+            background-color: #007bff;
+            color: white;
+            border: 2px solid #0056b3;
+          }
+        }
+      }
+      
+      .movie-info {
+        padding: 12px;
+        
+        .movie-title {
+          color: var(--text-color);
+          font-size: 16px;
+          font-weight: 600;
+          margin: 0 0 8px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        
+        .movie-genres {
+          display: flex;
+          flex-wrap: wrap;
+          
+          .genre-tag {
+            font-size: 12px;
+            color: #9e9e9e;
+            margin-right: 8px;
+            margin-bottom: 4px;
+          }
+        }
+      }
+    }
+  }
+  
+  /* Upcoming Slider */
+  .upcoming-slider {
+    .upcoming-card {
+      display: flex;
+      flex-direction: column;
+      background-color: var(--background-light);
+      border-radius: 12px;
+      overflow: hidden;
+      height: 100%;
+      margin: 10px;
+      
+      .upcoming-poster-container {
+        position: relative;
+        aspect-ratio: 2/3;
+        
+        .upcoming-poster {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+        
+        .release-date {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 100%);
+          padding: 30px 12px 12px;
+          color: var(--text-color);
+          display: flex;
+          align-items: center;
+          font-size: 14px;
+          
+          ion-icon {
+            margin-right: 6px;
+            color: var(--primary-color);
+          }
+        }
+      }
+      
+      .upcoming-info {
+        padding: 12px;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        
+        .upcoming-title {
+          color: var(--text-color);
+          font-size: 16px;
+          font-weight: 600;
+          margin: 0 0 8px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        
+        .upcoming-genres {
+          margin-bottom: 12px;
+          
+          .genre-tag {
+            font-size: 12px;
+            color: #9e9e9e;
+            margin-right: 8px;
+          }
+        }
+        
+        .remind-me-btn {
+          margin-top: auto;
+          --background: transparent;
+          --border-color: var(--text-color);
+          --border-style: solid;
+          --border-radius: 20px;
+          font-size: 12px;
+          height: 36px;
+          
+          ion-icon {
+            margin-right: 6px;
+          }
+        }
+      }
+    }
+  }
+  
+  /* Theaters Section */
+  .theaters-section {
+    padding: 32px 16px;
+    background-color: var(--background-medium);
+  }
+  
+  .theaters-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    
+    .theater-card {
+      background-color: var(--background-light);
+      border-radius: 12px;
+      overflow: hidden;
+      
+      .theater-image-container {
+        height: 160px;
+        
+        .theater-image {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+      
+      .theater-info {
+        padding: 16px;
+        
+        .theater-name {
+          color: var(--text-color);
+          font-size: 18px;
+          font-weight: 600;
+          margin: 0 0 8px;
+        }
+        
+        .theater-address {
+          color: #9e9e9e;
+          font-size: 14px;
+          margin: 0 0 12px;
+          line-height: 1.4;
+        }
+        
+        .theater-distance {
+          display: flex;
+          align-items: center;
+          color: var(--primary-color);
+          font-size: 14px;
+          margin-bottom: 16px;
+          
+          ion-icon {
+            margin-right: 6px;
+          }
+        }
+        
+        .theater-showtime-btn {
+          width: 100%;
+          --border-color: var(--primary-color);
+          --color: var(--primary-color);
+          --border-radius: 20px;
+          font-weight: 600;
+          height: 40px;
+        }
+      }
+    }
+  }
+  
+  /* Promo Section */
+  .promo-section {
+    padding: 32px 16px;
+    background-color: var(--background-dark);
+  }
+  
+  .promo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    
+    .promo-card {
+      background-color: var(--background-light);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform 0.3s ease;
+      
+      &:hover {
+        transform: translateY(-5px);
+      }
+      
+      .promo-image {
+        width: 100%;
+        height: 160px;
+        object-fit: cover;
+      }
+      
+      .promo-info {
+        padding: 16px;
+        
+        .promo-title {
+          color: var(--text-color);
+          font-size: 18px;
+          font-weight: 600;
+          margin: 0 0 12px;
+        }
+        
+        .promo-expiry {
+          display: flex;
+          align-items: center;
+          color: #9e9e9e;
+          margin-bottom: 16px;
+          font-size: 14px;
+          
+          ion-icon {
+            margin-right: 6px;
+            color: var(--primary-color);
+          }
+        }
+        
+        .promo-details-btn {
+          width: 100%;
+          --background: var(--primary-color);
+          --border-radius: 20px;
+          font-weight: 600;
+          height: 40px;
+        }
+      }
+    }
+  }
+  
+  /* App Download Section */
+  .app-download-section {
+    padding: 48px 16px;
+    background-color: var(--background-light);
+    
+    .app-download-content {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      
+      .app-info {
+        flex: 1;
+        min-width: 280px;
+        padding-right: 24px;
+        
+        h2 {
+          color: var(--text-color);
+          font-size: 28px;
+          font-weight: 700;
+          margin: 0 0 16px;
+        }
+        
+        p {
+          color: #9e9e9e;
+          font-size: 16px;
+          margin: 0 0 24px;
+          line-height: 1.5;
+        }
+        
+        .app-buttons {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 12px;
+          
+          .app-btn {
+            --background: var(--background-medium);
+            --color: var(--text-color);
+            --border-radius: 24px;
+            height: 48px;
+            
+            ion-icon {
+              margin-right: 8px;
+              font-size: 20px;
+            }
+          }
+        }
+      }
+      
+      .app-image {
+        flex: 1;
+        min-width: 280px;
+        display: flex;
+        justify-content: center;
+        
+        img {
+          max-width: 100%;
+          max-height: 400px;
+        }
+      }
+    }
+  }
+  
+  /* Footer */
+  .cinema-footer {
+    background-color: var(--background-dark);
+    
+    .footer-toolbar {
+      --background: var(--background-dark);
+      --border-color: transparent;
+      --padding-top: 32px;
+      --padding-bottom: 16px;
+      
+      .footer-container {
+        width: 100%;
+        height: 150px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding: 0 16px 24px;
+        border-bottom: 1px solid var(--background-light);
+        
+        .brand-section, .links-section, .social-section {
+          flex: 1;
+          min-width: 240px;
+          margin-bottom: 24px;
+        }
+        
+        .footer-title {
+          color: var(--text-color);
+          font-size: 18px;
+          font-weight: 700;
+          margin: 0 0 16px;
+        }
+        
+        .footer-text {
+          color: #9e9e9e;
+          margin: 0 0 8px;
+          font-size: 14px;
+          line-height: 1.5;
+        }
+        
+        .footer-links {
+          background: transparent;
+          
+          ion-item {
+            --background: transparent;
+            --color: #9e9e9e;
+            --min-height: 36px;
+            --padding-start: 0;
+            
+            &:hover {
+              --color: var(--primary-color);
+            }
+          }
+        }
+        
+        .social-buttons {
+          display: flex;
+          gap: 12px;
+          
+          .social-button {
+            --padding-start: 0;
+            --padding-end: 0;
+            width: 40px;
+            height: 40px;
+            --border-radius: 50%;
+            --background: var(--background-light);
+            
+            ion-icon {
+              font-size: 20px;
+            }
+            
+            &:hover {
+              --background: var(--primary-color);
+            }
+          }
+        }
+      }
+      
+      .copyright {
+        width: 100%;
+        text-align: center;
+        padding: 16px 0 0;
+        
+        p {
+          color: #9e9e9e;
+          font-size: 14px;
+          margin: 0;
+        }
+      }
+    }
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .hero-banner-container {
+      height: 400px;
+      
+      .hero-banner-slider {
+        .hero-banner-slide {
+          .hero-banner-overlay {
+            padding-bottom: 48px;
+            
+            .hero-banner-content {
+              margin-left: 24px;
+              
+              .hero-title {
+                font-size: 32px;
+              }
+              
+              .hero-rating {
+                ion-icon {
+                  font-size: 20px;
+                }
+                
+                span {
+                  font-size: 16px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    
+    .header-toolbar {
+      .nav-buttons {
+        .nav-item {
+          font-size: 12px;
+          margin: 0 2px;
+          
+          &.login-btn {
+            margin-left: 5px;
+          }
+        }
+      }
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .hero-banner-container {
+      height: 350px;
+      
+      .hero-banner-slider {
+        .hero-banner-slide {
+          .hero-banner-overlay {
+            .hero-banner-content {
+              margin-left: 16px;
+              
+              .hero-title {
+                font-size: 28px;
+              }
+              
+              .hero-genres {
+                .hero-genre-tag {
+                  padding: 4px 8px;
+                  font-size: 12px;
+                }
+              }
+              
+              .hero-cta-button {
+                height: 40px;
+                font-size: 14px;
+              }
+            }
+          }
+        }
+      }
+    }
+    
+    .header-toolbar {
+      .logo-button {
+        .brand-name {
+          font-size: 20px;
+        }
+      }
+      
+      .nav-buttons {
+        .nav-item:not(.login-btn) {
+          display: none;
+        }
+      }
+    }
+    
+    .app-download-section {
+      .app-download-content {
+        .app-info {
+          padding-right: 0;
+          margin-bottom: 24px;
+          
+          h2 {
+            font-size: 24px;
+          }
+        }
+      }
+    }
+  }

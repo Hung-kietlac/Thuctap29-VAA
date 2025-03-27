@@ -1,0 +1,191 @@
+/* details.component.scss - Netflix-inspired dark theme */
+
+// Global variables
+$netflix-red: #e50914;
+$netflix-dark-red: #b20710;
+$netflix-black: #141414;
+$netflix-dark-gray: #181818;
+$netflix-medium-gray: #2f2f2f;
+$netflix-light-gray: #808080;
+$netflix-text: #ffffff;
+
+// Apply overall theme to content
+ion-content {
+  --background: #{$netflix-black};
+  --color: #{$netflix-text};
+  
+  ion-card {
+    background: $netflix-dark-gray;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+    margin: 16px;
+    
+    ion-card-header {
+      ion-card-title {
+        color: $netflix-text;
+        font-weight: bold;
+        font-size: 20px;
+      }
+    }
+    
+    ion-card-content {
+      color: $netflix-text;
+    }
+  }
+  
+  ion-item {
+    --background: transparent;
+    --color: #{$netflix-text};
+    
+    h2 {
+      color: $netflix-light-gray;
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+    
+    p {
+      color: $netflix-text;
+      font-size: 16px;
+    }
+  }
+}
+
+// Style header toolbar
+ion-toolbar {
+  --background: #{$netflix-black};
+  --color: #{$netflix-text};
+  
+  ion-title {
+    font-weight: bold;
+  }
+  
+  ion-back-button {
+    --color: #{$netflix-text};
+  }
+}
+
+// Style movie banner section
+.movie-banner {
+  position: relative;
+  height: 300px;
+  overflow: hidden;
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.8);
+  }
+  
+  .movie-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.5) 60%, transparent 100%);
+    color: $netflix-text;
+    
+    h1 {
+      margin: 0;
+      font-size: 28px;
+      font-weight: bold;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    }
+    
+    .movie-meta {
+      display: flex;
+      gap: 10px;
+      margin-top: 12px;
+      
+      span {
+        padding: 3px 10px;
+        border-radius: 4px;
+        background-color: rgba(229, 9, 20, 0.7);
+        font-size: 13px;
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+// Style segments and showtimes
+ion-segment {
+  --background: #{$netflix-dark-gray};
+  padding: 5px;
+  
+  ion-segment-button {
+    --background-checked: #{$netflix-red};
+    --color-checked: #{$netflix-text};
+    --border-color: transparent;
+    --indicator-color: transparent;
+    --color: #{$netflix-light-gray};
+    min-height: 40px;
+  }
+}
+
+.showtimes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 15px;
+  
+  ion-chip {
+    --background: #{$netflix-medium-gray};
+    --color: #{$netflix-text};
+    font-weight: 500;
+    
+    &:hover {
+      --background: #{$netflix-red};
+      cursor: pointer;
+    }
+  }
+}
+
+// Trailer section styling
+.trailer-thumbnail {
+  position: relative;
+  margin-top: 10px;
+  
+  img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    filter: brightness(0.9);
+  }
+  
+  ion-button {
+    margin-top: 12px;
+    --background: #{$netflix-red};
+    --background-activated: #{$netflix-dark-red};
+    --background-focused: #{$netflix-dark-red};
+    --background-hover: #{$netflix-dark-red};
+    font-weight: bold;
+  }
+}
+
+.video-container {
+  margin: 10px 0;
+  
+  ion-button {
+    --background: #{$netflix-red};
+    --background-activated: #{$netflix-dark-red};
+    --background-focused: #{$netflix-dark-red};
+    --background-hover: #{$netflix-dark-red};
+    font-weight: bold;
+  }
+}
+
+// FAB button for ticket booking
+ion-fab-button {
+  --background: #{$netflix-red};
+  --background-activated: #{$netflix-dark-red};
+  --background-hover: #{$netflix-dark-red};
+  --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+// Progress bar customization
+ion-progress-bar {
+  --background: #{$netflix-dark-gray};
+  --progress-background: #{$netflix-red};
+}
