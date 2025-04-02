@@ -1,0 +1,18 @@
+[{
+  "_id": {
+    "$oid": "67d2954bbaf0bc542a10280a"
+  },
+  "tenPTTT": "VNPay"
+},
+{
+  "_id": {
+    "$oid": "67d2954bbaf0bc542a10280b"
+  },
+  "tenPTTT": "Momo"
+},
+{
+  "_id": {
+    "$oid": "67d2954bbaf0bc542a10280c"
+  },
+  "tenPTTT": "Thẻ Ngân Hàng"
+}]

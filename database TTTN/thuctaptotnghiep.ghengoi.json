@@ -1,0 +1,37 @@
+[{
+  "_id": {
+    "$oid": "67d2978abaf0bc542a102821"
+  },
+  "soghe": "A1",
+  "hang": "A",
+  "cot": 1,
+  "trangthai": "con_trong"
+},
+{
+  "_id": {
+    "$oid": "67d2988bbaf0bc542a102823"
+  },
+  "soghe": "A2",
+  "hang": "A",
+  "cot": 2,
+  "trangthai": "da_dat"
+},
+
+{
+  "_id": {
+    "$oid": "67d298b3baf0bc542a102825"
+  },
+  "soghe": "B1",
+  "hang": "B",
+  "cot": 1,
+  "trangthai": "con_trong"
+},
+{
+  "_id": {
+    "$oid": "67d298cfbaf0bc542a102827"
+  },
+  "soghe": "C2",
+  "hang": "C",
+  "cot": 2,
+  "trangthai": "con_trong"
+}]

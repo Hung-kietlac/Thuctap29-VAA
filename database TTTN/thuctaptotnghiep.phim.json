@@ -1,0 +1,425 @@
+[{
+  "_id": {
+    "$oid": "67bcab825938662cb930a270"
+  },
+  "tenphim": "Avengers: Endgame",
+  "theloai": "Action, Adventure, Sci-Fi",
+  "ngaychieu": {
+    "$date": "2025-04-26T00:00:00.000Z"
+  },
+  "poster": "https://genk.mediacdn.vn/139269124445442048/2020/2/14/1-15816746144451193748082.jpg",
+  "trailer_teaser": "https://www.youtube.com/watch?v=TcMBFSGVi1c",
+  "mota": "Avengers: Endgame is a 2019 superhero film produced by Marvel Studios. It is the fourth installment in the Avengers series and a direct sequel to Avengers: Infinity War (2018). Directed by Anthony and Joe Russo, the film features an ensemble cast including Robert Downey Jr. (Iron Man), Chris Evans (Captain America), Chris Hemsworth (Thor), Scarlett Johansson (Black Widow), Mark Ruffalo (Hulk), Jeremy Renner (Hawkeye), and Josh Brolin (Thanos).\n\n",
+  "tendaodien": "Anthony Russo",
+  "dienvien": "Robert Downey Jr., Chris Evans, Scarlett Johansson",
+  "danhgiaphim": 9,
+  "thoiluong": "181"
+},
+{
+  "_id": {
+    "$oid": "67bcaeed5938662cb930a275"
+  },
+  "tenphim": "Inception",
+  "theloai": "Action, Adventure, Sci-Fi",
+  "ngaychieu": {
+    "$date": "2025-07-16T00:00:00.000Z"
+  },
+  "poster": "https://m.media-amazon.com/images/I/51oD7QkxKHL._AC_SY679_.jpg",
+  "trailer_teaser": "https://www.youtube.com/watch?v=YoHD9XEInc0",
+  "mota": "Inception is a 2010 science-fiction thriller directed by Christopher Nolan and starring Leonardo DiCaprio, Joseph Gordon-Levitt, Elliot Page, Tom Hardy, Ken Watanabe, Cillian Murphy, and Marion Cotillard. The film explores the concept of dream manipulation and the nature of reality through an intricate, mind-bending narrative.",
+  "tendaodien": "Christopher Nolan",
+  "dienvien": "Leonardo DiCaprio, Joseph Gordon-Levitt, Ellen Page",
+  "danhgiaphim": 9,
+  "thoiluong": "148"
+},
+{
+  "_id": {
+    "$oid": "67bcaeed5938662cb930a276"
+  },
+  "tenphim": "Interstellar",
+  "theloai": "Adventure, Drama, Sci-Fi",
+  "ngaychieu": {
+    "$date": "2025-11-07T00:00:00.000Z"
+  },
+  "poster": "https://www.studyphim.vn/system/movies/712/thumbnails/original/1.jpg",
+  "trailer_teaser": "https://www.youtube.com/watch?v=zSWdZVtXT7E",
+  "mota": "Interstellar is a 2014 sci-fi epic directed by Christopher Nolan, starring Matthew McConaughey, Anne Hathaway, Jessica Chastain, Michael Caine, and Matt Damon. The film explores space travel, time dilation, love, and human survival, featuring a stunning mix of hard science fiction and deep emotional storytelling.",
+  "tendaodien": "Christopher Nolan",
+  "dienvien": "Matthew McConaughey, Anne Hathaway, Jessica Chastain",
+  "danhgiaphim": 9,
+  "thoiluong": "169"
+},
+{
+  "_id": {
+    "$oid": "67bcaeed5938662cb930a277"
+  },
+  "tenphim": "The Dark Knight",
+  "theloai": "Action, Crime, Drama",
+  "ngaychieu": {
+    "$date": "2025-07-18T00:00:00.000Z"
+  },
+  "poster": "https://static.tuoitre.vn/tto/i/s626/2008/07/19/cUyQKKve.jpg",
+  "trailer_teaser": "https://www.youtube.com/watch?v=EXeTwQWrcwY",
+  "mota": "The Dark Knight is a 2008 superhero crime thriller directed by Christopher Nolan and starring Christian Bale (Batman), Heath Ledger (Joker), Aaron Eckhart (Harvey Dent/Two-Face), Gary Oldman (Jim Gordon), Morgan Freeman (Lucius Fox), and Michael Caine (Alfred Pennyworth). It is the second film in The Dark Knight Trilogy and widely regarded as one of the greatest films ever made.",
+  "tendaodien": "Christopher Nolan",
+  "dienvien": "Christian Bale, Heath Ledger, Aaron Eckhart",
+  "danhgiaphim": 9,
+  "thoiluong": "152"
+},
+{
+  "_id": {
+    "$oid": "67bcaeed5938662cb930a278"
+  },
+  "tenphim": "Dune: Part Two",
+  "theloai": "Action, Adventure, Drama",
+  "ngaychieu": {
+    "$date": "2025-09-01T00:00:00.000Z"
+  },
+  "poster": "https://s3.amazonaws.com/nightjarprod/content/uploads/sites/189/2024/05/29150236/czembW0Rk1Ke7lCJGahbOhdCuhV-scaled.jpg",
+  "trailer_teaser": "https://www.youtube.com/watch?v=Way9Dexny3w",
+  "mota": "Dune: Part Two is the highly anticipated sequel to the 2021 sci-fi epic Dune, directed by Denis Villeneuve. The film continues the adaptation of Frank Herbert’s legendary novel, diving deeper into Paul Atreides’ journey as he embraces his destiny.\n\n",
+  "tendaodien": "Denis Villeneuve",
+  "dienvien": "Timothée Chalamet, Zendaya, Rebecca Ferguson",
+  "danhgiaphim": 7.5,
+  "thoiluong": "166"
+},
+{
+  "_id": {
+    "$oid": "67bcaeed5938662cb930a279"
+  },
+  "tenphim": "Avatar: The Way of Water",
+  "theloai": "Action, Adventure, Fantasy",
+  "ngaychieu": {
+    "$date": "2025-04-16T00:00:00.000Z"
+  },
+  "poster": "https://fullerstudio.fuller.edu/wp-content/uploads/2022/12/avatar-poster.jpg",
+  "trailer_teaser": "https://www.youtube.com/watch?v=d9MyW72ELq0",
+  "mota": "Avatar: The Way of Water is the long-awaited sequel to Avatar (2009), directed by James Cameron. This visually stunning sci-fi epic continues the story of Jake Sully and Neytiri, exploring new regions of Pandora and introducing the Metkayina clan, a water-dwelling Na’vi tribe.\n\n",
+  "tendaodien": "James Cameron",
+  "dienvien": "Sam Worthington, Zoe Saldana, Sigourney Weaver",
+  "danhgiaphim": 8.5,
+  "thoiluong": "192"
+},
+{
+  "_id": {
+    "$oid": "67bcaeed5938662cb930a27a"
+  },
+  "tenphim": "Joker",
+  "theloai": "Crime, Drama, Thriller",
+  "ngaychieu": {
+    "$date": "2025-10-04T00:00:00.000Z"
+  },
+  "poster": "https://m.media-amazon.com/images/M/MV5BNzY3OWQ5NDktNWQ2OC00ZjdlLThkMmItMDhhNDk3NTFiZGU4XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+  "trailer_teaser": "https://www.youtube.com/watch?v=zAGVQLHvwOY",
+  "mota": "Joker is a psychological thriller directed by Todd Phillips, starring Joaquin Phoenix in an Oscar-winning performance as Arthur Fleck, a struggling comedian who descends into madness and becomes Gotham’s infamous Joker. Unlike traditional superhero films, Joker is a dark, gritty character study set in the 1980s, heavily inspired by Taxi Driver and The King of Comedy.\n\n",
+  "tendaodien": "Todd Phillips",
+  "dienvien": "Joaquin Phoenix, Robert De Niro, Zazie Beetz",
+  "danhgiaphim": 7,
+  "thoiluong": "122"
+},
+{
+  "_id": {
+    "$oid": "67bcaeed5938662cb930a27b"
+  },
+  "tenphim": "Oppenheimer",
+  "theloai": "Biography, Drama, History",
+  "ngaychieu": {
+    "$date": "2025-07-21T00:00:00.000Z"
+  },
+  "poster": "https://cdn.daibieunhandan.vn/images/b9dccf2610944215cc16af20b31f48414ad629fb4815b733d4f71e71256b855b6f361ed37e6b515e13e175f9a0a5f69418bab18c6ae9036b254ecf98f0b4ee3d/Oppen-1692613114888.jpg",
+  "trailer_teaser": "https://www.youtube.com/watch?v=bK6ldnjE3Y0",
+  "mota": "Oppenheimer is a biographical thriller directed by Christopher Nolan, starring Cillian Murphy as J. Robert Oppenheimer, the physicist who led the development of the atomic bomb during World War II. Based on the book American Prometheus, the film explores his genius, moral dilemmas, and the devastating consequences of his creation.\n\n\n\n\n\n\n",
+  "tendaodien": "Christopher Nolan",
+  "dienvien": "Cillian Murphy, Emily Blunt, Matt Damon",
+  "danhgiaphim": 8.5,
+  "thoiluong": "180"
+},
+{
+  "_id": {
+    "$oid": "67bcaeed5938662cb930a27c"
+  },
+  "tenphim": "Black Panther: Wakanda Forever",
+  "theloai": "Action, Adventure, Drama",
+  "ngaychieu": {
+    "$date": "2025-11-11T00:00:00.000Z"
+  },
+  "poster": "https://iguov8nhvyobj.vcdn.cloud/media/catalog/product/cache/3/image/1800x/71252117777b696995f01934522c402d/b/l/black-panther-2-poster-1.jpg",
+  "trailer_teaser": "https://www.youtube.com/watch?v=_Z3QKkl1WyM",
+  "mota": "Black Panther: Wakanda Forever is the sequel to Black Panther (2018), directed by Ryan Coogler. The film serves as both a tribute to Chadwick Boseman (who played T’Challa) and an exploration of Wakanda’s future after the death of its beloved king. It introduces a new major threat: Namor, the ruler of the underwater kingdom Talokan.",
+  "tendaodien": "Ryan Coogler",
+  "dienvien": "Letitia Wright, Lupita Nyong'o, Danai Gurira",
+  "danhgiaphim": 7.4,
+  "thoiluong": "161"
+},
+{
+  "_id": {
+    "$oid": "67bcaeed5938662cb930a27d"
+  },
+  "tenphim": "Spider-Man: No Way Home",
+  "theloai": "Action, Adventure, Fantasy",
+  "ngaychieu": {
+    "$date": "2025-12-01T00:00:00.000Z"
+  },
+  "poster": "https://thanhnien.mediacdn.vn/Uploaded/caotung/2022_01_05/1-1199.jpg",
+  "trailer_teaser": "https://www.youtube.com/watch?v=JfVOs4VSpmA",
+  "mota": "Spider-Man: No Way Home is a multiverse-packed superhero film directed by Jon Watts, starring Tom Holland as Peter Parker/Spider-Man. The film brings back villains and heroes from past Spider-Man movies, making it one of the most ambitious and nostalgic entries in the Marvel Cinematic Universe (MCU).\n\n",
+  "tendaodien": "Jon Watts",
+  "dienvien": "Tom Holland, Zendaya, Benedict Cumberbatch",
+  "danhgiaphim": 7.2,
+  "thoiluong": "148"
+},
+{
+  "_id": {
+    "$oid": "67bcaf135938662cb930a27f"
+  },
+  "tenphim": "Doctor Strange in the Multiverse of Madness",
+  "theloai": "Action, Adventure, Fantasy",
+  "ngaychieu": {
+    "$date": "2025-05-06T00:00:00.000Z"
+  },
+  "poster": "https://truyenhinhvov.qltns.mediacdn.vn/239964650902032384/2022/5/9/4-1652068520934612756616.jpg",
+  "trailer_teaser": "https://www.youtube.com/watch?v=aWzlQ2N6qqg",
+  "mota": "Doctor Strange in the Multiverse of Madness is a mind-bending superhero film directed by Sam Raimi, starring Benedict Cumberbatch as Doctor Stephen Strange. The film explores the dark side of the multiverse, introducing alternate realities, Scarlet Witch’s wrath, and unexpected cameos.",
+  "tendaodien": "Sam Raimi",
+  "dienvien": "Benedict Cumberbatch, Elizabeth Olsen, Chiwetel Ejiofor",
+  "danhgiaphim": 7,
+  "thoiluong": "126"
+},
+{
+  "_id": {
+    "$oid": "67bcaf135938662cb930a280"
+  },
+  "tenphim": "Guardians of the Galaxy Vol. 3",
+  "theloai": "Action, Adventure, Comedy",
+  "ngaychieu": {
+    "$date": "2025-05-05T00:00:00.000Z"
+  },
+  "poster": "https://resizing.flixster.com/hes0LmMNf5lOnJlDsPNvj9gVas4=/fit-in/705x460/v2/https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p17845781_v_h9_ar.jpg",
+  "trailer_teaser": "https://www.youtube.com/watch?v=u3V5KDHRQvk",
+  "mota": "Guardians of the Galaxy Vol. 3 is the final chapter in James Gunn’s beloved space-adventure trilogy, bringing an emotional farewell to the Guardians team while focusing on Rocket’s tragic origin story. The film delivers heart, humor, and high-stakes action, making it one of the most emotional and satisfying entries in the Marvel Cinematic Universe (MCU).\n\n",
+  "tendaodien": "James Gunn",
+  "dienvien": "Chris Pratt, Zoe Saldana, Dave Bautista",
+  "danhgiaphim": 7.8,
+  "thoiluong": "150"
+},
+{
+  "_id": {
+    "$oid": "67bcaf135938662cb930a281"
+  },
+  "tenphim": "The Batman",
+  "theloai": "Action, Crime, Drama",
+  "ngaychieu": {
+    "$date": "2025-03-04T00:00:00.000Z"
+  },
+  "poster": "https://kenh14cdn.com/203336854389633024/2022/3/15/-16473330679501473888711.jpg",
+  "trailer_teaser": "https://www.youtube.com/watch?v=mqqft2x_Aa4",
+  "mota": "The Batman is a dark, gripping reboot of the Caped Crusader, directed by Matt Reeves and starring Robert Pattinson as Bruce Wayne/Batman. Unlike previous adaptations, this film focuses on Batman’s early years as a detective, blending neo-noir crime thriller elements with stunning cinematography and an intense psychological tone.\n\n",
+  "tendaodien": "Matt Reeves",
+  "dienvien": "Robert Pattinson, Zoë Kravitz, Paul Dano",
+  "danhgiaphim": 7.5,
+  "thoiluong": "176"
+},
+{
+  "_id": {
+    "$oid": "67bcaf135938662cb930a282"
+  },
+  "tenphim": "Mission: Impossible - Dead Reckoning Part One",
+  "theloai": "Action, Adventure, Thriller",
+  "ngaychieu": {
+    "$date": "2025-04-03T00:00:00.000Z"
+  },
+  "poster": "https://touchcinema.com/storage/slider-app/358070261-678739857626121-8465667485051426478-n.jpg",
+  "trailer_teaser": "https://www.youtube.com/watch?v=avz06PDqDbM",
+  "mota": "Mission: Impossible – Dead Reckoning Part One is the seventh installment in the Mission: Impossible franchise, directed by Christopher McQuarrie and starring Tom Cruise as Ethan Hunt. The film delivers high-octane action, intense espionage, and breathtaking stunts as Ethan and his team face their most dangerous enemy yet—a rogue AI known as \"The Entity.\"",
+  "tendaodien": "Christopher McQuarrie",
+  "dienvien": "Tom Cruise, Hayley Atwell, Ving Rhames",
+  "danhgiaphim": 8.5,
+  "thoiluong": "163"
+},
+{
+  "_id": {
+    "$oid": "67bcaf135938662cb930a283"
+  },
+  "tenphim": "Fast X",
+  "theloai": "Action, Crime, Thriller",
+  "ngaychieu": {
+    "$date": "2025-04-19T00:00:00.000Z"
+  },
+  "poster": "https://images2.thanhnien.vn/528068263637045248/2023/5/24/banner-16849209381891838665788.jpg",
+  "trailer_teaser": "https://www.youtube.com/watch?v=32RAq6JzY-w",
+  "mota": "Fast X is the tenth main installment in the Fast & Furious franchise, directed by Louis Leterrier. The film continues the high-octane action, family themes, and over-the-top stunts that define the series, while introducing Dante Reyes (Jason Momoa)—a vengeful villain seeking to destroy Dominic Toretto (Vin Diesel) and his family.\n\n",
+  "tendaodien": "Louis Leterrier",
+  "dienvien": "Vin Diesel, Michelle Rodriguez, Jason Momoa",
+  "danhgiaphim": 7.6,
+  "thoiluong": "141"
+},
+{
+  "_id": {
+    "$oid": "67bcaf135938662cb930a284"
+  },
+  "tenphim": "John Wick: Chapter 4",
+  "theloai": "Action, Crime, Thriller",
+  "ngaychieu": {
+    "$date": "2025-07-24T00:00:00.000Z"
+  },
+  "poster": "https://images.justwatch.com/poster/304195811/s718/john-wick-chapter-4.jpg",
+  "trailer_teaser": "https://www.youtube.com/watch?v=qEVUtrk8_B4",
+  "mota": "John Wick: Chapter 4 is the epic continuation of the John Wick franchise, directed by Chad Stahelski and starring Keanu Reeves as the legendary assassin. This installment raises the stakes, delivering breathtaking action sequences, intense combat, and a high-stakes battle against the High Table.\n\n",
+  "tendaodien": "Chad Stahelski",
+  "dienvien": "Keanu Reeves, Donnie Yen, Bill Skarsgård",
+  "danhgiaphim": 8.4,
+  "thoiluong": "169"
+},
+{
+  "_id": {
+    "$oid": "67bcaf135938662cb930a285"
+  },
+  "tenphim": "Dune",
+  "theloai": "Adventure, Drama, Sci-Fi",
+  "ngaychieu": {
+    "$date": "2025-09-22T00:00:00.000Z"
+  },
+  "poster": "https://m.media-amazon.com/images/M/MV5BZGFkZjMyM2YtM2YzYS00ODE4LTllNDYtNzFkNzhmMzg5MmYxXkEyXkFqcGc@._V1_.jpg",
+  "trailer_teaser": "https://www.youtube.com/watch?v=n9xhJrPXop4",
+  "mota": "Dune: Part One is a sci-fi epic directed by Denis Villeneuve, based on Frank Herbert’s legendary novel. Starring Timothée Chalamet, Zendaya, Rebecca Ferguson, and Oscar Isaac, the film tells the story of Paul Atreides, a young noble caught in a war for the desert planet Arrakis, home to the universe’s most valuable substance: spice.\n",
+  "tendaodien": "Denis Villeneuve",
+  "dienvien": "Timothée Chalamet, Rebecca Ferguson, Oscar Isaac",
+  "danhgiaphim": 7.9,
+  "thoiluong": "155"
+},
+{
+  "_id": {
+    "$oid": "67bcaf135938662cb930a286"
+  },
+  "tenphim": "Black Widow",
+  "theloai": "Action, Adventure, Sci-Fi",
+  "ngaychieu": {
+    "$date": "2025-11-12T00:00:00.000Z"
+  },
+  "poster": "https://c8.alamy.com/comp/2H08A84/black-widow-us-streaming-poster-scarlett-johansson-as-black-widow-2021-walt-disney-studios-motion-pictures-marvel-studios-courtesy-everett-collection-2H08A84.jpg",
+  "trailer_teaser": "https://www.youtube.com/watch?v=ybji16u608U",
+  "mota": "Black Widow is a Marvel Cinematic Universe (MCU) film directed by Cate Shortland, starring Scarlett Johansson in her final solo appearance as Natasha Romanoff / Black Widow. Set between Captain America: Civil War and Avengers: Infinity War, the movie explores Natasha’s past, her family, and her battle against the Red Room—the secret organization that trained her.\n",
+  "tendaodien": "Cate Shortland",
+  "dienvien": "Scarlett Johansson, Florence Pugh, David Harbour",
+  "danhgiaphim": 7.8,
+  "thoiluong": "134"
+},
+{
+  "_id": {
+    "$oid": "67bcaf135938662cb930a287"
+  },
+  "tenphim": "No Time to Die",
+  "theloai": "Action, Adventure, Thriller",
+  "ngaychieu": {
+    "$date": "2025-10-08T00:00:00.000Z"
+  },
+  "poster": "https://toomva.com/images/posts/2022/08/james-bond-no-time-to-die-lead(des).jpg",
+  "trailer_teaser": "https://www.youtube.com/watch?v=N_gD9-Oa0fg",
+  "mota": "No Time to Die is the 25th James Bond film, directed by Cary Joji Fukunaga, and marks Daniel Craig’s final appearance as 007. The film delivers an action-packed yet emotional conclusion to Craig’s Bond era, featuring espionage, betrayal, and a tragic sacrifice.",
+  "tendaodien": "Cary Joji Fukunaga",
+  "dienvien": "Daniel Craig, Rami Malek, Léa Seydoux",
+  "danhgiaphim": 6.9,
+  "thoiluong": "163"
+},
+{
+  "_id": {
+    "$oid": "67bcaf135938662cb930a288"
+  },
+  "tenphim": "Shang-Chi and the Legend of the Ten Rings",
+  "theloai": "Action, Adventure, Fantasy",
+  "ngaychieu": {
+    "$date": "2025-03-27T17:00:00.000Z"
+  },
+  "poster": "https://cdnmedia.baotintuc.vn/Upload/YZmStSDTjb0M07hFJ2gA/files/2021/09/6/shang-chi-060921.jpg",
+  "trailer_teaser": "https://www.youtube.com/watch?v=8YjFbMbfXaQ",
+  "mota": "Shang-Chi and the Legend of the Ten Rings is a Marvel Cinematic Universe (MCU) film directed by Destin Daniel Cretton, introducing Simu Liu as Shang-Chi, Marvel’s first Asian superhero lead. The movie blends martial arts, mythology, and family drama, focusing on Shang-Chi’s journey to confront his past and his father, Xu Wenwu (Tony Leung), the leader of the Ten Rings organization.\n",
+  "tendaodien": "Destin Daniel Cretton",
+  "dienvien": "Simu Liu, Awkwafina, Tony Chiu-Wai Leung",
+  "danhgiaphim": 7.4,
+  "thoiluong": "132"
+},
+{
+  "_id": {
+    "$oid": "67bcaf135938662cb930a289"
+  },
+  "tenphim": "Eternals",
+  "theloai": "Action, Adventure, Fantasy",
+  "ngaychieu": {
+    "$date": "2025-02-15T00:00:00.000Z"
+  },
+  "poster": "https://m.media-amazon.com/images/S/pv-target-images/931eef36b2b3f3156689bcd2dd8889d71e0993a2870e08c1f6fb30ee11004ea4.jpg",
+  "trailer_teaser": "https://www.youtube.com/watch?v=x_me3xsvDgk",
+  "mota": "Eternals is a Marvel Cinematic Universe (MCU) film directed by Chloé Zhao, introducing a group of immortal beings who have secretly guided humanity for thousands of years. The film explores their history, purpose, and internal conflicts as they face a new threat, the Deviants.",
+  "tendaodien": "Chloé Zhao",
+  "dienvien": "Gemma Chan, Richard Madden, Angelina Jolie",
+  "danhgiaphim": 7.2,
+  "thoiluong": "156"
+},
+{
+  "_id": {
+    "$oid": "67bcaf285938662cb930a28b"
+  },
+  "tenphim": "The Flash",
+  "theloai": "Action, Adventure, Sci-Fi",
+  "ngaychieu": {
+    "$date": "2025-12-16T00:00:00.000Z"
+  },
+  "poster": "https://phim.cafephim.vn/wp-content/uploads/2024/05/rktDFPbfHfUbArZ6OOOKsXcv0Bm-340x480.jpg",
+  "trailer_teaser": "https://www.youtube.com/watch?v=5psN4I3NfE8",
+  "mota": "The Flash is a superhero film directed by Andy Muschietti, starring Ezra Miller as Barry Allen. It is based on the Flashpoint storyline from DC Comics, where Barry travels through time to save his mother, unintentionally altering the entire DC Universe. The movie features multiverse elements, bringing back past Batman actors, including Michael Keaton and Ben Affleck, and introducing Sasha Calle as Supergirl.",
+  "tendaodien": "Andy Muschietti",
+  "dienvien": "Ezra Miller, Kiersey Clemons, Michael Shannon",
+  "danhgiaphim": 7.1,
+  "thoiluong": "144"
+},
+{
+  "_id": {
+    "$oid": "67bcaf7e5938662cb930a28e"
+  },
+  "tenphim": "Spider-Man: Across the Spider-Verse",
+  "theloai": "Animation, Action, Adventure",
+  "ngaychieu": {
+    "$date": "2025-06-02T00:00:00.000Z"
+  },
+  "poster": "https://m.media-amazon.com/images/S/pv-target-images/3c7c45988ed34fe4628aed9d51507061434432482279e1b69f8fd11ced6869bf.jpg",
+  "trailer_teaser": "https://www.youtube.com/watch?v=cqGjhVJWtEg",
+  "mota": "Spider-Man: Across the Spider-Verse is the sequel to Spider-Man: Into the Spider-Verse (2018), directed by Joaquim Dos Santos, Kemp Powers, and Justin K. Thompson. This visually stunning animated film continues the story of Miles Morales, taking him on a breathtaking journey through the multiverse, where he meets countless Spider-People while facing a powerful new enemy.\n",
+  "tendaodien": "Joaquim Dos Santos, Kemp Powers, Justin K. Thompson",
+  "dienvien": "Shameik Moore, Hailee Steinfeld, Oscar Isaac",
+  "danhgiaphim": 7.3,
+  "thoiluong": "140"
+},
+{
+  "_id": {
+    "$oid": "67bcafa85938662cb930a290"
+  },
+  "tenphim": "Godzilla x Kong: The New Empire",
+  "theloai": "Action, Adventure, Sci-Fi",
+  "ngaychieu": {
+    "$date": "2025-08-29T00:00:00.000Z"
+  },
+  "poster": "https://m.media-amazon.com/images/I/71T4YARkLKL._AC_UF1000,1000_QL80_.jpg",
+  "trailer_teaser": "https://www.youtube.com/watch?v=xoPpR2U8rx0",
+  "mota": "Godzilla x Kong: The New Empire is a 2024 science fiction monster film directed by Adam Wingard. Serving as a sequel to Godzilla vs. Kong (2021), the movie continues the saga of the MonsterVerse, depicting the evolving dynamics between two iconic Titans: Godzilla and King Kong.​\nAshton",
+  "tendaodien": "Adam Wingard",
+  "dienvien": "Rebecca Hall, Brian Tyree Henry, Dan Stevens",
+  "danhgiaphim": 7,
+  "thoiluong": "104"
+},
+{
+  "_id": {
+    "$oid": "67bd7892caee57e6e8764923"
+  },
+  "tenphim": "Killers of the Flower Moon",
+  "theloai": "Crime, Drama, History",
+  "ngaychieu": {
+    "$date": "2025-11-20T00:00:00.000Z"
+  },
+  "poster": "https://m.media-amazon.com/images/M/MV5BNzE5MDY0ZDUtYjg2NS00ZjRkLWJkZjEtNGYyOWNmZDk0MDhmXkEyXkFqcGc@._V1_.jpg",
+  "trailer_teaser": "https://www.youtube.com/watch?v=EP3pw4X7aKE",
+  "mota": "Killers of the Flower Moon is a historical crime drama directed by Martin Scorsese, starring Leonardo DiCaprio, Robert De Niro, and Lily Gladstone. Based on the true events chronicled in David Grann’s book, the film explores the Osage murders in the 1920s, a dark chapter in American history where wealthy Osage Native Americans were systematically murdered for their oil-rich land.\n\n",
+  "tendaodien": "Martin Scorsese",
+  "dienvien": "Leonardo DiCaprio, Robert De Niro, Lily Gladstone",
+  "danhgiaphim": 7,
+  "thoiluong": "206"
+}]

@@ -1,0 +1,24 @@
+[{
+  "_id": {
+    "$oid": "67d2973fbaf0bc542a102819"
+  },
+  "soluongdichvu": 2
+},
+{
+  "_id": {
+    "$oid": "67d2973fbaf0bc542a10281a"
+  },
+  "soluongdichvu": 1
+},
+{
+  "_id": {
+    "$oid": "67d2973fbaf0bc542a10281b"
+  },
+  "soluongdichvu": 1
+},
+{
+  "_id": {
+    "$oid": "67d2973fbaf0bc542a10281c"
+  },
+  "soluongdichvu": 3
+}]

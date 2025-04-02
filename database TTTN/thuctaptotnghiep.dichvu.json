@@ -1,0 +1,32 @@
+[{
+  "_id": {
+    "$oid": "67d2963ebaf0bc542a10280f"
+  },
+  "tendichvu": "Bắp ngọt",
+  "giadichvu": 50000,
+  "tinhtrang": "Còn hàng"
+},
+{
+  "_id": {
+    "$oid": "67d2963ebaf0bc542a102810"
+  },
+  "tendichvu": "Bắp phô mai",
+  "giadichvu": 60000,
+  "tinhtrang": "Còn hàng"
+},
+{
+  "_id": {
+    "$oid": "67d2963ebaf0bc542a102811"
+  },
+  "tendichvu": "Nước ngọt Pepsi",
+  "giadichvu": 30000,
+  "tinhtrang": "Còn hàng"
+},
+{
+  "_id": {
+    "$oid": "67d2963ebaf0bc542a102812"
+  },
+  "tendichvu": "Nước ngọt 7up",
+  "giadichvu": 35000,
+  "tinhtrang": "Còn hàng"
+}]

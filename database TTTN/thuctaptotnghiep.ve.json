@@ -1,0 +1,39 @@
+[{
+  "_id": {
+    "$oid": "67c57e066896aa40e5f76afb"
+  },
+  "giave": 100000,
+  "trangthai": "Đã thanh toán",
+  "thoigianTT": "ISODate(\"2025-03-27T15:00:00Z\"),",
+  "ngaychieu": {
+    "$date": "2025-02-02T00:00:00.000Z"
+  },
+  "PTTT": "VNPay",
+  "rap": "CGV Vincom Đồng Khởi"
+},
+{
+  "_id": {
+    "$oid": "67e53cf8477b0cc970330a36"
+  },
+  "giave": 120000,
+  "trangthai": "Chưa thanh toán",
+  "thoigianTT": "ISODate(\"2025-03-27T14:00:00Z\")",
+  "ngaychieu": {
+    "$date": "2025-03-28T19:00:00.000Z"
+  },
+  "PTTT": "VNPay",
+  "rap": "Galaxy Nguyễn Du"
+},
+{
+  "_id": {
+    "$oid": "67e53e06477b0cc970330a38"
+  },
+  "giave": 300000,
+  "trangthai": "Hủy thanh toán",
+  "thoigianTT": "ISODate(\"2025-03-27T15:00:00Z\")",
+  "ngaychieu": {
+    "$date": "2025-03-28T19:00:00.000Z"
+  },
+  "PTTT": "VnPay",
+  "rap": "Lotte Cinema Nam Sài Gòn"
+}]

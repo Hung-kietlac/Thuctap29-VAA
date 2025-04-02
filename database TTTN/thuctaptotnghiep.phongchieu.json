@@ -1,0 +1,35 @@
+[{
+  "_id": {
+    "$oid": "67c57d2a6896aa40e5f76aec"
+  },
+  "tenphongchieu": "Phòng 1",
+  "soluongghe": 100
+},
+{
+  "_id": {
+    "$oid": "67c57d2a6896aa40e5f76aed"
+  },
+  "tenphongchieu": "Phòng 2",
+  "soluongghe": 80
+},
+{
+  "_id": {
+    "$oid": "67c57d2a6896aa40e5f76aee"
+  },
+  "tenphongchieu": "Phòng 3",
+  "soluongghe": 120
+},
+{
+  "_id": {
+    "$oid": "67c57d2a6896aa40e5f76aef"
+  },
+  "tenphongchieu": "Phòng 4",
+  "soluongghe": 90
+},
+{
+  "_id": {
+    "$oid": "67c57d2a6896aa40e5f76af0"
+  },
+  "tenphongchieu": "Phòng 5",
+  "soluongghe": 110
+}]

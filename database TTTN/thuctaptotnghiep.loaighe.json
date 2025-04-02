@@ -1,0 +1,21 @@
+[{
+  "_id": {
+    "$oid": "67d299babaf0bc542a102832"
+  },
+  "tenloaighe": "Ghế thường",
+  "giaghe": 100000
+},
+{
+  "_id": {
+    "$oid": "67d299babaf0bc542a102833"
+  },
+  "tenloaighe": "Ghế VIP",
+  "giaghe": 150000
+},
+{
+  "_id": {
+    "$oid": "67d299babaf0bc542a102834"
+  },
+  "tenloaighe": "Ghế đôi",
+  "giaghe": 200000
+}]

@@ -1,0 +1,10 @@
+[{
+  "_id": {
+    "$oid": "67d1ab120ddf8b2940144a8e"
+  },
+  "soluongve": 2,
+  "tonggia": 200000,
+  "ngaychieu": {
+    "$date": "2025-01-01T00:00:00.000Z"
+  }
+}]

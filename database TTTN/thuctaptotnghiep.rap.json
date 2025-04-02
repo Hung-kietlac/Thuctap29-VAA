@@ -1,0 +1,35 @@
+[{
+  "_id": {
+    "$oid": "67bd79b1caee57e6e876492f"
+  },
+  "tenrap": "CGV Vincom Đồng Khởi",
+  "diachi": "72 Lê Thánh Tôn, Bến Nghé, Quận 1, TP.HCM"
+},
+{
+  "_id": {
+    "$oid": "67bd79b1caee57e6e8764930"
+  },
+  "tenrap": "Lotte Cinema Nam Sài Gòn",
+  "diachi": "469 Nguyễn Hữu Thọ, Tân Hưng, Quận 7, TP.HCM"
+},
+{
+  "_id": {
+    "$oid": "67bd79b1caee57e6e8764931"
+  },
+  "tenrap": "BHD Star Cineplex Thảo Điền",
+  "diachi": "Tầng 5, Vincom Mega Mall, Quận 2, TP.HCM"
+},
+{
+  "_id": {
+    "$oid": "67bd79b1caee57e6e8764932"
+  },
+  "tenrap": "Galaxy Nguyễn Du",
+  "diachi": "116 Nguyễn Du, Bến Thành, Quận 1, TP.HCM"
+},
+{
+  "_id": {
+    "$oid": "67bd79b1caee57e6e8764933"
+  },
+  "tenrap": "Cinestar Quốc Thanh",
+  "diachi": "271 Nguyễn Trãi, Nguyễn Cư Trinh, Quận 1, TP.HCM"
+}]
