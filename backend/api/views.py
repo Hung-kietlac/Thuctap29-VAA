@@ -1,15 +1,19 @@
 from django.http import JsonResponse
+from django.shortcuts import redirect
 from django.views.decorators.csrf import csrf_exempt
 import json
 from pymongo import MongoClient
 import bcrypt
 from twilio.rest import Client
 import random
-from django.conf import settings
-from .models import User
 import traceback
-from .models import Phim
 from bson import ObjectId
+from urllib.parse import urlencode
+import hmac
+import datetime
+from django.http import HttpResponse
+import hashlib
+import base64
 
 OTP_STORAGE = {}
 
@@ -192,17 +196,20 @@ def dichvu(request):
     except Exception as e:
         return JsonResponse({"error": f"Lỗi server: {str(e)}"}, status=500)
 
+@csrf_exempt
 def generate_vnpay_qr(request):
-    vnp_TmnCode = settings.VNPAY_TMN_CODE
-    vnp_HashSecret = settings.VNPAY_HASH_SECRET
-    vnp_Url = settings.VNPAY_URL
+    vnp_TmnCode = 'YQ5K6E9C'
+    vnp_HashSecret = 'YTLQUAUDSV4R502QNY4HXWJ2XF8WUTCD'
+    vnp_Url = 'https://sandbox.vnpayment.vn/paymentv2/vpcpay.html'
 
     vnp_TxnRef = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
-    vnp_Amount = int(request.GET.get("amount", 10000)) * 100  # Đơn vị VNĐ x 100
-    vnp_OrderInfo = "Thanh toan don hang " + vnp_TxnRef
-    vnp_ReturnUrl = "http://localhost:3000/payment-success"  # Trang React sau khi thanh toán
+    vnp_Amount = int(request.GET.get("amount", 10000)) * 100
+    phim = request.GET.get("phim", "Không rõ")
+    rap = request.GET.get("rap", "Không rõ")
 
-    # Tạo dữ liệu gửi lên VNPay
+    vnp_OrderInfo = f"PHIM:{phim}|RAP:{rap}|REF:{vnp_TxnRef}"
+    vnp_ReturnUrl = "http://localhost:8000/api/vnpay-return"
+
     data = {
         "vnp_Version": "2.1.0",
         "vnp_Command": "pay",
@@ -218,26 +225,119 @@ def generate_vnpay_qr(request):
         "vnp_CreateDate": datetime.datetime.now().strftime("%Y%m%d%H%M%S"),
     }
 
-    # Sắp xếp tham số theo thứ tự alphabet
     sorted_data = sorted(data.items())
     query_string = urlencode(sorted_data)
 
-    # Tạo chữ ký bảo mật (HMAC-SHA512)
     hmac_signature = hmac.new(
-        bytes(vnp_HashSecret, "utf-8"), 
-        bytes(query_string, "utf-8"), 
+        bytes(vnp_HashSecret, "utf-8"),
+        bytes(query_string, "utf-8"),
         hashlib.sha512
     ).hexdigest()
 
-    # Thêm chữ ký vào URL
     payment_url = f"{vnp_Url}?{query_string}&vnp_SecureHash={hmac_signature}"
 
-    # Tạo mã QR Code
-    qr = qrcode.make(payment_url)
-    qr.save("qrcode.png")
+    return JsonResponse({"payment_url": payment_url})
 
-    # Encode QR thành Base64 để trả về frontend
-    with open("qrcode.png", "rb") as qr_file:
-        qr_base64 = base64.b64encode(qr_file.read()).decode()
+@csrf_exempt
+def vnpay_return(request):
+    inputData = request.GET.dict()
+    vnp_HashSecret = 'YTLQUAUDSV4R502QNY4HXWJ2XF8WUTCD'
 
-    return JsonResponse({"qr_code": qr_base64, "payment_url": payment_url})
+    vnp_SecureHash = inputData.pop("vnp_SecureHash", None)
+    inputData.pop("vnp_SecureHashType", None)
+
+    sorted_data = sorted(inputData.items())
+    query_string = urlencode(sorted_data)
+
+    hash_check = hmac.new(
+        bytes(vnp_HashSecret, "utf-8"),
+        bytes(query_string, "utf-8"),
+        hashlib.sha512
+    ).hexdigest()
+
+    if hash_check == vnp_SecureHash:
+        if inputData.get("vnp_ResponseCode") == "00":
+            # Kết nối MongoDB
+            client = MongoClient("mongodb://localhost:27017")
+            db = client["Thuctap"]
+            collection = db["thanhtoan"]
+
+            order_info = inputData.get("vnp_OrderInfo", "")
+            phim = rap = ""
+            for part in order_info.split("|"):
+                if part.startswith("PHIM:"):
+                    phim = part[5:]
+                elif part.startswith("RAP:"):
+                    rap = part[4:]
+
+            ma_ve = inputData.get("vnp_TxnRef")
+            so_tien = int(inputData.get("vnp_Amount", 0)) / 100
+            ngan_hang = inputData.get("vnp_BankCode", "")
+            ngay_dat_str = inputData.get("vnp_PayDate", "")
+            ngay_dat = datetime.datetime.strptime(ngay_dat_str, "%Y%m%d%H%M%S") if ngay_dat_str else None
+            trang_thai = "Đã thanh toán"
+
+            data_to_save = {
+                "ma_ve": ma_ve,
+                "phim": phim,
+                "rap": rap,
+                "so_tien": so_tien,
+                "ngan_hang": ngan_hang,
+                "ngay_dat": ngay_dat,
+                "trang_thai": trang_thai
+            }
+
+            collection.insert_one(data_to_save)
+
+            return redirect("http://localhost:8100/ticket-history")
+        else:
+            return HttpResponse("Thanh toán thất bại hoặc bị hủy")
+    else:
+        return HttpResponse("Sai chữ ký. Không hợp lệ")
+
+def payment_return(request):
+    code = request.GET.get('vnp_ResponseCode', '')
+
+    if code == '24':
+        # Người dùng hủy thanh toán
+        html = """
+        <script>
+          window.opener.postMessage('payment_cancelled', '*');
+          window.close();
+        </script>
+        """
+        return HttpResponse(html)
+
+    elif code == '00':
+        # Thành công
+        html = """
+        <script>
+          window.opener.postMessage('payment_success', '*');
+          window.close();
+        </script>
+        """
+        return HttpResponse(html)
+
+    else:
+        html = """
+        <script>
+          window.opener.postMessage('payment_failed', '*');
+          window.close();
+        </script>
+        """
+        return HttpResponse(html)
+
+@csrf_exempt
+def du_lieu_thanh_toan(request):
+    try:
+        client = MongoClient("mongodb://localhost:27017/")
+        db = client["Thuctap"]
+        collection = db["thanhtoan"]
+        
+        if request.method =="GET":
+            thanhtoan = list(collection.find({}, {"_id":0}))
+            return JsonResponse({"thanhtoan": thanhtoan}, safe=False, status=200)
+        
+        return JsonResponse({"error": "Lỗi phương thức"}, status=405)
+    except Exception as e:
+        return JsonResponse({"error": f"Lỗi server: {str(e)}"}, status=500)

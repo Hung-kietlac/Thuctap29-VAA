@@ -25,6 +25,8 @@ export class BookTicketPage implements OnInit {
   previousCinema: string = '';
   previousRoom: string = '';
   previousTime: string = '';
+  selectedDate: string = '';
+  weekDates: { date: string; label: string }[] = [];
 
   constructor(private route: ActivatedRoute, private router: Router) {}
 
@@ -33,6 +35,7 @@ export class BookTicketPage implements OnInit {
       this.phim = params;
       console.log("Thông tin phim:", this.phim);
     });
+    this.generateWeekDays();
   }
 
   openTrailer() {
@@ -101,6 +104,42 @@ export class BookTicketPage implements OnInit {
     return this.bookedSeats.includes(seat);
   }
 
+  generateWeekDays(startDate?: Date) {
+    this.weekDates = [];
+    let today = startDate || new Date(); // Nếu không có ngày, lấy ngày hôm nay
+
+    for (let i = 0; i < 7; i++) {
+      let nextDay = new Date(today);
+      nextDay.setDate(today.getDate() + i);
+
+      let dateStr = nextDay.toISOString().split('T')[0]; // YYYY-MM-DD
+      let label = `${nextDay.getDate()}/${nextDay.getMonth() + 1}<br>${this.getDayLabel(nextDay.getDay())}`;
+
+      this.weekDates.push({ date: dateStr, label });
+    }
+
+    this.selectedDate = this.weekDates[0].date; // Mặc định chọn ngày đầu tiên
+  }
+
+  getDayLabel(dayIndex: number): string {
+    const days = ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'];
+    return days[dayIndex];
+  }
+
+  // Hàm chuyển sang tuần tiếp theo
+  nextWeek() {
+    let nextWeekStart = new Date(this.weekDates[6].date);
+    nextWeekStart.setDate(nextWeekStart.getDate() + 1);
+    this.generateWeekDays(nextWeekStart);
+  }
+
+  // Hàm chuyển về tuần trước
+  prevWeek() {
+    let prevWeekStart = new Date(this.weekDates[0].date);
+    prevWeekStart.setDate(prevWeekStart.getDate() - 7);
+    this.generateWeekDays(prevWeekStart);
+  }
+
   toggleSeat(seat: string) {
     // Kiểm tra nếu chưa chọn rạp, phòng, hoặc thời gian
     if (!this.previousCinema || !this.previousRoom || !this.previousTime) {
@@ -154,15 +193,27 @@ export class BookTicketPage implements OnInit {
   }
 
   datve(phim: any) {
-    this.router.navigate(['/cart'], { 
-      queryParams: { 
-        tenphim: phim.tenphim, 
-        poster: phim.poster, 
-        ngaychieu: phim.ngaychieu, 
-        rap: this.selectedCinema,
-        seats: this.selectedSeats.join(','),
-        total: this.calculateTotalPrice()
-      }
-    });
+    if (!this.selectedCinema) {
+      alert("Vui lòng chọn rạp chiếu!");
+      return;
+    }
+    if (!this.selectedShowtime.time) {
+      alert("Vui lòng chọn suất chiếu!");
+      return;
+    }
+    if (this.selectedSeats.length === 0) {
+      alert("Vui lòng chọn ghế!");
+      return;
+    }
+
+    localStorage.setItem('selectedMovie', JSON.stringify({
+      tenphim: phim.tenphim,
+      poster: phim.poster,
+      ngaychieu: phim.ngaychieu,
+      rap: this.selectedCinema,
+      seats: this.selectedSeats,
+      total: this.calculateTotalPrice(),
+    }));
+    this.router.navigate(['/cart']);
   }
 }

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-ticket-history',
@@ -12,7 +13,13 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./ticket-history.page.scss'],
 })
 export class  TicketHistoryPage implements OnInit {
-  constructor() {}
+  dulieu: any[] = [];
+
+  constructor(private http: HttpClient) {}
 
   ngOnInit() {}
+
+  loadDulieu() {
+    this.http.get<{dulieu: any[]}>
+  }
 }

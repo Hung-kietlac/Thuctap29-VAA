@@ -28,15 +28,28 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-# env = environ.Env()
-# environ.Env.read_env()
-
-# VNPAY_TMN_CODE = env("VNPAY_TMN_CODE")
-# VNPAY_HASH_SECRET = env("VNPAY_HASH_SECRET")
-# VNPAY_URL = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html"
-
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:8100",
+]
+
+CORS_ALLOW_HEADERS = [
+    "accept",
+    "accept-encoding",
+    "authorization",
+    "content-type",
+    "dnt",
+    "origin",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
+]
+
+CORS_ALLOW_METHODS = [
+    "GET",
+    "POST",
+    "PUT",
+    "DELETE",
+    "OPTIONS"
 ]
 
 INSTALLED_APPS = [
@@ -52,6 +65,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -59,7 +73,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
