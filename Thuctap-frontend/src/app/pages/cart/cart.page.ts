@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
@@ -42,8 +42,8 @@ export class CartPage implements OnInit {
     if (savedMovie) {
       this.phim = JSON.parse(savedMovie);
       console.log('Thông tin phim từ localStorage:', this.phim);
-      console.log('Tên phim:', this.phim.tenphim);  // Lấy tên phim từ this.phim
-      console.log('Tên rạp:', this.phim.rap);  // Lấy tên rạp từ this.phim
+      console.log('Tên phim:', this.phim.tenphim);
+      console.log('Tên rạp:', this.phim.rap);
     } else {
       console.log('Không có thông tin phim trong localStorage');
     }
@@ -143,7 +143,6 @@ export class CartPage implements OnInit {
     }
   }
 
-  // Gọi API VNPay để lấy mã QR thanh toán
   pay() {
     const amount = this.thanhTienSauGiam;
     const phim = encodeURIComponent(this.phim.tenphim || "Không rõ");
@@ -163,25 +162,17 @@ export class CartPage implements OnInit {
     }
   
     if (this.selectedPayment === 'vnpay') {
-      const paymentWindow = window.open('', '_blank');
-      if (!paymentWindow) {
-        alert('Popup bị chặn. Vui lòng cho phép pop-up để thanh toán.');
-        return;
-      }
-  
       const apiUrl = `http://127.0.0.1:8000/api/generate_vnpay_qr/?amount=${amount}&phim=${phim}&rap=${rap}`;
-      console.log("API URL:", apiUrl);  // Kiểm tra API URL trong console
+      console.log("API URL:", apiUrl);
   
       this.http.get<{ payment_url: string }>(apiUrl).subscribe(response => {
         if (response.payment_url) {
-          paymentWindow.location.href = response.payment_url;
+          window.location.href = response.payment_url;
         } else {
           console.error("Không nhận được payment_url từ API");
-          paymentWindow.close();
         }
       }, error => {
         console.error("Lỗi khi gọi API VNPay:", error);
-        paymentWindow.close();
       });
     }
   }
