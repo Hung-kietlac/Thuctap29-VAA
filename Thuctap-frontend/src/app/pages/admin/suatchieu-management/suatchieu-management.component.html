@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/admin"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Quản lý suất chiếu</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="openAddSuatChieuModal()">
+        <ion-icon name="add"></ion-icon>
+        Thêm suất chiếu
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let suatchieu of suatchieuList">
+      <ion-label>
+        <h2>{{ suatchieu.phim.tenphim }}</h2>
+        <p>Phòng: {{ suatchieu.phongchieu.tenphongchieu }}</p>
+        <p>Ngày chiếu: {{ suatchieu.ngaychieu }}</p>
+        <p>Giờ chiếu: {{ suatchieu.giobatdau }} - {{ suatchieu.gioketthuc }}</p>
+        <p>Giá vé: {{ suatchieu.giave | number }} VNĐ</p>
+        <p>Trạng thái: {{ suatchieu.trangthai }}</p>
+      </ion-label>
+      <ion-buttons slot="end">
+        <ion-button (click)="editSuatChieu(suatchieu)">
+          <ion-icon name="create-outline"></ion-icon>
+        </ion-button>
+        <ion-button (click)="deleteSuatChieu(suatchieu.id)" color="danger">
+          <ion-icon name="trash-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+  </ion-list>
+</ion-content>

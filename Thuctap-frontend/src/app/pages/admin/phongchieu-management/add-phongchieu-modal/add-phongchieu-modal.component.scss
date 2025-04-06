@@ -1,0 +1,33 @@
+ion-content {
+  --background: #f5f5f5;
+}
+
+ion-list {
+  background: transparent;
+}
+
+ion-item {
+  --background: white;
+  --border-radius: 8px;
+  margin-bottom: 16px;
+  --padding-start: 16px;
+  --padding-end: 16px;
+}
+
+ion-label {
+  color: #666;
+  font-size: 14px;
+}
+
+ion-input, ion-select {
+  --padding-start: 0;
+  --padding-end: 0;
+  font-size: 16px;
+}
+
+ion-footer {
+  ion-toolbar {
+    --background: white;
+    --border-color: #eee;
+  }
+} 

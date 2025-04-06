@@ -28,6 +28,26 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/trangchu/trangchu.page').then( m => m.TrangchuPage), canActivate: [AuthGuard]
   },
   {
+    path: 'admin',
+    loadComponent: () => import('./pages/admin/admin.page').then( m => m.AdminPage), canActivate: [AuthGuard]
+  },
+  {
+    path: 'admin/phim',
+    loadComponent: () => import('./pages/admin/phim-management/phim-management.component').then( m => m.PhimManagementComponent), canActivate: [AuthGuard]
+  },
+  {
+    path: 'admin/suatchieu',
+    loadComponent: () => import('./pages/admin/suatchieu-management/suatchieu-management.component').then( m => m.SuatChieuManagementComponent), canActivate: [AuthGuard]
+  },
+  {
+    path: 'admin/ve',
+    loadComponent: () => import('./pages/admin/ve-management/ve-management.component').then( m => m.VeManagementComponent), canActivate: [AuthGuard]
+  },
+  {
+    path: 'admin/dichvu',
+    loadComponent: () => import('./pages/admin/dichvu-management/dichvu-management.component').then( m => m.DichVuManagementComponent), canActivate: [AuthGuard]
+  },
+  {
     path: 'admin-footer',
     loadComponent: () => import('./pages/admin-footer/admin-footer.page').then( m => m.AdminFooterPage)
   },
@@ -68,11 +88,16 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/cart/cart.page').then( m => m.CartPage)
   },
   {
-    path: 'details/:id',
+    path: 'details/',
     loadComponent: () => import('./pages/details/details.page').then( m => m.DetailsPage)
   },
   {
     path: 'book-ticket',
     loadComponent: () => import('./pages/book-ticket/book-ticket.page').then( m => m.BookTicketPage)
   },
+  {
+    path: 'admin/phongchieu',
+    loadComponent: () => import('./pages/admin/phongchieu-management/phongchieu-management.component').then(m => m.PhongChieuManagementComponent),
+    canActivate: [AuthGuard]
+  }
 ];

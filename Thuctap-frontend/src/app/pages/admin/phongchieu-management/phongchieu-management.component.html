@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/admin"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Quản lý phòng chiếu</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="openAddPhongChieuModal()">
+        <ion-icon slot="icon-only" name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let phongchieu of phongchieuList">
+      <ion-label>
+        <h2>{{ phongchieu.tenphongchieu }}</h2>
+        <p>Rạp: {{ phongchieu.rap.tenrap }}</p>
+        <p>Số lượng ghế: {{ phongchieu.soluongghe }}</p>
+      </ion-label>
+      <ion-buttons slot="end">
+        <ion-button (click)="editPhongChieu(phongchieu)">
+          <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+        </ion-button>
+        <ion-button (click)="deletePhongChieu(phongchieu)" color="danger">
+          <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+  </ion-list>
+</ion-content> 

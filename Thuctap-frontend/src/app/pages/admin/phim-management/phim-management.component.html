@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/admin"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Quản lý phim</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="openAddPhimModal()">
+        <ion-icon name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-md="6" size-lg="4" *ngFor="let phim of phimList">
+        <ion-card>
+          <img [src]="phim.poster" *ngIf="phim.poster" [alt]="phim.tenphim">
+          <ion-card-header>
+            <ion-card-title>{{phim.tenphim}}</ion-card-title>
+            <ion-card-subtitle>{{phim.theloai}}</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <p><strong>Thời lượng:</strong> {{phim.thoiluong}} phút</p>
+            <p><strong>Ngày khởi chiếu:</strong> {{phim.ngaykhoichieu | date}}</p>
+            <p><strong>Ngày kết thúc:</strong> {{phim.ngayketthuc | date}}</p>
+            <p><strong>Trạng thái:</strong> {{phim.trangthai}}</p>
+            <p><strong>Đạo diễn:</strong> {{phim.tendaodien}}</p>
+            <p><strong>Diễn viên:</strong> {{phim.dienvien}}</p>
+            <p><strong>Đánh giá:</strong> {{phim.danhgiaphim}}/10</p>
+            <p><strong>Mô tả:</strong> {{phim.mota}}</p>
+            <ion-button expand="block" (click)="editPhim(phim)">Sửa</ion-button>
+            <ion-button expand="block" color="danger" (click)="deletePhim(phim.id)">Xóa</ion-button>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

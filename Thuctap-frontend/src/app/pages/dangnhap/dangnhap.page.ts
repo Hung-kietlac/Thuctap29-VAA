@@ -36,18 +36,19 @@ export class DangnhapPage implements OnInit {
   async onLogin() {
     this.authService.login(this.loginData.username, this.loginData.password)
       .subscribe({
-        next: (response: { message: string; role: string; username: string }) => {
+        next: (response: any) => {
           if (this.rememberMe) {
             localStorage.setItem('savedUsername', this.loginData.username);
           } else {
             localStorage.removeItem('savedUsername');
           }
           
-          localStorage.setItem('userRole', response.role);
+          const isAdmin = response.user?.is_staff || false;
+          localStorage.setItem('userRole', isAdmin ? 'admin' : 'user');
 
-          if (response.role === "admin") {
+          if (isAdmin) {
             alert('Bạn đã đăng nhập admin thành công!');
-            this.router.navigate(['/dashboard']);
+            this.router.navigate(['/admin']);
           } else {
             alert('Bạn đã đăng nhập thành công!');
             this.router.navigate(['/trangchu']);

@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Quản lý hệ thống</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-md="6" size-lg="3">
+        <ion-card [routerLink]="['/admin/phim']">
+          <ion-card-header>
+            <ion-card-title>Quản lý phim</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-icon name="film-outline" size="large"></ion-icon>
+            <p>Thêm, sửa, xóa phim</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="12" size-md="6" size-lg="3">
+        <ion-card [routerLink]="['/admin/suatchieu']">
+          <ion-card-header>
+            <ion-card-title>Quản lý suất chiếu</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-icon name="time-outline" size="large"></ion-icon>
+            <p>Thêm, sửa, xóa suất chiếu</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="12" size-md="6" size-lg="3">
+        <ion-card routerLink="/ticket-history">
+          <ion-card-header>
+            <ion-card-title>Quản lý vé</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-icon name="ticket-outline" size="large"></ion-icon>
+            <p>Xem và quản lý vé</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      
+
+      <ion-col size="12" size-md="6" size-lg="3">
+        <ion-card [routerLink]="['/admin/dichvu']">
+          <ion-card-header>
+            <ion-card-title>Quản lý dịch vụ</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-icon name="fast-food-outline" size="large"></ion-icon>
+            <p>Thêm, sửa, xóa dịch vụ</p>
+          </ion-card-content>
+        </ion-card>
+        
+        <ion-col size="12" size-md="6" size-lg="4">
+          <ion-card routerLink="/users">
+            <ion-card-header>
+              <ion-card-title>Quản lý người dùng</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              Thêm, sửa, xóa dịch vụ
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        
+    </ion-row>
+  </ion-grid>
+</ion-content>

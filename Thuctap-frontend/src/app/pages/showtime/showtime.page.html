@@ -1,13 +1,167 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>showtime</ion-title>
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Quản Lý Rạp Chiếu Phim</ion-title>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon slot="icon-only" name="notifications-outline"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon slot="icon-only" name="person-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">showtime</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <div class="admin-container">
+    <!-- Navigation Tabs -->
+    <ion-segment [(ngModel)]="selectedSegment" color="danger">
+      <ion-segment-button value="showtimes">
+        <ion-label>Lịch Chiếu</ion-label>
+        <ion-icon name="calendar"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="theaters">
+        <ion-label>Rạp Phim</ion-label>
+        <ion-icon name="business"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="movies">
+        <ion-label>Phim</ion-label>
+        <ion-icon name="film"></ion-icon>
+      </ion-segment-button>
+    </ion-segment>
+
+    <!-- Showtimes Section -->
+    <div *ngIf="selectedSegment === 'showtimes'" class="section-container">
+      <div class="section-header">
+        <h2>Quản Lý Lịch Chiếu</h2>
+        <ion-button color="danger" size="small" (click)="addShowtime()">
+          <ion-icon name="add" slot="start"></ion-icon> Thêm Mới
+        </ion-button>
+      </div>
+
+      <!-- Filter & Search -->
+      <ion-card>
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col size-md="3">
+                <ion-item>
+                  <ion-label position="stacked">Rạp phim</ion-label>
+                  <ion-select [(ngModel)]="selectedTheater" placeholder="Chọn rạp phim">
+                    <ion-select-option *ngFor="let rap of rapList" [value]="rap._id">{{ rap.tenrap }}</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+              <ion-col size-md="3">
+                <ion-item>
+                  <ion-label position="stacked">Phim</ion-label>
+                  <ion-select [(ngModel)]="selectedMovie" placeholder="Chọn phim">
+                    <ion-select-option *ngFor="let phim of phimList" [value]="phim._id">{{ phim.tenphim }}</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+              <ion-col size-md="3">
+                <ion-item>
+                  <ion-label position="stacked">Ngày chiếu</ion-label>
+                  <ion-datetime [(ngModel)]="selectedDate" displayFormat="DD/MM/YYYY" placeholder="Chọn ngày"></ion-datetime>
+                </ion-item>
+              </ion-col>
+              <ion-col size-md="3" class="ion-align-self-end">
+                <ion-button expand="block" color="danger" (click)="searchShowtimes()">
+                  <ion-icon name="search" slot="start"></ion-icon> Tìm kiếm
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+
+      <!-- Showtimes List -->
+      <ion-card>
+        <ion-card-content>
+          <ion-list>
+            <ion-item *ngFor="let showtime of showtimes">
+              <ion-label>
+                <h2>{{ showtime.tenphim }}</h2>
+                <p>Rạp: {{ showtime.rap }} - Phòng: {{ showtime.phong }}</p>
+                <p>Ngày: {{ showtime.ngaychieu }} - Giờ: {{ showtime.giochieu }}</p>
+              </ion-label>
+              <ion-buttons slot="end">
+                <ion-button color="primary" (click)="updateShowtime(showtime._id)">
+                  <ion-icon name="create-outline"></ion-icon>
+                </ion-button>
+                <ion-button color="danger" (click)="deleteShowtime(showtime._id)">
+                  <ion-icon name="trash-outline"></ion-icon>
+                </ion-button>
+              </ion-buttons>
+            </ion-item>
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <!-- Theaters Section -->
+    <div *ngIf="selectedSegment === 'theaters'" class="section-container">
+      <div class="section-header">
+        <h2>Quản Lý Rạp Phim</h2>
+        <ion-button color="danger" size="small" (click)="addTheater()">
+          <ion-icon name="add" slot="start"></ion-icon> Thêm Mới
+        </ion-button>
+      </div>
+
+      <ion-card>
+        <ion-card-content>
+          <ion-list>
+            <ion-item *ngFor="let rap of rapList">
+              <ion-label>
+                <h2>{{ rap.tenrap }}</h2>
+              </ion-label>
+              <ion-buttons slot="end">
+                <ion-button color="primary" (click)="updateTheater(rap._id)">
+                  <ion-icon name="create-outline"></ion-icon>
+                </ion-button>
+                <ion-button color="danger" (click)="deleteTheater(rap._id)">
+                  <ion-icon name="trash-outline"></ion-icon>
+                </ion-button>
+              </ion-buttons>
+            </ion-item>
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <!-- Movies Section -->
+    <div *ngIf="selectedSegment === 'movies'" class="section-container">
+      <div class="section-header">
+        <h2>Quản Lý Phim</h2>
+        <ion-button color="danger" size="small" (click)="addMovie()">
+          <ion-icon name="add" slot="start"></ion-icon> Thêm Mới
+        </ion-button>
+      </div>
+
+      <ion-card>
+        <ion-card-content>
+          <ion-list>
+            <ion-item *ngFor="let phim of phimList">
+              <ion-label>
+                <h2>{{ phim.tenphim }}</h2>
+                <p>Thể loại: {{ phim.theloai }}</p>
+              </ion-label>
+              <ion-buttons slot="end">
+                <ion-button color="primary" (click)="updateMovie(phim._id)">
+                  <ion-icon name="create-outline"></ion-icon>
+                </ion-button>
+                <ion-button color="danger" (click)="deleteMovie(phim._id)">
+                  <ion-icon name="trash-outline"></ion-icon>
+                </ion-button>
+              </ion-buttons>
+            </ion-item>
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
 </ion-content>

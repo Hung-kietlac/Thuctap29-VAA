@@ -43,21 +43,23 @@
         <ion-card-title>Lịch Chiếu</ion-card-title>
       </ion-card-header>
       <ion-card-content>
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-          <ion-button fill="clear" (click)="prevWeek()">
-            <ion-icon name="chevron-back-outline"></ion-icon>
-          </ion-button>
-      
-          <ion-segment [(ngModel)]="selectedDate">
-            <ion-segment-button *ngFor="let day of weekDates" [value]="day.date">
-              <ion-label [innerHTML]="day.label"></ion-label>
-            </ion-segment-button>
-          </ion-segment>
-      
-          <ion-button fill="clear" (click)="nextWeek()">
-            <ion-icon name="chevron-forward-outline"></ion-icon>
-          </ion-button>
-        </div>
+        <ion-segment value="2025-03-09" id="dateSelector">
+          <ion-segment-button value="2025-03-09">
+            <ion-label>09/03<br>CN</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2025-03-10">
+            <ion-label>10/03<br>T2</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2025-03-11">
+            <ion-label>11/03<br>T3</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2025-03-12">
+            <ion-label>12/03<br>T4</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2025-03-13">
+            <ion-label>13/03<br>T5</ion-label>
+          </ion-segment-button>
+        </ion-segment>
 
         <div class="cinema-selector">
           <ion-item>
@@ -186,9 +188,7 @@
           </ion-item>
           <ion-item>
             <ion-label>Suất chiếu:</ion-label>
-            <ion-note slot="end" id="summaryShowtime">
-              {{selectedDate}} - {{ selectedShowtime.time }}
-            </ion-note>
+            <ion-note slot="end" id="summaryShowtime">{{ selectedShowtime.time }}</ion-note>
           </ion-item>
           <ion-item>
             <ion-label>Ghế đã chọn:</ion-label>
@@ -205,6 +205,31 @@
             <ion-note slot="end" id="summaryPrice"> {{ calculateTotalPrice() | number }} VNĐ</ion-note>
           </ion-item>
         </ion-list>
+
+        <div class="customer-info">
+          <ion-item>
+            <ion-label position="floating">Họ và tên</ion-label>
+            <ion-input type="text" id="customerName" required=""></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Số điện thoại</ion-label>
+            <ion-input type="tel" id="customerPhone" required=""></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Email</ion-label>
+            <ion-input type="email" id="customerEmail" required=""></ion-input>
+          </ion-item>
+        </div>
+
+        <ion-item>
+          <ion-label>Phương thức thanh toán</ion-label>
+          <ion-select id="paymentMethod" interface="popover">
+            <ion-select-option value="momo">Ví MoMo</ion-select-option>
+            <ion-select-option value="vnpay">VN Pay</ion-select-option>
+            <ion-select-option value="credit">Thẻ tín dụng</ion-select-option>
+            <ion-select-option value="banking">Chuyển khoản ngân hàng</ion-select-option>
+          </ion-select>
+        </ion-item>
 
         <ion-button (click)="datve(phim)" expand="block" color="primary" id="confirmBooking">
           Xác nhận đặt vé

@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ phongchieu ? 'Sửa phòng chiếu' : 'Thêm phòng chiếu' }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">Đóng</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-item>
+    <ion-label position="stacked">Tên phòng chiếu</ion-label>
+    <ion-input [(ngModel)]="tenphongchieu" placeholder="Nhập tên phòng chiếu"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Số lượng ghế</ion-label>
+    <ion-input type="number" [(ngModel)]="soluongghe" placeholder="Nhập số lượng ghế"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Rạp</ion-label>
+    <ion-select [(ngModel)]="rap_id" placeholder="Chọn rạp">
+      <ion-select-option *ngFor="let rap of rapList" [value]="rap.id">
+        {{ rap.tenrap }}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-button expand="block" (click)="save()" class="ion-margin-top">
+    {{ phongchieu ? 'Cập nhật' : 'Thêm' }}
+  </ion-button>
+</ion-content> 

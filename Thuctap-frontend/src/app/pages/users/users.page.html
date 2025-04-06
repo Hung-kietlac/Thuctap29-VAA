@@ -3,116 +3,68 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>User Management</ion-title>
+    <ion-title>Quản lý Người dùng</ion-title>
     <ion-buttons slot="end">
-      <ion-button>
-        <ion-icon slot="icon-only" name="add-outline"></ion-icon>
+      <ion-button color="success" (click)="openAddUserModal()">
+        <ion-icon name="person-add-outline"></ion-icon>
+        Thêm
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 
   <ion-toolbar color="dark">
-    <ion-searchbar placeholder="Search users" color="light">
-    </ion-searchbar>
-    <ion-buttons slot="end">
-      <ion-button>All</ion-button>
-      <ion-button>Active</ion-button>
-      <ion-button>Inactive</ion-button>
-    </ion-buttons>
+    <ion-searchbar 
+      placeholder="Tìm kiếm người dùng" 
+      color="light"
+      [(ngModel)]="searchTerm"
+      (ionChange)="filterUsers()"
+    ></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
 <ion-content color="dark">
+  <!-- Debugging info -->
+  <div *ngIf="debugMode" class="ion-padding">
+    <p>Debug: {{filteredUsers.length}} người dùng</p>
+  </div>
+  
   <div class="user-stats">
     <div class="stat-box">
-      <span class="stat-number">Tổng</span>
-      <span class="stat-label">Total Users</span>
-    </div>
-    <div class="stat-box">
-      <span class="stat-number">Số người mới</span>
-      <span class="stat-label">New Users</span>
-    </div>
-    <div class="stat-box">
-      <span class="stat-number">VIP</span>
-      <span class="stat-label">Premium</span>
-    </div>
-    <div class="stat-box">
-      <span class="stat-number">Phim đã xem</span>
-      <span class="stat-label">Movies Viewed</span>
+      <span class="stat-number">{{ users.length }}</span>
+      <span class="stat-label">Tổng số người dùng</span>
     </div>
   </div>
 
-  <!-- Admin Table -->
-  <ion-grid>
-    <ion-row class="header-row">
-      <ion-col size="0.5">#</ion-col>
-      <ion-col size="3">Admin</ion-col>
-      <ion-col size="2.5">Tên</ion-col>
-      <ion-col size="2">....</ion-col>
-      <ion-col size="2">....</ion-col>
-    </ion-row>
+  <ion-list *ngIf="!isLoading">
+    <ion-item *ngFor="let user of filteredUsers" color="dark">
+      <ion-avatar slot="start">
+        <img src="https://ionicframework.com/docs/img/demos/avatar.svg">
+      </ion-avatar>
+      <ion-label>
+        <h2>{{ user.hoten }}</h2>
+        <p>{{ user.username }}</p>
+        <p>{{ user.sodienthoai }}</p>
+      </ion-label>
 
-    <ion-row class="user-row">
-      <ion-col size="0.5">1</ion-col>
-      <ion-col size="3">
-        <div class="user-info">
-          <ion-avatar>
-            <img src="https://ionicframework.com/docs/img/demos/avatar.svg">
-          </ion-avatar>
-          <div class="user-details">
-            <div class="user-name">.....</div>
-            <div class="user-email">example.com</div>
-          </div>
-        </div>
-      </ion-col>
-      <ion-col size="2.5">....K</ion-col>
-      <ion-col size="2">2 hours ago</ion-col>
-      <ion-col size="2">2023-04-15</ion-col>
-      <ion-col size="2">
-        <ion-button fill="clear" size="small">
-          <ion-icon name="ellipsis-vertical"></ion-icon>
-        </ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>  
+      <!-- Nút chỉnh sửa -->
+      <ion-button fill="clear" color="primary" (click)="openEditUserModal(user)">
+        <ion-icon name="create-outline"></ion-icon>
+      </ion-button>
 
-  <!-- Users Table -->
-  <ion-grid>
-    <ion-row class="header-row">
-      <ion-col size="0.5">#</ion-col>
-      <ion-col size="3">User</ion-col>
-      <ion-col size="2.5">Plan</ion-col>
-      <ion-col size="2">Last Active</ion-col>
-      <ion-col size="2">Joined</ion-col>
-    </ion-row>
+      <!-- Nút xóa -->
+      <ion-button fill="clear" color="danger" (click)="confirmDeleteUser(user._id)">
+        <ion-icon name="trash-outline"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
 
-    <ion-row class="user-row">
-      <ion-col size="0.5">1</ion-col>
-      <ion-col size="3">
-        <div class="user-info">
-          <ion-avatar>
-            <img src="https://ionicframework.com/docs/img/demos/avatar.svg">
-          </ion-avatar>
-          <div class="user-details">
-            <div class="user-name">.....</div>
-            <div class="user-email">example.com</div>
-          </div>
-        </div>
-      </ion-col>
-      <ion-col size="2.5">Premium 4K</ion-col>
-      <ion-col size="2">2 hours ago</ion-col>
-      <ion-col size="2">2023-04-15</ion-col>
-      <ion-col size="2">
-        <ion-button fill="clear" size="small">
-          <ion-icon name="ellipsis-vertical"></ion-icon>
-        </ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>  
-  <!-- Infinite Scroll -->
-  <ion-infinite-scroll>
-    <ion-infinite-scroll-content loadingspinner="crescent" loadingtext="Loading more users...">
-    </ion-infinite-scroll-content>
-  </ion-infinite-scroll>
+  <div *ngIf="isLoading" class="ion-text-center ion-padding">
+    <ion-spinner></ion-spinner>
+    <p>Đang tải dữ liệu...</p>
+  </div>
 
+  <div *ngIf="!isLoading && filteredUsers.length === 0" class="ion-text-center ion-padding">
+    <ion-icon name="people-outline" size="large"></ion-icon>
+    <p>Không có người dùng nào</p>
+  </div>
 </ion-content>

@@ -8,29 +8,22 @@
 </ion-header>
 
 <ion-content>
-  <ion-refresher slot="fixed">
+  <ion-refresher slot="fixed" (ionRefresh)="fetchTickets()">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   
   <div class="ticket-history-container">
-    <ion-segment [(ngModel)]="selectedStatus" (ionChange)="filterTickets()">
+    <ion-segment [value]="selectedStatus" (ionChange)="changeStatus($event.detail.value)" class="status-segment">
       <ion-segment-button value="all">
         <ion-label>Tất cả</ion-label>
       </ion-segment-button>
-      <ion-segment-button value="completed">
-        <ion-label>Đã thanh toán</ion-label>
-      </ion-segment-button>
-      <ion-segment-button value="pending">
-        <ion-label>Đang chờ thanh toán</ion-label>
-      </ion-segment-button>
-      <ion-segment-button value="cancelled">
-        <ion-label>Đã hủy</ion-label>
-      </ion-segment-button>
+      
+      
     </ion-segment>
 
     <div class="tickets-list">
       <!-- Trạng thái đang tải -->
-      <ion-card *ngIf="loading" class="loading-card">
+      <ion-card *ngIf="isLoading" class="loading-card">
         <ion-card-content>
           <ion-spinner name="crescent"></ion-spinner>
           <p>Đang tải dữ liệu...</p>
@@ -38,19 +31,21 @@
       </ion-card>
 
       <!-- Thông báo không có vé -->
-      <ion-item-divider *ngIf="dulieu.length === 0" class="no-tickets-message">
+      <ion-item-divider *ngIf="noTickets" class="no-tickets-message">
         <ion-label>Không có vé nào trong lịch sử</ion-label>
       </ion-item-divider>
 
-      <!-- Hiển thị vé -->
-      <ion-card *ngFor="let ticket of filteredTickets" class="ticket-card">
+      <!-- Danh sách vé -->
+      <ion-card *ngFor="let ticket of tickets" class="ticket-card">
         <ion-card-header>
           <div class="ticket-header">
             <div class="ticket-id">
-              Mã vé: {{ ticket.maVe }}
+              Mã vé: {{ ticket._id }}
             </div>
-            <ion-badge [color]="ticket.trangThai === 'completed' ? 'success' : ticket.trangThai === 'pending' ? 'warning' : 'danger'">
-              {{ ticket.trangThai === 'completed' ? 'Đã hoàn thành' : ticket.trangThai === 'pending' ? 'Đang chờ thanh toán' : 'Đã hủy' }}
+            <ion-badge [color]="ticket.trangthai === 'Đã thanh toán' ? 'success' : 
+                             ticket.trangthai === 'Đang chờ thanh toán' ? 'warning' : 
+                             'danger'">
+              {{ ticket.trangthai }}
             </ion-badge>
           </div>
           <ion-card-title class="destination">{{ ticket.rap }}</ion-card-title>
@@ -60,42 +55,42 @@
           <div class="ticket-details">
             <div class="detail-row">
               <ion-icon name="calendar-outline"></ion-icon>
-              <span>{{ ticket.ngayChieu }}</span>
+              <span>Ngày chiếu: {{ ticket.ngayxem }}</span>
             </div>
             
             <div class="detail-row">
               <ion-icon name="calendar-outline"></ion-icon>
-              <span>{{ ticket.gioChieu }}</span>
+              <span>Giờ chiếu: {{ ticket.giochieu }}</span>
             </div>
             
             <div class="detail-row">
               <ion-icon name="cash-outline"></ion-icon>
-              <span>{{ ticket.giaVe | currency }}</span>
+              <span>Giá vé: {{ ticket.giave | currency:'VND' }}</span>
             </div>
             
             <div class="detail-row">
               <ion-icon name="card-outline"></ion-icon>
-              <span>{{ ticket.nganHang }}</span>
+              <span>Phương thức thanh toán: {{ ticket.phuongthuctt }}</span>
             </div>
             
             <div class="detail-row">
               <ion-icon name="time-outline"></ion-icon>
-              <span>{{ ticket.ngayDat }}</span>
+              <span>Ngày đặt: {{ ticket.ngaydat }}</span>
             </div>
           </div>
           
           <div class="ticket-actions">
-            <ion-button fill="clear" size="small">
+            <ion-button fill="clear" size="small" [routerLink]="['/ticket-details', ticket._id]">
               <ion-icon slot="start" name="eye-outline"></ion-icon>
               Chi tiết
             </ion-button>
             
-            <ion-button fill="clear" size="small" color="danger" (click)="cancelTicket(ticket)">
+            <ion-button *ngIf="ticket.trangthai !== 'Đã hủy'" fill="clear" size="small" color="danger">
               <ion-icon slot="start" name="close-circle-outline"></ion-icon>
               Hủy vé
             </ion-button>
             
-            <ion-button fill="clear" size="small" (click)="downloadTicket(ticket)">
+            <ion-button fill="clear" size="small">
               <ion-icon slot="start" name="download-outline"></ion-icon>
               Tải vé
             </ion-button>

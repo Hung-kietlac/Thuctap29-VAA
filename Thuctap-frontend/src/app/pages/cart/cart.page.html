@@ -5,6 +5,11 @@
     <ion-title>
       Giỏ Hàng
     </ion-title>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon name="trash-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -19,14 +24,52 @@
         <ion-item-sliding>
           <ion-item>
             <ion-thumbnail slot="start">
-              <img src="{{ phim.poster }}" alt="Poster">
+              <img src="{{phim.poster}}" alt="Poster">
             </ion-thumbnail>
             <ion-label>
-              <h2>Tên phim: {{ phim.tenphim }}</h2>
-              <p>Rạp: {{ phim.rap }}</p>
-              <p>Ngày chiếu: {{ phim.ngaychieu }}</p>
-              <p>Ghế: {{ phim.seats }}</p>
+              <h2>Tên phim: {{phim.tenphim}}</h2>
+              <p>Rạp: {{phim.rap}}</p>
+              <p>Ngày chiếu: {{phim.ngaychieu}}</p>
+              <p>Ghế: {{phim.seats}}</p>
             </ion-label>
+            <div slot="end" class="ticket-price-qty">
+              <ion-text color="primary">
+                <p>giá</p>
+              </ion-text>
+              <ion-chip color="medium" outline="">
+                <ion-icon name="remove-outline" (click)="giamSoLuong()"></ion-icon>
+                <ion-label>{{ soLuong }}</ion-label>
+                <ion-icon name="add-outline" (click)="tangSoLuong()"></ion-icon>
+              </ion-chip>
+            </div>
+          </ion-item>
+          <ion-item-options side="end">
+            <ion-item-option color="danger">
+              <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+            </ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+        
+        <!-- Vé 2 -->
+        <ion-item-sliding>
+          <ion-item>
+            <ion-thumbnail slot="start">
+              <img src="{{phim.poster}}" alt="Poster phim">
+            </ion-thumbnail>
+            <ion-label>
+              <h2>Tên phim: {{phim.tenphim}}</h2>
+              <p>Rạp: {{phim.rap}}</p>
+            </ion-label>
+            <div slot="end" class="ticket-price-qty">
+              <ion-text color="primary">
+                <p>giá</p>
+              </ion-text>
+              <ion-chip color="medium" outline="">
+                <ion-icon name="remove-outline" (click)="giamSoLuong()"></ion-icon>
+                <ion-label>{{ soLuong }}</ion-label>
+                <ion-icon name="add-outline" (click)="tangSoLuong()"></ion-icon>
+              </ion-chip>
+            </div>
           </ion-item>
           <ion-item-options side="end">
             <ion-item-option color="danger">
@@ -45,37 +88,57 @@
       <ion-card-subtitle>Mô tả</ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let food of gioHang">
+          <ion-thumbnail slot="start">
+            <img [src]="food.hinh_anh" alt="{{ food.ten }}">
+          </ion-thumbnail>
+          <ion-label>
+            <h2>{{ food.ten }}</h2>
+            <p>{{ food.mo_ta }}</p>
+          </ion-label>
+          <div slot="end" class="food-price-qty">
+            <ion-text color="primary">
+              <p>{{ food.gia }}đ</p>
+            </ion-text>
+            <ion-chip color="tertiary">
+              <ion-icon name="remove-outline" (click)="giamSoLuongMonAn(food)"></ion-icon>
+              <ion-label>{{ food.soLuong }}</ion-label>
+              <ion-icon name="add-outline" (click)="themMonAn(food)"></ion-icon>
+            </ion-chip>
+          </div>
+        </ion-item>
+      </ion-list>
+  
       <!-- Nút xem danh sách món ăn -->
       <ion-button expand="block" (click)="toggleDanhSachMonAn()">
         {{ hienDanhSachMonAn ? 'Ẩn danh sách món ăn' : 'Xem tất cả món ăn' }}
       </ion-button>
   
-      <ion-list *ngIf="hienDanhSachMonAn && dichVuList.length > 0">
-        <ion-item *ngFor="let food of dichVuList">
+      <ion-list *ngIf="hienDanhSachMonAn">
+        <ion-item *ngFor="let food of foods">
           <ion-thumbnail slot="start">
-            <img [src]="food.hinhanh" alt="{{ food.tendichvu }}">
+            <img [src]="food.hinh_anh" alt="{{ food.ten }}">
           </ion-thumbnail>
           <ion-label>
-            <h2>{{ food.tendichvu }}</h2>
-            <p>{{ food.tinhtrang }}</p>
-            <p>Giá: {{ food.giadichvu }} VNĐ</p>
+            <h2>{{ food.ten }}</h2>
+            <p>{{ food.mo_ta }}</p>
           </ion-label>
-          <div slot="end" class="ticket-price-qty">
+          <div slot="end" class="food-price-qty">
             <ion-text color="primary">
-              <p>{{ food.soLuong * food.giadichvu }} VNĐ</p> <!-- Tổng tiền của dịch vụ đó -->
+              <p>{{ food.gia }}đ</p>
             </ion-text>
-            <ion-chip color="medium" outline="">
-              <ion-icon name="remove-outline" (click)="giamSoLuong(food)"></ion-icon>
-              <ion-label>{{ food.soLuong }}</ion-label>
-              <ion-icon name="add-outline" (click)="tangSoLuong(food)"></ion-icon>
+            <ion-chip color="tertiary" (click)="themMonAn(food)">
+              <ion-icon name="add-outline"></ion-icon>
+              <ion-label>Thêm</ion-label>
             </ion-chip>
           </div>
         </ion-item>
       </ion-list>
-
+  
       <ion-footer>
         <ion-toolbar>
-          <ion-title>Tổng tiền: {{ tinhTongTien() }} VNĐ</ion-title>
+          <ion-title>Tổng tiền: {{ tinhTongTien() }}đ</ion-title>
         </ion-toolbar>
       </ion-footer>
     </ion-card-content>
@@ -104,7 +167,7 @@
             <h3>Khách hàng mới</h3>
             <p>Giảm 10% cho lần đặt vé đầu tiên</p>
           </ion-label>
-          <ion-button slot="end" fill="outline" size="small" (click)="applyPromo()">Sử dụng</ion-button>
+          <ion-button slot="end" fill="outline" size="small">Sử dụng</ion-button>
         </ion-item>
       </div>
     </ion-card-content>
@@ -119,33 +182,29 @@
       <ion-list>
         <ion-item>
           <ion-label>Tổng tiền vé</ion-label>
-          <ion-note slot="end">{{ phim.total }} VNĐ</ion-note>
+          <ion-note slot="end">{{ phim.total }} VND</ion-note>
         </ion-item>
         <ion-item>
           <ion-label>Đồ ăn &amp; Thức uống</ion-label>
-          <ion-note slot="end">{{ tinhTongTien() }} VNĐ</ion-note>
+          <ion-note slot="end">gia</ion-note>
         </ion-item>
         
         <ion-item>
           <ion-label>Giảm giá</ion-label>
-          <ion-note slot="end" color="success">{{ discountMessage }}</ion-note>
+          <ion-note slot="end" color="success">giam -...</ion-note>
         </ion-item>
-  
         <ion-item>
           <ion-label><strong>Thành tiền</strong></ion-label>
-          <ion-note slot="end" color="primary">
-            <strong>{{ thanhTienSauGiam }} VNĐ</strong>
-          </ion-note>
+          <ion-note slot="end" color="primary"><strong>thanhtien</strong></ion-note>
         </ion-item>
-  
       </ion-list>
+
       <div class="payment-methods">
         <ion-text color="medium">
           <h5>Phương thức thanh toán</h5>
         </ion-text>
         
-        <ion-radio-group [(ngModel)]="selectedPayment">
-          <!-- MoMo -->
+        <ion-radio-group value="momo">
           <ion-item>
             <ion-thumbnail slot="start" class="payment-icon">
               <img src="https://developers.momo.vn/v3/assets/images/icon-52bd5808cecdb1970e1aeec3c31a3ee1.png" alt="MoMo">
@@ -154,7 +213,6 @@
             <ion-radio slot="end" value="momo"></ion-radio>
           </ion-item>
           
-          <!-- VNPay -->
           <ion-item>
             <ion-thumbnail slot="start" class="payment-icon">
               <img src="https://inkythuatso.com/uploads/thumbnails/800/2021/12/vnpay-logo-inkythuatso-01-13-16-29-51.jpg" alt="VNPay">
@@ -162,15 +220,26 @@
             <ion-label>VN Pay</ion-label>
             <ion-radio slot="end" value="vnpay"></ion-radio>
           </ion-item>
+          
+          <ion-item>
+            <ion-thumbnail slot="start" class="payment-icon">
+              <img src="https://th.bing.com/th/id/R.7abd83592c595496b84b9a3543ac78b1?rik=Fim0YHWk0%2b4lEw&pid=ImgRaw&r=0" alt="Credit Card">
+            </ion-thumbnail>
+            <ion-label>Thẻ tín dụng/ghi nợ</ion-label>
+            <ion-radio slot="end" value="card"></ion-radio>
+          </ion-item>
+          
+          <ion-item>
+            <ion-thumbnail slot="start" class="payment-icon">
+              <img src="https://static.vecteezy.com/system/resources/previews/000/287/488/original/bank-vector-icon.jpg" alt="Banking">
+            </ion-thumbnail>
+            <ion-label>Chuyển khoản ngân hàng</ion-label>
+            <ion-radio slot="end" value="banking"></ion-radio>
+          </ion-item>
         </ion-radio-group>
       </div>
 
-      <ion-button 
-        expand="block" 
-        color="primary" 
-        size="large" 
-        class="checkout-button"
-        (click)="pay()">
+      <ion-button expand="block" color="primary" size="large" class="checkout-button">
         Thanh toán
         <ion-icon slot="end" name="arrow-forward"></ion-icon>
       </ion-button>

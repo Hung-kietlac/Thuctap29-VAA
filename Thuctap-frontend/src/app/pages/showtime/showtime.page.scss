@@ -1,0 +1,129 @@
+.admin-container {
+  padding: 20px;
+}
+
+.table-header {
+  background-color: #f5f5f5;
+  padding: 8px 0;
+  font-weight: 600;
+  font-size: 14px;
+  color: #333;
+  
+}
+
+
+ion-grid ion-row ion-col {
+  display: flex;
+  align-items: center;
+  padding: 7px 5px;
+  min-height: 40px;
+  overflow: visible;
+}
+
+ion-list ion-item {
+  --padding-start: 0;
+  --inner-padding-end: 0;
+  width: 100%;
+}
+
+ion-badge {
+  font-size: 13px;
+  padding: 6px 10px;
+  border-radius: 12px;
+  font-weight: 500;
+  display: inline-block;
+  min-width: 80px;
+  text-align: center;
+}
+
+ion-buttons {
+  display: flex;
+  justify-content: space-between;
+  min-width: 70px;
+  visibility: visible !important;
+  height:80px;
+}
+
+ion-buttons ion-button {
+  margin: 0 2px;
+  --padding-start: 8px;
+  --padding-end: 8px;
+  height: 36px;
+  width: 36px;
+  visibility: visible !important;
+  opacity: 1 !important;
+  display: flex !important;
+  
+}
+
+
+ion-buttons ion-button ion-icon {
+  font-size: 20px;
+  visibility: visible !important;
+  opacity: 1 !important;
+  
+}
+
+ion-col:last-child {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 80px;
+  visibility: visible !important;
+  
+}
+
+ion-item ion-col {
+  min-height: 50px;
+  
+}
+
+ion-segment {
+  background-color: #333;
+  height:75px;
+  margin-bottom: 15px;
+  border-radius: 15px;
+}
+
+ion-segment-button ion-label {
+  color: #ffffff !important;
+  opacity: 0.9;
+  visibility: visible;
+}
+
+ion-segment-button ion-icon {
+  font-size: 22px;
+  color: #ffffff;
+}
+
+ion-segment-button.segment-button-checked ion-label {
+  color: #ff4d4d !important;
+}
+
+ion-segment-button.segment-button-checked ion-icon {
+  color: #ff4d4d !important;
+}
+
+ion-card {
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+ion-card-content.no-padding {
+  padding: 0;
+}
+
+.section-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+ion-grid {
+  width: 100%;
+  min-width: 800px; 
+}
+
+ion-button, ion-badge, ion-buttons {
+  z-index: 1;
+  position: relative;
+}
