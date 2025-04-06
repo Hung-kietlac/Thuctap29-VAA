@@ -306,17 +306,20 @@ def rap(request):
     except Exception as e:
         return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+@csrf_exempt
 def generate_vnpay_qr(request):
-    vnp_TmnCode = settings.VNPAY_TMN_CODE
-    vnp_HashSecret = settings.VNPAY_HASH_SECRET
-    vnp_Url = settings.VNPAY_URL
+    vnp_TmnCode = 'YQ5K6E9C'
+    vnp_HashSecret = 'YTLQUAUDSV4R502QNY4HXWJ2XF8WUTCD'
+    vnp_Url = 'https://sandbox.vnpayment.vn/paymentv2/vpcpay.html'
 
     vnp_TxnRef = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
-    vnp_Amount = int(request.GET.get("amount", 10000)) * 100  # Đơn vị VNĐ x 100
-    vnp_OrderInfo = "Thanh toan don hang " + vnp_TxnRef
-    vnp_ReturnUrl = "http://localhost:3000/payment-success"  # Trang React sau khi thanh toán
+    vnp_Amount = int(request.GET.get("amount", 10000)) * 100
+    phim = request.GET.get("phim", "Không rõ")
+    rap = request.GET.get("rap", "Không rõ")
 
-    # Tạo dữ liệu gửi lên VNPay
+    vnp_OrderInfo = f"PHIM:{phim}|RAP:{rap}|REF:{vnp_TxnRef}"
+    vnp_ReturnUrl = "http://localhost:8000/api/vnpay-return"
+
     data = {
         "vnp_Version": "2.1.0",
         "vnp_Command": "pay",
@@ -332,29 +335,18 @@ def generate_vnpay_qr(request):
         "vnp_CreateDate": datetime.datetime.now().strftime("%Y%m%d%H%M%S"),
     }
 
-    # Sắp xếp tham số theo thứ tự alphabet
     sorted_data = sorted(data.items())
     query_string = urlencode(sorted_data)
 
-    # Tạo chữ ký bảo mật (HMAC-SHA512)
     hmac_signature = hmac.new(
-        bytes(vnp_HashSecret, "utf-8"), 
-        bytes(query_string, "utf-8"), 
+        bytes(vnp_HashSecret, "utf-8"),
+        bytes(query_string, "utf-8"),
         hashlib.sha512
     ).hexdigest()
 
-    # Thêm chữ ký vào URL
     payment_url = f"{vnp_Url}?{query_string}&vnp_SecureHash={hmac_signature}"
 
-    # Tạo mã QR Code
-    qr = qrcode.make(payment_url)
-    qr.save("qrcode.png")
-
-    # Encode QR thành Base64 để trả về frontend
-    with open("qrcode.png", "rb") as qr_file:
-        qr_base64 = base64.b64encode(qr_file.read()).decode()
-
-    return JsonResponse({"qr_code": qr_base64, "payment_url": payment_url})
+    return JsonResponse({"payment_url": payment_url})
 
 @csrf_exempt
 def vnpay_return(request):
@@ -375,7 +367,6 @@ def vnpay_return(request):
 
     if hash_check == vnp_SecureHash:
         if inputData.get("vnp_ResponseCode") == "00":
-            # Kết nối MongoDB
             client = MongoClient("mongodb://localhost:27017")
             db = client["Thuctap"]
             collection = db["thanhtoan"]
@@ -392,6 +383,7 @@ def vnpay_return(request):
             so_tien = int(inputData.get("vnp_Amount", 0)) / 100
             ngan_hang = inputData.get("vnp_BankCode", "")
             ngay_dat_str = inputData.get("vnp_PayDate", "")
+            method = request.GET.get("method", "VNPay")
             ngay_dat = datetime.datetime.strptime(ngay_dat_str, "%Y%m%d%H%M%S") if ngay_dat_str else None
             trang_thai = "Đã thanh toán"
 
@@ -400,6 +392,7 @@ def vnpay_return(request):
                 "phim": phim,
                 "rap": rap,
                 "so_tien": so_tien,
+                "phuong_thuc": method,
                 "ngan_hang": ngan_hang,
                 "ngay_dat": ngay_dat,
                 "trang_thai": trang_thai
